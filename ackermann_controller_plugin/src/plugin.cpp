@@ -13,7 +13,6 @@ namespace gazebo
     {
         target_steering_rad_ = 0.0;
         target_speed_mps_ = 0.0;
-        // current_steering_angle_ = 0.0;
 
         x_ = 0;
         y_ = 0;
@@ -34,6 +33,7 @@ namespace gazebo
 
     std::vector<double> AckermannPlugin::GetDiffSpeeds(double vel, double phi)
     {
+        // TODO - consider using real phi instead of target
         std::vector<double> wheel_speeds;
         wheel_speeds.assign(4, 0.0);
         wheel_speeds[RL] = vel * (1.0 - (wheel_track_width_ * tan(phi)) /
@@ -173,24 +173,12 @@ namespace gazebo
         odom_pub_->msg_.header.frame_id = odom_frame_id_;
         odom_pub_->msg_.child_frame_id = base_frame_id_;
         odom_pub_->msg_.pose.pose.position.z = 0;
-        odom_pub_->msg_.pose.covariance = boost::assign::list_of
-                                          (static_cast<double>(pose_cov_list[0])) (0)  (0)  (0)  (0)  (0)
-                                          (0)  (static_cast<double>(pose_cov_list[1])) (0)  (0)  (0)  (0)
-                                          (0)  (0)  (static_cast<double>(pose_cov_list[2])) (0)  (0)  (0)
-                                          (0)  (0)  (0)  (static_cast<double>(pose_cov_list[3])) (0)  (0)
-                                          (0)  (0)  (0)  (0)  (static_cast<double>(pose_cov_list[4])) (0)
-                                          (0)  (0)  (0)  (0)  (0)  (static_cast<double>(pose_cov_list[5]));
+        odom_pub_->msg_.pose.covariance = boost::assign::list_of(static_cast<double>(pose_cov_list[0]))(0)(0)(0)(0)(0)(0)(static_cast<double>(pose_cov_list[1]))(0)(0)(0)(0)(0)(0)(static_cast<double>(pose_cov_list[2]))(0)(0)(0)(0)(0)(0)(static_cast<double>(pose_cov_list[3]))(0)(0)(0)(0)(0)(0)(static_cast<double>(pose_cov_list[4]))(0)(0)(0)(0)(0)(0)(static_cast<double>(pose_cov_list[5]));
         odom_pub_->msg_.twist.twist.linear.y = 0;
         odom_pub_->msg_.twist.twist.linear.z = 0;
         odom_pub_->msg_.twist.twist.angular.x = 0;
         odom_pub_->msg_.twist.twist.angular.y = 0;
-        odom_pub_->msg_.twist.covariance = boost::assign::list_of
-                                           (static_cast<double>(twist_cov_list[0])) (0)  (0)  (0)  (0)  (0)
-                                           (0)  (static_cast<double>(twist_cov_list[1])) (0)  (0)  (0)  (0)
-                                           (0)  (0)  (static_cast<double>(twist_cov_list[2])) (0)  (0)  (0)
-                                           (0)  (0)  (0)  (static_cast<double>(twist_cov_list[3])) (0)  (0)
-                                           (0)  (0)  (0)  (0)  (static_cast<double>(twist_cov_list[4])) (0)
-                                           (0)  (0)  (0)  (0)  (0)  (static_cast<double>(twist_cov_list[5]));
+        odom_pub_->msg_.twist.covariance = boost::assign::list_of(static_cast<double>(twist_cov_list[0]))(0)(0)(0)(0)(0)(0)(static_cast<double>(twist_cov_list[1]))(0)(0)(0)(0)(0)(0)(static_cast<double>(twist_cov_list[2]))(0)(0)(0)(0)(0)(0)(static_cast<double>(twist_cov_list[3]))(0)(0)(0)(0)(0)(0)(static_cast<double>(twist_cov_list[4]))(0)(0)(0)(0)(0)(0)(static_cast<double>(twist_cov_list[5]));
 
         // tf_odom_pub_.reset(new realtime_tools::RealtimePublisher<tf::tfMessage>(n_, "/tf", 100));
         // tf_odom_pub_->msg_.transforms.resize(1);
@@ -278,19 +266,6 @@ namespace gazebo
 
             last_update_time_ = current_time;
         }
-
-        // if (last_update_time_ == common::Time(0))
-        // {
-        //     last_update_time_ = info.simTime;
-        //     return;
-        // }
-
-        // double time_step_ = (info.simTime - last_update_time_).Double();
-        // last_update_time_ = info.simTime;
-
-
-        // driveUpdate();
-        // steeringUpdate(time_step_);
     }
 
     void AckermannPlugin::updateOdometry(double time_step)
@@ -344,50 +319,11 @@ namespace gazebo
         double t_cur_rsteer = tan(steer_joints_[FR]->Position(X));
 
         // std::atan(wheelbase_ * std::tan(steering_angle)/std::abs(wheelbase_ + it->lateral_deviation_ * std::tan(steering_angle)));
-
         double virt_lsteer = atan(wheelbase_ * t_cur_lsteer / (wheelbase_ + t_cur_lsteer * 0.5 * wheel_track_width_));
         double virt_rsteer = atan(wheelbase_ * t_cur_rsteer / (wheelbase_ - t_cur_rsteer * 0.5 * wheel_track_width_));
 
         cur_virtual_steering_rad_ = (virt_lsteer + virt_rsteer) / 2;
         cur_virtual_speed_rps_ = (drive_joints_[RL]->GetVelocity(Z) + drive_joints_[RR]->GetVelocity(Z)) / 2;
-    }
-
-    // TODO - clean this as uses speeds, not forces
-    void AckermannPlugin::driveUpdate()
-    {
-        double ref_rotation_speed_rps = target_speed_mps_ * mps2rps;
-
-        // double cur_right_rspeed_rps = wheel_rr_joint_->GetVelocity(0);
-        // double cur_left_rpeed_rps = wheel_rl_joint_->GetVelocity(0);
-
-        double radius = wheelbase_ / tan(cur_virtual_steering_rad_);
-
-        double ref_right_rspeed = ref_rotation_speed_rps * (1 + (0.5 * wheel_track_width_ / radius));
-        double ref_left_rspeed = ref_rotation_speed_rps * (1 - (0.5 * wheel_track_width_ / radius));
-
-        // ROS_INFO_STREAM( "Target speeds: " << ref_left_rspeed << " / " << ref_right_rspeed );
-
-        // double right_rspeed_error = ref_right_rspeed - cur_right_rspeed_rps;
-        // double left_rspeed_error = ref_left_rspeed - cur_left_rpeed_rps;
-
-        // wheel_rl_joint_->SetVelocity(0, ref_right_rspeed);
-        // wheel_rr_joint_->SetVelocity(0, ref_left_rspeed);
-    }
-
-    void AckermannPlugin::steeringUpdate(double time_step)
-    {
-        // Compute Ackermann steering angles for each wheel
-        // double t_alph = tan(target_steering_rad_);
-        // double left_steer = atan(wheelbase_ * t_alph / (wheelbase_ - 0.5 * wheel_track_width_ * t_alph));
-        // double right_steer = atan(wheelbase_ * t_alph / (wheelbase_ + 0.5 * wheel_track_width_ * t_alph));
-
-// #if GAZEBO_MAJOR_VERSION >= 9
-//         steer_fl_joint_->SetParam("vel", 0, STEER_P_RATE * (left_steer - steer_fl_joint_->Position(0)));
-//         steer_fr_joint_->SetParam("vel", 0, STEER_P_RATE * (right_steer - steer_fr_joint_->Position(0)));
-// #else
-//         steer_fl_joint_->SetParam("vel", 0, STEER_P_RATE * (left_steer - steer_fl_joint_->GetAngle(0).Radian()));
-//         steer_fr_joint_->SetParam("vel", 0, STEER_P_RATE * (right_steer - steer_fr_joint_->GetAngle(0).Radian()));
-// #endif
     }
 
     void AckermannPlugin::Reset()
