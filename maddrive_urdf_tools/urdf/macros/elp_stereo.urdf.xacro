@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+	<xacro:include filename="$(find maddrive_urdf_tools)/urdf/macros/inertia.urdf.xacro" />
+	<xacro:include filename="$(find maddrive_urdf_tools)/urdf/macros/common.urdf.xacro" />
+
+	<xacro:property
+			name="elp_camera_width"
+			value="0.1" />
+	<xacro:property
+			name="elp_camera_height"
+			value="0.03" />
+	<xacro:property
+			name="elp_camera_length"
+			value="0.015" />
+	<xacro:property
+			name="elp_camera_mass_kg"
+			value="0.15" />
+
+	<xacro:macro
+			name="elp_stereo"
+			params="name base_link_name xyz rpy">
+		<link name="${name}_link">
+			<visual>
+				<geometry>
+					<box size="${elp_camera_length} ${elp_camera_width} ${elp_camera_height}" />
+				</geometry>
+			</visual>
+			<collision>
+				<geometry>
+					<box size="${elp_camera_length} ${elp_camera_width} ${elp_camera_height}" />
+				</geometry>
+			</collision>
+			<xacro:box_inertia
+					width="${elp_camera_width}"
+					length="${elp_camera_length}"
+					height="${elp_camera_height}"
+					mass="${elp_camera_mass_kg}">
+				<origin
+						xyz="0 0 0"
+						rpy="0 0 0" />
+			</xacro:box_inertia>
+		</link>
+
+		<joint
+				name="base_${name}_camera_joint"
+				type="fixed">
+			<parent link="${base_link_name}" />
+			<child link="${name}_link" />
+			<origin
+					xyz="${xyz}"
+					rpy="${rpy}" />
+		</joint>
+
+		<link name="${name}_optical_frame" />
+
+		<joint
+				name="${name}_camera_optical_joint"
+				type="fixed">
+			<parent link="${name}_link" />
+			<child link="${name}_optical_frame" />
+			<origin
+					xyz="0 0 0"
+					rpy="${-pi/2} 0 ${-pi/2}" />
+		</joint>
+
+		<gazebo reference="${name}_link">
+			<material>Gazebo/Green</material>
+			<sensor
+					name="${name}"
+					type="depth">
+				<update_rate>25</update_rate>
+				<camera>
+					<horizontal_fov>1.29154</horizontal_fov>
+					<image>
+						<width>640</width>
+						<height>480</height>
+						<format>R8G8B8</format>
+					</image>
+					<clip>
+						<near>0.05</near>
+						<far>8</far>
+					</clip>
+				</camera>
+				<plugin
+						name="camera_plugin"
+						filename="libgazebo_ros_openni_kinect.so">
+					<baseline>0.06</baseline>
+					<alwaysOn>true</alwaysOn>
+					<updateRate>20.0</updateRate>
+					<cameraName>${name}</cameraName>
+					<imageTopicName>/${name}/color/image_raw</imageTopicName>
+					<cameraInfoTopicName>/${name}/color/camera_info</cameraInfoTopicName>
+					<depthImageTopicName>/${name}/depth/image_raw</depthImageTopicName>
+					<depthImageCameraInfoTopicName>/${name}/depth/camera_info</depthImageCameraInfoTopicName>
+					<pointCloudTopicName>/${name}/depth/color/points</pointCloudTopicName>
+					<frameName>${name}_optical_frame</frameName>
+					<pointCloudCutoff>0.05</pointCloudCutoff>
+					<pointCloudCutoffMax>10</pointCloudCutoffMax>
+					<distortionK1>0</distortionK1>
+					<distortionK2>0</distortionK2>
+					<distortionK3>0</distortionK3>
+					<distortionT1>0</distortionT1>
+					<distortionT2>0</distortionT2>
+					<CxPrime>0</CxPrime>
+					<Cx>0</Cx>
+					<Cy>0</Cy>
+					<focalLength>0</focalLength>
+					<hackBaseline>0</hackBaseline>
+				</plugin>
+			</sensor>
+		</gazebo>
+	</xacro:macro>
+</robot>
