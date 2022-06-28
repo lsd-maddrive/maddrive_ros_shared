@@ -11,7 +11,7 @@ git -C $THIRD_PARTY_DIR/ublox apply ../patches/ublox.patch
 # ELP stereocamera driver
 #   NB - version not set as driver is under our development
 
-git -C $THIRD_PARTY_DIR clone https://github.com/lsd-maddrive/elp_stereo_camera
+git -C $THIRD_PARTY_DIR clone https://github.com/lsd-maddrive/elp_stereo_camera || git -C $THIRD_PARTY_DIR pull
 
 # Libviso2
 
