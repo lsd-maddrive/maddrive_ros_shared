@@ -78,7 +78,7 @@
 					</image>
 					<clip>
 						<near>0.05</near>
-						<far>8</far>
+						<far>100</far>
 					</clip>
 				</camera>
 				<plugin

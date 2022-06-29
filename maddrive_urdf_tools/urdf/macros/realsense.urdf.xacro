@@ -88,7 +88,7 @@
                     </image>
                     <clip>
                         <near>0.05</near>
-                        <far>8</far>
+                        <far>100</far>
                     </clip>
                 </camera>
                 <plugin
@@ -100,7 +100,7 @@
                     <cameraName>${name}</cameraName>
                     <imageTopicName>/${name}/color/image_raw</imageTopicName>
                     <cameraInfoTopicName>/${name}/color/camera_info</cameraInfoTopicName>
-                    <depthImageTopicName>/${name}/depth/image_raw</depthImageTopicName>
+                    <depthImageTopicName>/${name}/aligned_depth_to_color/image_raw</depthImageTopicName>
                     <depthImageCameraInfoTopicName>/${name}/depth/camera_info</depthImageCameraInfoTopicName>
                     <pointCloudTopicName>/${name}/depth/color/points</pointCloudTopicName>
                     <frameName>${name}_optical_frame</frameName>
@@ -158,10 +158,10 @@
                 <plugin
                         filename="libgazebo_ros_imu_sensor.so"
                         name="imu_plugin">
-                    <topicName>/${name}/imu</topicName>
+                    <topicName>/${name}/imu/</topicName>
                     <bodyName>${name}_imu_link</bodyName>
                     <updateRateHZ>20.0</updateRateHZ>
-                    <gaussianNoise>0.5</gaussianNoise>
+                    <gaussianNoise>0.02</gaussianNoise>
                     <xyzOffset>0 0 0</xyzOffset>
                     <rpyOffset>0 0 0</rpyOffset>
                     <frameName>${name}_imu_link</frameName>
