@@ -2,6 +2,7 @@
 
 sudo apt-get install \
     ros-$ROS_DISTRO-gazebo-plugins \
+    ros-$ROS_DISTRO-ddynamic-reconfigure
    
 #requirements for RS-ros
 sudo apt install python3-rosdep
