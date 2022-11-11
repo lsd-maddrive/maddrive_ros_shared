@@ -5,7 +5,7 @@ mkdir -p $THIRD_PARTY_DIR
 
 # GPS driver
 
-git -C $THIRD_Pcd ./$THIRD_PARTY_DIRARTY_DIR clone  https://github.com/KumarRobotics/ublox -b 1.4.1
+git -C $THIRD_PARTY_DIR clone  https://github.com/KumarRobotics/ublox -b 1.4.1
 git -C $THIRD_PARTY_DIR/ublox apply ../patches/ublox.patch
 
 # ELP stereocamera driver
