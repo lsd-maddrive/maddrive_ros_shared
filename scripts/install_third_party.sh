@@ -5,7 +5,7 @@ mkdir -p $THIRD_PARTY_DIR
 
 # GPS driver
 
-git -C $THIRD_PARTY_DIR clone  https://github.com/KumarRobotics/ublox -b 1.4.1
+git -C $THIRD_Pcd ./$THIRD_PARTY_DIRARTY_DIR clone  https://github.com/KumarRobotics/ublox -b 1.4.1
 git -C $THIRD_PARTY_DIR/ublox apply ../patches/ublox.patch
 
 # ELP stereocamera driver
@@ -34,12 +34,6 @@ git -C $THIRD_PARTY_DIR clone https://github.com/ros-perception/vision_opencv.gi
 
 git -C $THIRD_PARTY_DIR clone https://github.com/SteveMacenski/spatio_temporal_voxel_layer.git -b noetic-devel
 
-# Realsense-ros
-sudo apt install python3-rosdep
-sudo rosdep init
-rosdep update
-rosdep install --from-paths src --ignore-src -r -y
-sudo apt purge ros-$ROS_DISTRO-librealsense2
-
+# Realsense-ros (rosdep required)
 git -C $THIRD_PARTY_DIR clone https://github.com/IntelRealSense/realsense-ros.git -b 2.3.2
-cd ./$THIRD_PARTY_DIR
+
