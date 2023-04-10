@@ -37,3 +37,9 @@ git -C $THIRD_PARTY_DIR clone https://github.com/SteveMacenski/spatio_temporal_v
 # Realsense-ros (rosdep required)
 git -C $THIRD_PARTY_DIR clone https://github.com/IntelRealSense/realsense-ros.git -b 2.3.2
 
+# C16 Lidar 
+git -C $THIRD_PARTY_DIR clone https://github.com/Forestry-Robotics-UC/lslidar_c16.git
+
+# CH64W Lidar 
+git -C $THIRD_PARTY_DIR clone https://github.com/Lslidar/Lslidar_ROS1_driver.git -b CH64W_V1.0
+
