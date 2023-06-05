@@ -6,7 +6,7 @@
 	<xacro:include filename="$(find maddrive_urdf_tools)/urdf/macros/inertia.urdf.xacro" />
 	<xacro:include filename="$(find maddrive_urdf_tools)/urdf/macros/common.urdf.xacro" />
 
-	<!-- XACRO WHEEL -->
+	<!-- BASE WHEEL -->
 	<xacro:macro name="base_wheel" params="name">
 		<link name="${name}">
 			<visual>
@@ -30,7 +30,7 @@
 		</gazebo>
 	</xacro:macro>
 
-	<!-- XACRO SPEED -->
+	<!-- SPEED WHEEL -->
 	<xacro:macro name="speed_wheel" params="name base_name xyz ">
 		<xacro:base_wheel name="wheel_${name}" />
 
@@ -43,7 +43,7 @@
 		</joint>
 	</xacro:macro>
 
-	<!-- XACRO STEER -->
+	<!-- STEER WHEEL -->
 	<xacro:macro name="steer_wheel" params="name base_name xyz steer_limit">
 		<xacro:base_wheel name="wheel_${name}" />
 

@@ -3,32 +3,19 @@
     <xacro:include filename="$(find maddrive_urdf_tools)/urdf/macros/inertia.urdf.xacro" />
     <xacro:include filename="$(find maddrive_urdf_tools)/urdf/macros/common.urdf.xacro" />
 
-    <xacro:property
-            name="rs_camera_width"
-            value="0.09" />
-    <xacro:property
-            name="rs_camera_height"
-            value="0.025" />
-    <xacro:property
-            name="rs_camera_length"
-            value="0.025" />
-    <xacro:property
-            name="rs_camera_mass_kg"
-            value="0.320" />
+    <xacro:property name="rs_camera_width" value="0.09" />
+    <xacro:property name="rs_camera_height" value="0.025" />
+    <xacro:property name="rs_camera_length" value="0.025" />
+    <xacro:property name="rs_camera_mass_kg" value="0.320" />
 
-    <xacro:property
-            name="rs_imu_height"
-            value="0.01" />
-    <xacro:property
-            name="rs_imu_width"
-            value="0.01" />
-    <xacro:property
-            name="rs_imu_length"
-            value="0.01" />
+    <xacro:property name="rs_imu_height" value="0.01" />
+    <xacro:property name="rs_imu_width" value="0.01" />
+    <xacro:property name="rs_imu_length" value="0.01" />
 
+    <!-- DEPTH CAMERA -->
     <xacro:macro
-            name="realsense_435"
-            params="name base_link_name xyz rpy">
+        name="realsense_435"
+        params="name base_link_name xyz rpy">
         <link name="${name}_link">
             <visual>
                 <geometry>
@@ -41,43 +28,31 @@
                 </geometry>
             </collision>
             <xacro:box_inertia
-                    width="${rs_camera_width}"
-                    length="${rs_camera_length}"
-                    height="${rs_camera_height}"
-                    mass="${rs_camera_mass_kg}">
-                <origin
-                        xyz="0 0 0"
-                        rpy="0 0 0" />
+                width="${rs_camera_width}"
+                length="${rs_camera_length}"
+                height="${rs_camera_height}"
+                mass="${rs_camera_mass_kg}">
+                <origin xyz="0 0 0" rpy="0 0 0" />
             </xacro:box_inertia>
         </link>
 
-        <joint
-                name="base_${name}_camera_joint"
-                type="fixed">
+        <joint name="base_${name}_camera_joint" type="fixed">
             <parent link="${base_link_name}" />
             <child link="${name}_link" />
-            <origin
-                    xyz="${xyz}"
-                    rpy="${rpy}" />
+            <origin xyz="${xyz}" rpy="${rpy}" />
         </joint>
 
         <link name="${name}_optical_frame" />
 
-        <joint
-                name="${name}_camera_optical_joint"
-                type="fixed">
+        <joint name="${name}_camera_optical_joint" type="fixed">
             <parent link="${name}_link" />
             <child link="${name}_optical_frame" />
-            <origin
-                    xyz="0 0 0"
-                    rpy="${-pi/2} 0 ${-pi/2}" />
+            <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}" />
         </joint>
 
         <gazebo reference="${name}_link">
             <material>Gazebo/Black</material>
-            <sensor
-                    name="${name}"
-                    type="depth">
+            <sensor name="${name}" type="depth">
                 <update_rate>20</update_rate>
                 <camera>
                     <horizontal_fov>1.29154</horizontal_fov>
@@ -91,9 +66,7 @@
                         <far>100</far>
                     </clip>
                 </camera>
-                <plugin
-                        name="camera_plugin"
-                        filename="libgazebo_ros_openni_kinect.so">
+                <plugin name="camera_plugin" filename="libgazebo_ros_openni_kinect.so">
                     <baseline>0.2</baseline>
                     <alwaysOn>true</alwaysOn>
                     <updateRate>20.0</updateRate>
@@ -135,29 +108,21 @@
             <xacro:null_inertial />
         </link>
 
-        <joint
-                name="${name}_camera_imu_joint"
-                type="fixed">
+        <joint name="${name}_camera_imu_joint" type="fixed">
             <parent link="${name}_link" />
             <child link="${name}_imu_link" />
-            <origin
-                    xyz="0 0 0"
-                    rpy="0 0 0" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
         </joint>
 
         <gazebo reference="${name}_imu_link">
             <material>Gazebo/Red</material>
             <gravity>true</gravity>
-            <sensor
-                    name="imu_sensor"
-                    type="imu">
+            <sensor name="imu_sensor" type="imu">
                 <always_on>true</always_on>
                 <update_rate>100</update_rate>
                 <visualize>true</visualize>
                 <topic>__default_topic__</topic>
-                <plugin
-                        filename="libgazebo_ros_imu_sensor.so"
-                        name="imu_plugin">
+                <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
                     <topicName>/${name}/imu/</topicName>
                     <bodyName>${name}_imu_link</bodyName>
                     <updateRateHZ>20.0</updateRateHZ>

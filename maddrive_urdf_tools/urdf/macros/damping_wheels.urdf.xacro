@@ -8,7 +8,7 @@
 	<xacro:include filename="$(find maddrive_urdf_tools)/urdf/macros/common.urdf.xacro" />
 	<xacro:include filename="$(find maddrive_urdf_tools)/urdf/macros/wheels.urdf.xacro" />
 
-	<!-- XACRO SPEED -->
+	<!-- WHEEL SPEED -->
 	<xacro:macro name="speed_wheel" params="name base_name xyz ">
 		<base_wheel name="wheel_${name}" />
 		<gazebo reference="${name}_spring_joint">
@@ -35,7 +35,7 @@
 		</joint>
 	</xacro:macro>
 
-	<!-- XACRO STEER -->
+	<!-- WHEEL STEER -->
 	<xacro:macro name="steer_wheel" params="name base_name xyz">
 		<base_wheel name="wheel_${name}" />
 		<gazebo reference="${name}_spring_joint">
@@ -54,7 +54,11 @@
 			<null_inertial />
 		</link>
 		<joint name="${name}_steer_joint" type="revolute">
-			<limit lower="${-wheel_turn_limit}" upper="${wheel_turn_limit}" effort="1000" velocity="0" />
+			<limit
+				lower="${-wheel_turn_limit}"
+				upper="${wheel_turn_limit}"
+				effort="1000"
+				velocity="0" />
 			<parent link="spring2_${name}" />
 			<child link="steer_${name}" />
 			<origin xyz="${xyz}" rpy="0 0 0" />
