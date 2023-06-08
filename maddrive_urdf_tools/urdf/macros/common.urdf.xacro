@@ -5,6 +5,11 @@
     <xacro:property name="degrees_180" value="${pi}" />
 
     <xacro:macro name="null_visual" >
+    </xacro:macro>
 
+    <xacro:macro name="null_collision" >
+    </xacro:macro>
+
+    <xacro:macro name="null_inertia" >
     </xacro:macro>
 </robot>
