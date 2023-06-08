@@ -24,8 +24,8 @@
     <xacro:property name="c64_lidar_horizontal_max_angle" value="${pi/2}" />
     <xacro:property name="c64_lidar_vertical_min_angle" value="-0.436332" />
     <xacro:property name="c64_lidar_vertical_max_angle" value="0.261799" />
-    <xacro:property name="c64_lidar_range_min" value="0.2" />
-    <xacro:property name="c64_lidar_range_max" value="20" />
+    <xacro:property name="c64_lidar_range_min" value="0.5" />
+    <xacro:property name="c64_lidar_range_max" value="100" />
 
     <xacro:macro name="sector_lidar" params="model parent origin_xyz origin_rpy">
 
