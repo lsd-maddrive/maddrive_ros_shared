@@ -5,7 +5,7 @@
     <xacro:property name="lidar_height" value="0.02" />
     <xacro:property name="lidar_radius" value="0.04" />
 
-    <xacro:macro name="simple_lidar" params="name base_name place_height">
+    <xacro:macro name="simple_lidar" params="name parent place_height">
         <link name="${name}">
             <cylinder_inertial r="${lidar_radius}" h="${lidar_height}" mass="${lidar_mass}">
                 <origin xyz="0 0 0" rpy="0 0 0" />
@@ -27,7 +27,7 @@
         <joint name="lidar_joint" type="fixed">
             <axis xyz="0 1 0" />
             <origin xyz="0 0 ${place_height}" rpy="0 0 0" />
-            <parent link="${base_name}" />
+            <parent link="${parent}" />
             <child link="lidar_link" />
         </joint>
 

@@ -15,7 +15,7 @@
     <!-- DEPTH CAMERA -->
     <xacro:macro
         name="realsense_435"
-        params="name base_link_name xyz rpy">
+        params="name parent xyz rpy">
         <link name="${name}_link">
             <visual>
                 <geometry>
@@ -37,7 +37,7 @@
         </link>
 
         <joint name="base_${name}_camera_joint" type="fixed">
-            <parent link="${base_link_name}" />
+            <parent link="${parent}" />
             <child link="${name}_link" />
             <origin xyz="${xyz}" rpy="${rpy}" />
         </joint>
