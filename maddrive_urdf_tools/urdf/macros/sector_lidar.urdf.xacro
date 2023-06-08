@@ -81,12 +81,16 @@
                         <horizontal>
                             <resolution>1</resolution>
                             <xacro:if value="${model == 'c16'}">
-                                <samples>${20000/c16_lidar_hz}</samples>
+                                <samples>
+                                    ${(c16_lidar_horizontal_max_angle-c16_lidar_horizontal_min_angle)*(180/pi)/0.018/c16_lidar_hz}
+                                </samples>
                                 <min_angle>${c16_lidar_horizontal_min_angle}</min_angle>
                                 <max_angle>${c16_lidar_horizontal_max_angle}</max_angle>
                             </xacro:if>
                             <xacro:if value="${model == 'c64'}">
-                                <samples>${10000/c64_lidar_hz}</samples>
+                                <samples>
+                                    ${(c64_lidar_horizontal_max_angle-c64_lidar_horizontal_min_angle)*(180/pi)/0.018/c64_lidar_hz}
+                                </samples>
                                 <min_angle>${c64_lidar_horizontal_min_angle}</min_angle>
                                 <max_angle>${c64_lidar_horizontal_max_angle}</max_angle>
                             </xacro:if>
