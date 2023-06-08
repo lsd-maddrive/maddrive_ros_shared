@@ -122,7 +122,12 @@
                     <topicName>${model}_lidar_points</topicName>
                     <gaussianNoise>0.01</gaussianNoise>
                     <hokuyoMinIntensity>101</hokuyoMinIntensity>
-                    <updateRate>5</updateRate>
+                    <xacro:if value="${model == 'c16'}">
+                        <updateRate>${c16_lidar_hz}</updateRate>
+                    </xacro:if>
+                    <xacro:if value="${model == 'c64'}">
+                        <updateRate>${c64_lidar_hz}</updateRate>
+                    </xacro:if>
                 </plugin>
             </sensor>
         </gazebo>
