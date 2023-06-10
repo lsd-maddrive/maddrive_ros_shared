@@ -37,3 +37,6 @@ git -C $THIRD_PARTY_DIR clone https://github.com/SteveMacenski/spatio_temporal_v
 # Realsense-ros (rosdep required)
 git -C $THIRD_PARTY_DIR clone https://github.com/IntelRealSense/realsense-ros.git -b 2.3.2
 
+# ddynamic_reconfigure
+git -C $THIRD_PARTY_DIR clone https://github.com/pal-robotics/ddynamic_reconfigure.git -b kinetic-devel
+
