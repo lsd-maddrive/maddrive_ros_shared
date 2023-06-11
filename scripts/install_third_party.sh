@@ -36,3 +36,15 @@ git -C $THIRD_PARTY_DIR clone https://github.com/SteveMacenski/spatio_temporal_v
 
 # Realsense-ros (rosdep required)
 git -C $THIRD_PARTY_DIR clone https://github.com/IntelRealSense/realsense-ros.git -b 2.3.2
+
+# Ydlidar driver
+git -C $THIRD_PARTY_DIR clone https://github.com/EAIBOT/ydlidar.git -b 1.3.9
+
+# Mad Detector (package for signs detection)
+git -C $THIRD_PARTY_DIR clone https://github.com/lsd-maddrive/mad_detector.git
+
+# Madproto - protocol for serial communication
+git -C $THIRD_PARTY_DIR clone https://github.com/KaiL4eK/madproto.git
+
+# World Creator package
+git -C $THIRD_PARTY_DIR clone https://github.com/PonomarevDA/world_creator.git
