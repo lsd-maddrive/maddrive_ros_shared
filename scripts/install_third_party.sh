@@ -45,3 +45,6 @@ git -C $THIRD_PARTY_DIR clone https://github.com/lsd-maddrive/mad_detector.git
 
 # World Creator package
 git -C $THIRD_PARTY_DIR clone https://github.com/PonomarevDA/world_creator.git
+
+# Madproto - protocol for serial communication
+git -C $THIRD_PARTY_DIR clone https://github.com/KaiL4eK/madproto.git
