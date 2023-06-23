@@ -6,7 +6,7 @@
 	<xacro:include filename="$(find maddrive_urdf_tools)/urdf/macros/inertia.urdf.xacro" />
 	<xacro:include filename="$(find maddrive_urdf_tools)/urdf/macros/common.urdf.xacro" />
 
-	<!-- XACRO WHEEL -->
+	<!-- BASE WHEEL -->
 	<xacro:macro name="base_wheel" params="name">
 		<link name="${name}">
 			<visual>
@@ -30,41 +30,45 @@
 		</gazebo>
 	</xacro:macro>
 
-	<!-- XACRO SPEED -->
-	<xacro:macro name="speed_wheel" params="name base_name xyz ">
-		<xacro:base_wheel name="wheel_${name}" />
+	<!-- SPEED WHEEL -->
+	<xacro:macro name="speed_wheel" params="prefix parent origin_xyz ">
 
-		<joint name="${name}_speed_joint" type="continuous">
-			<parent link="${base_name}" />
-			<child link="wheel_${name}" />
-			<origin xyz="${xyz}" rpy="0 0 0" />
+		<joint name="${prefix}_wheel_joint" type="continuous">
+			<parent link="${parent}" />
+			<child link="${prefix}_wheel_link" />
+			<origin xyz="${origin_xyz}" rpy="0 0 0" />
 			<axis xyz="0 1 0" />
 			<limit effort="${wheel_effort}" velocity="0" />
 		</joint>
+
+		<xacro:base_wheel name="${prefix}_wheel_link" />
+
 	</xacro:macro>
 
-	<!-- XACRO STEER -->
-	<xacro:macro name="steer_wheel" params="name base_name xyz steer_limit">
-		<xacro:base_wheel name="wheel_${name}" />
+	<!-- STEER WHEEL -->
+	<xacro:macro name="steer_wheel" params="prefix parent steer_origin_xyz steer_limit">
 
-		<link name="steer_${name}">
-			<xacro:null_inertial />
-		</link>
-
-		<joint name="${name}_steer_joint" type="revolute">
-			<parent link="${base_name}" />
-			<child link="steer_${name}" />
-			<origin xyz="${xyz}" rpy="0 0 0" />
+		<joint name="${prefix}_steer_joint" type="revolute">
+			<parent link="${parent}" />
+			<child link="${prefix}_steer_link" />
+			<origin xyz="${steer_origin_xyz}" rpy="0 0 0" />
 			<axis xyz="0 0 1" />
 			<limit lower="${-steer_limit}" upper="${steer_limit}" effort="${wheel_effort}" velocity="0" />
 		</joint>
 
-		<joint name="${name}_speed_joint" type="continuous">
-			<parent link="steer_${name}" />
-			<child link="wheel_${name}" />
+		<link name="${prefix}_steer_link">
+			<xacro:null_inertial />
+		</link>
+
+		<joint name="${prefix}_wheel_joint" type="continuous">
+			<parent link="${prefix}_steer_link" />
+			<child link="${prefix}_wheel_link" />
 			<origin xyz="0 0 0" rpy="0 0 0" />
 			<axis xyz="0 1 0" />
 			<limit effort="${wheel_effort}" velocity="0" />
 		</joint>
+
+		<xacro:base_wheel name="${prefix}_wheel_link" />
+
 	</xacro:macro>
 </robot>
