@@ -27,6 +27,9 @@
 		</link>
 		<gazebo reference="${name}">
 			<material>Gazebo/Black</material>
+			<selfCollide>false</selfCollide>
+            <mu1 value="0.0" />
+            <mu2 value="0.0" />
 		</gazebo>
 	</xacro:macro>
 
