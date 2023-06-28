@@ -38,25 +38,32 @@
             </xacro:box_inertia>
         </link>
 
-    <gazebo reference="gps_link">
-        <material>Gazebo/Orange</material>
-        <plugin name="gazebo_ros_gps" filename="libhector_gazebo_ros_gps.so">
-            <updateRate>4.0</updateRate>
-            <bodyName>gps_link</bodyName>
-            <frameId>gps_link</frameId>
-            <topicName>/gps/fix</topicName>
-            <velocityTopicName>/gps/fix_velocity</velocityTopicName>
-            <referenceLatitude>-30.06022459407145675</referenceLatitude>
-            <referenceLongitude>-51.173913575780311191</referenceLongitude>
-            <referenceHeading>90</referenceHeading>
-            <referenceAltitude>10</referenceAltitude>
-            <offset>0 0 0</offset>
-            <drift>0.001 0.001 0.001</drift>
-            <gaussianNoise>0.05 0.05 0.05</gaussianNoise>
-            <velocityDrift>0.001 0.001 0.001</velocityDrift>
-            <velocityGaussianNoise>0.5 0.5 0.5</velocityGaussianNoise>
-        </plugin>
-    </gazebo>
+        <!-- http://wiki.ros.org/hector_gazebo_plugins -->
+        <gazebo reference="gps_link">
+            <material>Gazebo/Orange</material>
+            <plugin name="gazebo_ros_gps" filename="libhector_gazebo_ros_gps.so">
+                <updateRate>4.0</updateRate>
+                <!-- <robotNamespace>/</robotNamespace> -->
+                <bodyName>gps_link</bodyName>
+                <frameId>/world</frameId>
+                <topicName>/gps/fix</topicName>
+                <velocityTopicName>/gps/vel</velocityTopicName>
+                <referenceLatitude>-30.06022459407145675</referenceLatitude>
+                <referenceLongitude>-51.173913575780311191</referenceLongitude>
+                <referenceHeading>90</referenceHeading>
+                <referenceAltitude>10</referenceAltitude>
+                <!-- <status>10</status> -->
+                <!-- <service>10</service> -->
+                <offset>0.0 0.0 0.0</offset>
+                <drift>0.001 0.001 0.001</drift>
+                <driftFrequency>0.001 0.001 0.001</driftFrequency>
+                <gaussianNoise>0.05 0.05 0.05</gaussianNoise>
+                <velocityOffset>0.001 0.001 0.001</velocityOffset>
+                <velocityDrift>0.001 0.001 0.001</velocityDrift>
+                <velocityDriftFrequency>0.001 0.001 0.001</velocityDriftFrequency>
+                <velocityGaussianNoise>0.5 0.5 0.5</velocityGaussianNoise>
+            </plugin>
+        </gazebo>
 
     </xacro:macro>
 
