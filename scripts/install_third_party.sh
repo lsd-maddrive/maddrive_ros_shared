@@ -26,8 +26,8 @@ git -C $THIRD_PARTY_DIR clone https://github.com/ros-drivers/rosserial.git -b no
 
 # Rtabmap
 
-git -C $THIRD_PARTY_DIR clone https://github.com/introlab/rtabmap.git -b 0.20.16-noetic
-git -C $THIRD_PARTY_DIR clone https://github.com/introlab/rtabmap_ros.git -b 0.20.16-noetic
+git -C $THIRD_PARTY_DIR clone https://github.com/introlab/rtabmap.git -b 0.21.0
+git -C $THIRD_PARTY_DIR clone https://github.com/introlab/rtabmap_ros.git -b 0.21.1-noetic
 
 git -C $THIRD_PARTY_DIR clone https://github.com/ros-perception/image_pipeline.git -b noetic
 git -C $THIRD_PARTY_DIR clone https://github.com/ros-perception/vision_opencv.git -b noetic
@@ -48,3 +48,11 @@ git -C $THIRD_PARTY_DIR clone https://github.com/PonomarevDA/world_creator.git
 
 # Madproto - protocol for serial communication
 git -C $THIRD_PARTY_DIR clone https://github.com/KaiL4eK/madproto.git
+
+# NEED TO CHOOSE ROBOT'S LIDAR
+
+# C16 Lidar official pkg 
+# git -C $THIRD_PARTY_DIR/C16 clone https://github.com/Lslidar/Lslidar_ROS1_driver.git -b C16_V2.6/2.8/3.0
+
+# CH64W Lidar 
+git -C $THIRD_PARTY_DIR clone https://github.com/Lslidar/Lslidar_ROS1_driver.git -b CH64W_V1.0
