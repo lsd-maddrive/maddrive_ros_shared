@@ -31,6 +31,7 @@ class Controller():
         self.buttons_status=self.ButtonsStatus
         self.command_state = Twist()
         self.buttons_msg= Int32MultiArray()
+        self.zero_published = False
 
         rospy.init_node("control_link")
         rospy.Subscriber("joy", Joy, self.joy_cb, queue_size=5)
@@ -107,7 +108,16 @@ class Controller():
         #     self.client.cancel_all_goals() # Try both
         #     rospy.loginfo("Goal cancelled")
 
-        self.cmd_pub.publish(self.command_state)
+        if (
+            self.command_state.linear.x == 0
+            and self.command_state.angular.z == 0
+            and not self.zero_published
+        ):
+            self.cmd_pub.publish(self.command_state)
+            self.zero_published = True
+        elif self.command_state.linear.x != 0 or self.command_state.angular.z != 0:
+            self.cmd_pub.publish(self.command_state)
+            self.zero_published = False
         self.btn_pub.publish(self.buttons_msg)
 
 
@@ -165,17 +175,6 @@ class Controller():
         def get_buttons(self):
             return self._pressed_buttons
         
-
-def update_command_state():
-    global command_state, cmd_pub, has_control_commands
-
-    command_state.linear.x = linear_vel.get_velocity()
-    command_state.angular.z = angular_pos.get_velocity()
-
-    if has_control_commands or (command_state.linear.x != 0) or (command_state.angular.z != 0):
-        cmd_pub.publish(command_state)
-        has_control_commands = (command_state.linear.x != 0) or (command_state.angular.z != 0)
-
 
 if __name__ == "__main__":
     try:
