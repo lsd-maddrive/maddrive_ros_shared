@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-sudo apt-get install \
+sudo apt install \
     ros-$ROS_DISTRO-usb-cam \
     ros-$ROS_DISTRO-rosserial-server \
     ros-$ROS_DISTRO-rosserial-client \
@@ -16,7 +16,10 @@ sudo apt-get install \
     ros-$ROS_DISTRO-octomap-msgs \
     ros-$ROS_DISTRO-ddynamic-reconfigure \
     libopenvdb-dev \
-    libpcap-dev
+    libpcap-dev \
+    librealsense2
 
 #requirements for RS-ros
-sudo apt purge ros-$ROS_DISTRO-realsense2-camera
+sudo apt purge \
+    ros-$ROS_DISTRO-realsense2-camera \
+    ros-$ROS_DISTRO-realsense2-description \
