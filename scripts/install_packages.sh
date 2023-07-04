@@ -15,6 +15,7 @@ sudo apt install \
     ros-$ROS_DISTRO-gazebo-plugins \
     ros-$ROS_DISTRO-octomap-msgs \
     ros-$ROS_DISTRO-ddynamic-reconfigure \
+    ros-$ROS_DISTRO-libpointmatcher \
     libopenvdb-dev \
     libpcap-dev \
     librealsense2
