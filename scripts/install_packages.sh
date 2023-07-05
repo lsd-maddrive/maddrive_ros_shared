@@ -16,6 +16,7 @@ sudo apt install \
     ros-$ROS_DISTRO-octomap-msgs \
     ros-$ROS_DISTRO-ddynamic-reconfigure \
     ros-$ROS_DISTRO-libpointmatcher \
+    ros-$ROS_DISTRO-spatio-temporal-voxel-layer \
     libopenvdb-dev \
     libpcap-dev \
     librealsense2
