@@ -49,10 +49,5 @@ git -C $THIRD_PARTY_DIR clone https://github.com/PonomarevDA/world_creator.git
 # Madproto - protocol for serial communication
 git -C $THIRD_PARTY_DIR clone https://github.com/KaiL4eK/madproto.git
 
-# NEED TO CHOOSE ROBOT'S LIDAR
-
-# C16 Lidar official pkg 
-# git -C $THIRD_PARTY_DIR/C16 clone https://github.com/Lslidar/Lslidar_ROS1_driver.git -b C16_V2.6/2.8/3.0
-
-# CH64W Lidar 
-git -C $THIRD_PARTY_DIR clone https://github.com/Lslidar/Lslidar_ROS1_driver.git -b CH64W_V1.0
+# LSLidar driver
+git -C $THIRD_PARTY_DIR clone https://github.com/Lslidar/Lslidar_ROS1_driver.git
