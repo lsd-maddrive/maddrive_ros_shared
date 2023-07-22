@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+    <name>maddrive_ros_shared</name>
+    <version>0.0.0</version>
+    <description>
+        The maddrive_ros_shared metapackage that installs maddrive_ros_shared packages.
+    </description>
+    <maintainer email="nlobazev@gmail.com">Nikita Lobazev</maintainer>
+    <license>BSD</license>
+
+    <buildtool_depend>catkin</buildtool_depend>
+    <run_depend>maddrive_teleop</run_depend>
+    <run_depend>maddrive_urdf_tools</run_depend>
+    <run_depend>maddrive_worlds</run_depend>
+    <export>
+        <metapackage/>
+    </export>
+</package>
