@@ -1,15 +1,15 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(maddrive_teleop)
 
-find_package(catkin REQUIRED COMPONENTS
-  rospy
-  roscpp
+find_package(catkin REQUIRED
+  COMPONENTS
+    rospy
+    roscpp
 )
 
 catkin_package()
 
 include_directories(
-  include
   ${catkin_INCLUDE_DIRS}
 )
 
