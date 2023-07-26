@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-	<xacro:property name="wheel_effort" value="1000000" />
-
 	<xacro:include filename="$(find maddrive_urdf_tools)/urdf/macros/inertia.urdf.xacro" />
 	<xacro:include filename="$(find maddrive_urdf_tools)/urdf/macros/common.urdf.xacro" />
 
@@ -28,8 +26,8 @@
 		<gazebo reference="${name}">
 			<material>Gazebo/Black</material>
 			<selfCollide>false</selfCollide>
-            <mu1 value="1.0" />
-            <mu2 value="1.0" />
+			<mu1 value="1.0" />
+			<mu2 value="1.0" />
 		</gazebo>
 	</xacro:macro>
 
@@ -41,7 +39,7 @@
 			<child link="${prefix}_wheel_link" />
 			<origin xyz="${origin_xyz}" rpy="0 0 0" />
 			<axis xyz="0 1 0" />
-			<limit effort="${wheel_effort}" velocity="0" />
+			<limit effort="0" velocity="0" />
 		</joint>
 
 		<xacro:base_wheel name="${prefix}_wheel_link" />
@@ -56,7 +54,7 @@
 			<child link="${prefix}_steer_link" />
 			<origin xyz="${steer_origin_xyz}" rpy="0 0 0" />
 			<axis xyz="0 0 1" />
-			<limit lower="${-steer_limit}" upper="${steer_limit}" effort="${wheel_effort}" velocity="0" />
+			<limit lower="${-steer_limit}" upper="${steer_limit}" effort="0" velocity="0" />
 		</joint>
 
 		<link name="${prefix}_steer_link">
@@ -68,7 +66,7 @@
 			<child link="${prefix}_wheel_link" />
 			<origin xyz="0 0 0" rpy="0 0 0" />
 			<axis xyz="0 1 0" />
-			<limit effort="${wheel_effort}" velocity="0" />
+			<limit effort="0" velocity="0" />
 		</joint>
 
 		<xacro:base_wheel name="${prefix}_wheel_link" />
