@@ -3,55 +3,54 @@
 
     <xacro:include filename="$(find maddrive_urdf_tools)/urdf/macros/inertia.urdf.xacro" />
 
-    <xacro:property name="gps_length" value="0.05" />
-    <xacro:property name="gps_width" value="0.05" />
-    <xacro:property name="gps_height" value="0.05" />
-    <xacro:property name="gps_mass" value="0.1" />
+    <xacro:property name="gps_sensor_length" value="0.05" />
+    <xacro:property name="gps_sensor_width" value="0.05" />
+    <xacro:property name="gps_sensor_height" value="0.05" />
+    <xacro:property name="gps_sensor_mass" value="0.1" />
 
-    <xacro:macro name="gps" params="parent origin_xyz origin_rpy">
+    <xacro:macro name="gps_sensor" params="prefix parent origin_xyz origin_rpy">
 
-        <joint name="gps_joint" type="fixed">
+        <joint name="${prefix}_gps_sensor_joint" type="fixed">
             <parent link="${parent}" />
-            <child link="gps_link" />
+            <child link="${prefix}_gps_sensor_link" />
             <origin xyz="${origin_xyz}" rpy="${origin_rpy}" />
         </joint>
 
-        <link name="gps_link">
+        <link name="${prefix}_gps_sensor_link">
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <box size="${gps_length} ${gps_width} ${gps_height}" />
+                    <box size="${gps_sensor_length} ${gps_sensor_width} ${gps_sensor_height}" />
                 </geometry>
             </collision>
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <box size="${gps_length} ${gps_width} ${gps_height}" />
+                    <box size="${gps_sensor_length} ${gps_sensor_width} ${gps_sensor_height}" />
                 </geometry>
             </visual>
             <xacro:box_inertia
-                length="${gps_length}"
-                width="${gps_width}"
-                height="${gps_height}"
-                mass="${gps_mass}">
+                length="${gps_sensor_length}"
+                width="${gps_sensor_width}"
+                height="${gps_sensor_height}"
+                mass="${gps_sensor_mass}">
                 <origin xyz="0 0 0" rpy="0 0 0" />
             </xacro:box_inertia>
         </link>
 
         <!-- http://wiki.ros.org/hector_gazebo_plugins -->
-        <gazebo reference="gps_link">
-            <material>Gazebo/Orange</material>
-            <plugin name="gazebo_ros_gps" filename="libhector_gazebo_ros_gps.so">
+        <gazebo>
+            <plugin name="gazebo_ros_gps_sensor" filename="libhector_gazebo_ros_gps.so">
                 <updateRate>4.0</updateRate>
                 <!-- <robotNamespace>/</robotNamespace> -->
-                <bodyName>gps_link</bodyName>
-                <frameId>/world</frameId>
-                <topicName>/gps/fix</topicName>
-                <velocityTopicName>/gps/vel</velocityTopicName>
+                <bodyName>${prefix}_gps_sensor_link</bodyName>
+                <frameId>${prefix}_gps_sensor</frameId>
+                <topicName>${prefix}_gps_sensor/fix</topicName>
+                <velocityTopicName>${prefix}_gps_sensor/vel</velocityTopicName>
                 <referenceLatitude>-30.06022459407145675</referenceLatitude>
                 <referenceLongitude>-51.173913575780311191</referenceLongitude>
-                <referenceHeading>90</referenceHeading>
-                <referenceAltitude>10</referenceAltitude>
+                <referenceHeading>90.0</referenceHeading>
+                <referenceAltitude>10.0</referenceAltitude>
                 <!-- <status>10</status> -->
                 <!-- <service>10</service> -->
                 <offset>0.0 0.0 0.0</offset>

@@ -51,3 +51,6 @@ git -C $THIRD_PARTY_DIR clone https://github.com/KaiL4eK/madproto.git
 
 # LSLidar driver
 git -C $THIRD_PARTY_DIR clone https://github.com/Lslidar/Lslidar_ROS1_driver.git
+
+# include GPS plugin
+git -C $THIRD_PARTY_DIR clone https://github.com/tu-darmstadt-ros-pkg/hector_gazebo.git
