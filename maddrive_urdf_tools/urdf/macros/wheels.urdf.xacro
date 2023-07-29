@@ -16,7 +16,8 @@
 			<collision>
 				<origin xyz="0 0 0" rpy="${pi/2} 0 0" />
 				<geometry>
-					<cylinder length="${wheel_width}" radius="${wheel_radius}" />
+					<sphere radius="${wheel_radius}" />
+					<!-- <cylinder length="${wheel_width}" radius="${wheel_radius}" /> -->
 				</geometry>
 			</collision>
 			<xacro:cylinder_inertia r="${wheel_radius}" h="${wheel_width}" mass="${wheel_mass}">

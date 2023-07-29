@@ -54,3 +54,6 @@ git -C $THIRD_PARTY_DIR clone https://github.com/Lslidar/Lslidar_ROS1_driver.git
 
 # include GPS plugin
 git -C $THIRD_PARTY_DIR clone https://github.com/tu-darmstadt-ros-pkg/hector_gazebo.git
+
+# pointCloud to PointCloud2 massage converter
+git -C $THIRD_PARTY_DIR clone https://github.com/pal-robotics-forks/point_cloud_converter.git

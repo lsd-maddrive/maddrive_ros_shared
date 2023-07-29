@@ -87,8 +87,7 @@
         <gazebo reference="${prefix}_lslidar_${model}_lidar_link">
             <material>Gazebo/Blue</material>
             <sensor name="${prefix}_lslidar_${model}_lidar_sensor" type="ray">
-                <pose>0 0 0.0 0 0 0</pose>
-                <visualize>true</visualize>
+                <visualize>false</visualize>
                 <ray>
                     <scan>
                         <horizontal>
@@ -136,7 +135,7 @@
                 <plugin name="gazebo_ros_block_laser" filename="libgazebo_ros_block_laser.so">
                     <robotNamespace>/</robotNamespace>
                     <frameName>${prefix}_lslidar_${model}_lidar_link</frameName>
-                    <topicName>${prefix}_lslidar_${model}_lidar_point_cloud</topicName>
+                    <topicName>${prefix}_lslidar_${model}_lidar_point_cloud_pcl1</topicName>
                     <gaussianNoise>0.01</gaussianNoise>
                     <hokuyoMinIntensity>101</hokuyoMinIntensity>
                     <xacro:if value="${model == 'c16'}">
