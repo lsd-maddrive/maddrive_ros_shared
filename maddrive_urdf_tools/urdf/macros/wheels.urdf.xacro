@@ -6,6 +6,7 @@
 
 	<!-- BASE WHEEL -->
 	<xacro:macro name="base_wheel" params="name">
+
 		<link name="${name}">
 			<visual>
 				<origin xyz="0 0 0" rpy="${pi/2} 0 0" />
@@ -24,12 +25,14 @@
 				<origin xyz="0 0 0" rpy="${pi/2} 0 0" />
 			</xacro:cylinder_inertia>
 		</link>
+
 		<gazebo reference="${name}">
 			<material>Gazebo/Black</material>
 			<selfCollide>false</selfCollide>
 			<mu1 value="1.0" />
 			<mu2 value="1.0" />
 		</gazebo>
+
 	</xacro:macro>
 
 	<!-- SPEED WHEEL -->
@@ -59,8 +62,12 @@
 		</joint>
 
 		<link name="${prefix}_steer_link">
-			<xacro:null_inertial />
+			<xacro:null_visual />
+			<xacro:null_collision />
+			<xacro:null_inertia />
 		</link>
+
+		<gazebo reference="${prefix}_steer_link" />
 
 		<joint name="${prefix}_wheel_joint" type="continuous">
 			<parent link="${prefix}_steer_link" />

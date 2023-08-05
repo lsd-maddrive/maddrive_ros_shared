@@ -19,7 +19,7 @@
 					<box size="${cam_size} ${cam_size} ${cam_size}" />
 				</geometry>
 			</collision>
-			<null_inertial />
+			<null_inertia />
 		</link>
 	</xacro:macro>
 

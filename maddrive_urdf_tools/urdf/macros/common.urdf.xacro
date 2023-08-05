@@ -5,11 +5,34 @@
     <xacro:property name="degrees_180" value="${pi}" />
 
     <xacro:macro name="null_visual" >
+        <visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<box size="0 0 0" />
+			</geometry>
+		</visual>
     </xacro:macro>
 
     <xacro:macro name="null_collision" >
+        <collision name="base_collision">
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<box size="0 0 0" />
+			</geometry>
+		</collision>
     </xacro:macro>
 
-    <xacro:macro name="null_inertia" >
+	<xacro:macro name="null_inertia" >
+        <inertial>
+			<mass value="0.01" />
+			<inertia
+				ixx="0.01"
+				ixy="0.01"
+				ixz="0.01"
+				iyy="0.01"
+				iyz="0.01"
+				izz="0.01" />
+		</inertial>
     </xacro:macro>
+
 </robot>

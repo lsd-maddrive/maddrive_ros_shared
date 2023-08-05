@@ -171,7 +171,7 @@
                         ${rs_imu_height}" />
                 </geometry>
             </collision>
-            <xacro:null_inertial />
+            <xacro:null_inertia />
         </link>
 
         <gazebo reference="${prefix}_rs_${model}_camera_imu_link">

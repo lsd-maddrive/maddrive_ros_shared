@@ -24,7 +24,7 @@
 			<axis xyz="0 0 1" />
 		</joint>
 		<link name="spring1_${name}">
-			<null_inertial />
+			<null_inertia />
 		</link>
 		<joint name="${name}_speed_joint" type="continuous">
 			<parent link="spring1_${name}" />
@@ -51,7 +51,7 @@
 			<axis xyz="0 0 1" />
 		</joint>
 		<link name="spring2_${name}">
-			<null_inertial />
+			<null_inertia />
 		</link>
 		<joint name="${name}_steer_joint" type="revolute">
 			<limit
@@ -65,7 +65,7 @@
 			<axis xyz="0 0 1" />
 		</joint>
 		<link name="steer_${name}">
-			<null_inertial />
+			<null_inertia />
 		</link>
 		<joint name="${name}_speed_joint" type="continuous">
 			<parent link="steer_${name}" />
