@@ -5,48 +5,49 @@
     <xacro:property name="lidar_height" value="0.02" />
     <xacro:property name="lidar_radius" value="0.04" />
 
-    <xacro:macro name="simple_lidar" params="name parent place_height">
+    <xacro:macro name="lidar" params="prefix parent origin_xyz origin_rpy">
 
-        <link name="${name}">
-            <cylinder_inertial
-                radius="${lidar_radius}"
-                length="${lidar_height}"
-                mass="${lidar_mass}">
-                <origin xyz="0 0 0" rpy="0 0 0" />
-            </cylinder_inertial>
-            <collision>
-                <origin xyz="0 0 0" rpy="0 0 0" />
-                <geometry>
-                    <cylinder length="${lidar_height}" radius="${lidar_radius}" />
-                </geometry>
-            </collision>
+        <joint name="${prefix}_lidar_joint" type="fixed">
+            <parent link="${parent}" />
+            <child link="${prefix}_lidar_link" />
+            <origin xyz="${origin_xyz}" rpy="${origin_rpy}" />
+        </joint>
+
+        <link name="${prefix}_lidar_link">
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
                     <cylinder length="${lidar_height}" radius="${lidar_radius}" />
                 </geometry>
             </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <cylinder length="${lidar_height}" radius="${lidar_radius}" />
+                </geometry>
+            </collision>
+            <xacro:cylinder_inertia
+                radius="${lidar_radius}"
+                length="${lidar_height}"
+                mass="${lidar_mass}">
+                <origin xyz="0 0 0" rpy="0 0 0" />
+            </xacro:cylinder_inertia>
         </link>
 
-        <joint name="lidar_joint" type="fixed">
-            <parent link="${parent}" />
-            <child link="lidar_link" />
-            <origin xyz="0 0 ${place_height}" rpy="0 0 0" />
-        </joint>
-
-        <gazebo reference="lidar_link">
+        <gazebo reference="${prefix}_lidar_link">
+            <selfCollide>false</selfCollide>
             <material>Gazebo/Red</material>
-            <sensor name="head_hokuyo_sensor" type="ray">
+            <sensor name="${prefix}_lidar_sensor" type="ray">
                 <pose>0 0 0 0 0 0</pose>
-                <visualize>false</visualize>
-                <update_rate>40</update_rate>
+                <visualize>true</visualize>
+                <update_rate>10</update_rate>
                 <ray>
                     <scan>
                         <horizontal>
-                            <samples>720</samples>
+                            <samples>360</samples>
                             <resolution>1</resolution>
-                            <min_angle>-3.14</min_angle>
-                            <max_angle>3.14</max_angle>
+                            <min_angle>${-pi}</min_angle>
+                            <max_angle>${pi}</max_angle>
                         </horizontal>
                     </scan>
                     <range>
@@ -57,12 +58,12 @@
                     <noise>
                         <type>gaussian</type>
                         <mean>0.0</mean>
-                        <stddev>0.01</stddev>
+                        <stddev>0.03</stddev>
                     </noise>
                 </ray>
-                <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
-                    <topicName>/scan</topicName>
-                    <frameName>lidar_link</frameName>
+                <plugin name="gazebo_ros_lidar_controller" filename="libgazebo_ros_laser.so">
+                    <topicName>${prefix}_lidar_scan</topicName>
+                    <frameName>${prefix}_lidar_link</frameName>
                 </plugin>
             </sensor>
         </gazebo>
