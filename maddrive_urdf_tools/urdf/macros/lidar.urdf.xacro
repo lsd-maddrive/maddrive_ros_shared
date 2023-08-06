@@ -8,7 +8,10 @@
     <xacro:macro name="simple_lidar" params="name parent place_height">
 
         <link name="${name}">
-            <cylinder_inertial r="${lidar_radius}" h="${lidar_height}" mass="${lidar_mass}">
+            <cylinder_inertial
+                radius="${lidar_radius}"
+                length="${lidar_height}"
+                mass="${lidar_mass}">
                 <origin xyz="0 0 0" rpy="0 0 0" />
             </cylinder_inertial>
             <collision>

@@ -19,33 +19,33 @@
 
 	<xacro:macro
 		name="cylinder_inertia"
-		params="r h mass *origin">
+		params="radius length mass *origin">
 		<inertial>
 			<xacro:insert_block name="origin" />
 			<mass value="${mass}" />
 			<inertia
-				ixx="${mass / 12 * (3 * r * r + h * h)}"
+				ixx="${mass / 12 * (3 * radius * radius + length * length)}"
 				ixy="0.0"
 				ixz="0.0"
-				iyy="${mass / 12 * (3 * r * r + h * h)}"
+				iyy="${mass / 12 * (3 * radius * radius + length * length)}"
 				iyz="0.0"
-				izz="${mass / 2 * r * r}" />
+				izz="${mass / 2 * radius * radius}" />
 		</inertial>
 	</xacro:macro>
 
 	<xacro:macro
 		name="sphere_inertia"
-		params="r mass *origin">
+		params="radius mass *origin">
 		<inertial>
 			<xacro:insert_block name="origin" />
 			<mass value="${mass}"/>
 			<inertia
-				ixx="${2 * mass * r * r / 5}"
+				ixx="${2 * mass * radius * radius / 5}"
 				ixy="0.0"
 				ixz="0.0"
-				iyy="${2 * mass * r * r / 5}"
+				iyy="${2 * mass * radius * radius / 5}"
 				iyz="0.0"
-				izz="${2 * mass * r * r / 5}"/>
+				izz="${2 * mass * radius * radius / 5}"/>
 		</inertial>
 	</xacro:macro>
 

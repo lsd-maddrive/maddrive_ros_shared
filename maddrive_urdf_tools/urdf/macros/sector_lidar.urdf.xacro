@@ -68,16 +68,16 @@
             </collision>
             <xacro:if value="${model == 'c16'}">
                 <xacro:cylinder_inertia
-                    r="${c16_radius}"
-                    h="${c16_height}"
+                    radius="${c16_radius}"
+                    length="${c16_height}"
                     mass="${c16_mass_kg}">
                     <origin xyz="0 0 0" rpy="0 0 0" />
                 </xacro:cylinder_inertia>
             </xacro:if>
             <xacro:if value="${model == 'c64'}">
                 <xacro:cylinder_inertia
-                    r="${c64_radius}"
-                    h="${c64_height}"
+                    radius="${c64_radius}"
+                    length="${c64_height}"
                     mass="${c64_mass_kg}">
                     <origin xyz="0 0 0" rpy="0 0 0" />
                 </xacro:cylinder_inertia>
