@@ -42,15 +42,15 @@
         <gazebo>
             <plugin name="gazebo_ros_gps_sensor" filename="libhector_gazebo_ros_gps.so">
                 <updateRate>4.0</updateRate>
-                <!-- <robotNamespace>/</robotNamespace> -->
+                <robotNamespace>/</robotNamespace>
                 <bodyName>${prefix}_gps_sensor_link</bodyName>
                 <frameId>${prefix}_gps_sensor</frameId>
                 <topicName>${prefix}_gps_sensor/fix</topicName>
                 <velocityTopicName>${prefix}_gps_sensor/vel</velocityTopicName>
-                <referenceLatitude>-30.06022459407145675</referenceLatitude>
-                <referenceLongitude>-51.173913575780311191</referenceLongitude>
-                <referenceHeading>90.0</referenceHeading>
-                <referenceAltitude>10.0</referenceAltitude>
+                <referenceLatitude>59.971956</referenceLatitude> <!-- широта -->
+                <referenceLongitude>30.320306</referenceLongitude> <!-- долгота -->
+                <referenceAltitude>0.0</referenceAltitude> <!-- высота -->
+                <referenceHeading>90.0</referenceHeading> <!-- угол 0 (ТЕТА) (в градусах) --> <!-- http://docs.ros.org/en/noetic/api/robot_localization/html/_images/figure2.png -->
                 <!-- <status>10</status> -->
                 <!-- <service>10</service> -->
                 <offset>0.0 0.0 0.0</offset>
