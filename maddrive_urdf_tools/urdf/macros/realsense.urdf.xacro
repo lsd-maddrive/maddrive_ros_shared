@@ -152,7 +152,6 @@
             <parent link="${prefix}_rs_${model}_camera_link" />
             <child link="${prefix}_rs_${model}_camera_imu_link" />
             <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}" /> <!-- realsense2_description/launch/view_d435i(d455)_model.launch -->
-            
         </joint>
 
         <link name="${prefix}_rs_${model}_camera_imu_link">
