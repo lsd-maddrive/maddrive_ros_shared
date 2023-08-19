@@ -21,9 +21,18 @@ sudo apt install \
     libpcap-dev \
     libspnav-dev
 
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE || sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
-sudo add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" -u
-sudo apt install librealsense2
+# https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md#installing-the-packages
+sudo mkdir -p /etc/apt/keyrings
+curl -sSf https://librealsense.intel.com/Debian/librealsense.pgp | \
+sudo tee /etc/apt/keyrings/librealsense.pgp > /dev/null
+echo "deb [signed-by=/etc/apt/keyrings/librealsense.pgp] https://librealsense.intel.com/Debian/apt-repo `lsb_release -cs` main" | \
+sudo tee /etc/apt/sources.list.d/librealsense.list
+sudo apt update
+sudo apt install \
+    librealsense2-dkms \
+    librealsense2-utils \
+    librealsense2-dev \
+    librealsense2-dbg
 
 #requirements for RS-ros
 sudo apt purge \
