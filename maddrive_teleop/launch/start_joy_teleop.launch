@@ -2,18 +2,22 @@
 <launch>
 
     <arg name="cmd_topic" default="cmd_vel" />
+    <arg name="speed/frwd_limit" default="1.0"/>
+    <arg name="speed/bkwrd_limit" default="-0.6"/>
+    <arg name="steer/limit" default="35"/>
 
     <!-- http://wiki.ros.org/joy -->
-    <node pkg="joy" type="joy_node" name="joystick" output="screen" >
+    <node pkg="joy" type="joy_node" name="joy_node" output="screen" >
         <param name="dev" value="/dev/input/js0" />
         <param name="deadzone" value="0.3"/>
+        <remap from="diagnostics" to="joy_node_diagnostics"/>
     </node>
 
     <node pkg="maddrive_teleop" type="joy_ctrl.py" name="joy_ctrl" output="screen" >
         <param name="debug" value="false" />
-        <param name="speed/frwd_limit" value="1" />
-        <param name="speed/bkwrd_limit" value="-0.6" />
-        <param name="steer/limit" value="35" />
+        <param name="speed/frwd_limit" value="$(arg speed/frwd_limit)" />
+        <param name="speed/bkwrd_limit" value="$(arg speed/bkwrd_limit)" />
+        <param name="steer/limit" value="$(arg steer/limit)" />
         <remap from="cmd_vel" to="$(arg cmd_topic)" />
     </node>
 
