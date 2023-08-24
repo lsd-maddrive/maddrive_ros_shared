@@ -17,6 +17,7 @@ sudo apt install \
     ros-$ROS_DISTRO-ddynamic-reconfigure \
     ros-$ROS_DISTRO-libpointmatcher \
     ros-$ROS_DISTRO-spatio-temporal-voxel-layer \
+    ros-$ROS_DISTRO-rqt-multiplot \
     libopenvdb-dev \
     libpcap-dev \
     libspnav-dev
