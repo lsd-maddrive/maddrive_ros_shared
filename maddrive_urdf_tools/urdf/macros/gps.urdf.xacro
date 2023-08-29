@@ -41,7 +41,7 @@
         <!-- http://wiki.ros.org/hector_gazebo_plugins -->
         <gazebo>
             <plugin name="gazebo_ros_gps_sensor" filename="libhector_gazebo_ros_gps.so">
-                <updateRate>4.0</updateRate>
+                <updateRate>1.0</updateRate>
                 <robotNamespace>/</robotNamespace>
                 <bodyName>${prefix}_gps_sensor_link</bodyName>
                 <frameId>${prefix}_gps_sensor</frameId>
@@ -54,13 +54,13 @@
                 <!-- <status>10</status> -->
                 <!-- <service>10</service> -->
                 <offset>0.0 0.0 0.0</offset>
-                <drift>0.001 0.001 0.001</drift>
-                <driftFrequency>0.001 0.001 0.001</driftFrequency>
-                <gaussianNoise>0.05 0.05 0.05</gaussianNoise>
-                <velocityOffset>0.001 0.001 0.001</velocityOffset>
-                <velocityDrift>0.001 0.001 0.001</velocityDrift>
-                <velocityDriftFrequency>0.001 0.001 0.001</velocityDriftFrequency>
-                <velocityGaussianNoise>0.5 0.5 0.5</velocityGaussianNoise>
+                <drift>0.001 0.001 0.0</drift>
+                <driftFrequency>0.001 0.001 0.0</driftFrequency>
+                <gaussianNoise>0.05 0.05 0.0</gaussianNoise>
+                <velocityOffset>0.001 0.001 0.0</velocityOffset>
+                <velocityDrift>0.001 0.001 0.0</velocityDrift>
+                <velocityDriftFrequency>0.001 0.001 0.0</velocityDriftFrequency>
+                <velocityGaussianNoise>0.5 0.5 0.0</velocityGaussianNoise>
             </plugin>
         </gazebo>
 

@@ -12,7 +12,7 @@
     <xacro:property name="c16_horizontal_max_angle" value="${pi}" />
     <xacro:property name="c16_vertical_min_angle" value="-0.261799" />
     <xacro:property name="c16_vertical_max_angle" value="0.261799" />
-    <xacro:property name="c16_range_min" value="0.5" />
+    <xacro:property name="c16_range_min" value="2" />
     <xacro:property name="c16_range_max" value="150" />
 
     <xacro:property name="c64_mass_kg" value="1.0" />
