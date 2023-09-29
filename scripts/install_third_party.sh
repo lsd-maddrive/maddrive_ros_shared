@@ -3,11 +3,6 @@
 THIRD_PARTY_DIR=third_party
 mkdir -p $THIRD_PARTY_DIR
 
-# GPS driver
-
-git -C $THIRD_PARTY_DIR clone  https://github.com/KumarRobotics/ublox -b 1.4.1
-git -C $THIRD_PARTY_DIR/ublox apply ../patches/ublox.patch
-
 # ELP stereocamera driver
 #   NB - version not set as driver is under our development
 
@@ -57,3 +52,21 @@ git -C $THIRD_PARTY_DIR clone https://github.com/tu-darmstadt-ros-pkg/hector_gaz
 
 # pointCloud to PointCloud2 massage converter
 git -C $THIRD_PARTY_DIR clone https://github.com/pal-robotics-forks/point_cloud_converter.git
+
+# GPS RTK REQS
+
+# U-Blox driver
+git -C $THIRD_PARTY_DIR clone https://github.com/KumarRobotics/ublox -b master
+# git -C $THIRD_PARTY_DIR/ublox apply ../patches/ublox.patch
+
+# rtcm_msgs for U-Blox driver
+git -C $THIRD_PARTY_DIR clone https://github.com/tilk/rtcm_msgs.git -b master
+
+# nmea_msgs for U-Blox driver
+git -C $THIRD_PARTY_DIR clone https://github.com/ros-drivers/nmea_msgs.git -b master
+
+# NTRIP client
+git -C $THIRD_PARTY_DIR clone https://github.com/LORD-MicroStrain/ntrip_client.git -b ros
+
+# mavros_msgs for NTRIP client
+git -C $THIRD_PARTY_DIR clone https://github.com/mavlink/mavros.git -b master
