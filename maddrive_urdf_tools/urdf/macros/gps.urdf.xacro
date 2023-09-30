@@ -47,20 +47,20 @@
                 <frameId>${prefix}_gps_sensor</frameId>
                 <topicName>${prefix}_gps_sensor/fix</topicName>
                 <velocityTopicName>${prefix}_gps_sensor/vel</velocityTopicName>
-                <referenceLatitude>59.971956</referenceLatitude> <!-- широта -->
-                <referenceLongitude>30.320306</referenceLongitude> <!-- долгота -->
+                <referenceLatitude>0.0</referenceLatitude> <!-- широта -->
+                <referenceLongitude>0.0</referenceLongitude> <!-- долгота -->
                 <referenceAltitude>0.0</referenceAltitude> <!-- высота -->
                 <referenceHeading>90.0</referenceHeading> <!-- угол 0 (ТЕТА) (в градусах) --> <!-- http://docs.ros.org/en/noetic/api/robot_localization/html/_images/figure2.png -->
                 <!-- <status>10</status> -->
                 <!-- <service>10</service> -->
-                <offset>0.0 0.0 0.0</offset>
-                <drift>0.001 0.001 0.0</drift>
-                <driftFrequency>0.001 0.001 0.0</driftFrequency>
-                <gaussianNoise>0.05 0.05 0.0</gaussianNoise>
-                <velocityOffset>0.001 0.001 0.0</velocityOffset>
-                <velocityDrift>0.001 0.001 0.0</velocityDrift>
-                <velocityDriftFrequency>0.001 0.001 0.0</velocityDriftFrequency>
-                <velocityGaussianNoise>0.5 0.5 0.0</velocityGaussianNoise>
+                <offset>0.0 0.0 0.0</offset> <!-- в метрах -->
+                <drift>0.0 0.0 0.0</drift>
+                <driftFrequency>0.0 0.0 0.0</driftFrequency>
+                <gaussianNoise>0.5 0.5 0.0</gaussianNoise> <!-- в метрах -->
+                <velocityOffset>0.0 0.0 0.0</velocityOffset>
+                <velocityDrift>0.0 0.0 0.0</velocityDrift>
+                <velocityDriftFrequency>0.0 0.0 0.0</velocityDriftFrequency>
+                <velocityGaussianNoise>0.0 0.0 0.0</velocityGaussianNoise>
             </plugin>
         </gazebo>
 
