@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 sudo apt install \
     ros-$ROS_DISTRO-usb-cam \
@@ -19,8 +19,12 @@ sudo apt install \
     ros-$ROS_DISTRO-spatio-temporal-voxel-layer \
     ros-$ROS_DISTRO-rqt-multiplot \
     ros-$ROS_DISTRO-libmavconn \
+    ros-$ROS_DISTRO-amcl \
+    ros-$ROS_DISTRO-gmapping \
+    ros-$ROS_DISTRO-map-server \
     libopenvdb-dev \
     libpcap-dev \
+    libgeographic-dev \
     libspnav-dev
 
 #requirements for RS-ros

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # RealSenseSDK
 if modinfo uvcvideo | grep -q "version:"; then
