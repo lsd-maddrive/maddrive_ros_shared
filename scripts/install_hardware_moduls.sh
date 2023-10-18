@@ -21,3 +21,13 @@ if modinfo uvcvideo | grep -q "version:"; then
 else
     echo "Could not get information about installed RealSenseSDK modules"
 fi
+
+# YDLidarSDK
+wget https://www.ydlidar.com/dowfile.html?cid=6&type=4
+unzip dowfile.html\?cid=6\&type=4
+rm -f dowfile.html\?cid=6\&type=4
+mv YDLidar-SDK-master YDLidar-SDK
+cd YDLidar-SDK/build
+cmake ..
+make
+sudo make install

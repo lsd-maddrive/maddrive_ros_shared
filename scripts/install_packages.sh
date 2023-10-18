@@ -21,6 +21,8 @@ sudo apt install \
     ros-$ROS_DISTRO-libmavconn \
     ros-$ROS_DISTRO-amcl \
     ros-$ROS_DISTRO-gmapping \
+    ros-$ROS_DISTRO-hector-slam \
+    ros-$ROS_DISTRO-twist-mux \
     ros-$ROS_DISTRO-map-server \
     libopenvdb-dev \
     libpcap-dev \

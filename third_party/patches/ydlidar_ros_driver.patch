@@ -1,0 +1,13 @@
+diff --git a/src/ydlidar_ros_driver.cpp b/src/ydlidar_ros_driver.cpp
+index 0262560..f6a44ab 100644
+--- a/src/ydlidar_ros_driver.cpp
++++ b/src/ydlidar_ros_driver.cpp
+@@ -97,7 +97,7 @@ int main(int argc, char **argv) {
+   //intensity bit count
+   optval = 10;
+   nh_private.param<int>("intensity_bit", optval, 10);
+-  laser.setlidaropt(LidarPropIntenstiyBit, &optval, sizeof(int));
++  laser.setlidaropt(LidarPropIntenstiy, &optval, sizeof(int));
+ 
+   //////////////////////bool property/////////////////
+   /// fixed angle resolution

@@ -41,7 +41,10 @@ git -C $THIRD_PARTY_DIR clone https://github.com/KaiL4eK/madproto.git
 git -C $THIRD_PARTY_DIR clone https://github.com/IntelRealSense/realsense-ros.git -b 2.3.2
 
 # Ydlidar driver
-git -C $THIRD_PARTY_DIR clone https://github.com/EAIBOT/ydlidar.git -b 1.3.9
+git -C $THIRD_PARTY_DIR clone https://github.com/YDLIDAR/ydlidar_ros_driver.git
+git -C $THIRD_PARTY_DIR/ydlidar_ros_driver apply ../patches/ydlidar_ros_driver.patch
+chmod 0777 $THIRD_PARTY_DIR/ydlidar_ros_driver/startup/*
+sudo sh $THIRD_PARTY_DIR/ydlidar_ros_driver/startup/initenv.sh
 
 # LSLidar driver
 git -C $THIRD_PARTY_DIR clone https://github.com/Lslidar/Lslidar_ROS1_driver.git
