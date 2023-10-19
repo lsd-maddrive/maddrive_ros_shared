@@ -24,6 +24,7 @@ sudo apt-get update && apt-get install \
     ros-$ROS_DISTRO-hector-slam \
     ros-$ROS_DISTRO-twist-mux \
     ros-$ROS_DISTRO-map-server \
+    ros-$ROS_DISTRO-robot-upstart \
     libopenvdb-dev \
     libpcap-dev \
     libgeographic-dev \
