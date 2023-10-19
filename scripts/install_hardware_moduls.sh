@@ -11,7 +11,7 @@ if modinfo uvcvideo | grep -q "version:"; then
         sudo tee /etc/apt/keyrings/librealsense.pgp > /dev/null
         echo "deb [signed-by=/etc/apt/keyrings/librealsense.pgp] https://librealsense.intel.com/Debian/apt-repo `lsb_release -cs` main" | \
         sudo tee /etc/apt/sources.list.d/librealsense.list
-        sudo apt-get update && apt-get install \
+        sudo apt-get update && apt-get install -y \
             librealsense2-dkms \
             librealsense2-utils \
             librealsense2-dev \
@@ -22,10 +22,8 @@ else
 fi
 
 # YDLidarSDK
-wget https://www.ydlidar.com/dowfile.html?cid=6&type=4
-unzip dowfile.html\?cid=6\&type=4
-rm -f dowfile.html\?cid=6\&type=4
-mv YDLidar-SDK-master YDLidar-SDK
+git clone https://github.com/YDLIDAR/YDLidar-SDK.git
+mkdir -p YDLidar-SDK/build
 cd YDLidar-SDK/build
 cmake ..
 make
