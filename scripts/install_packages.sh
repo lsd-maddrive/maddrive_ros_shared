@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install \
+sudo apt-get update && apt-get install \
     ros-$ROS_DISTRO-usb-cam \
     ros-$ROS_DISTRO-rosserial-server \
     ros-$ROS_DISTRO-rosserial-client \
@@ -30,6 +30,6 @@ sudo apt install \
     libspnav-dev
 
 #requirements for RS-ros
-sudo apt purge \
+sudo apt-get purge \
     ros-$ROS_DISTRO-realsense2-camera \
     ros-$ROS_DISTRO-realsense2-description \
