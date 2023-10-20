@@ -72,3 +72,6 @@ git -C $THIRD_PARTY_DIR clone https://github.com/LORD-MicroStrain/ntrip_client.g
 
 # mavros_msgs for NTRIP client
 git -C $THIRD_PARTY_DIR clone https://github.com/mavlink/mavros.git -b master
+
+# csv2kml convert
+git -C $THIRD_PARTY_DIR clone https://github.com/MapIV/kml_generator.git -b main
