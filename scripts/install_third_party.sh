@@ -75,3 +75,15 @@ git -C $THIRD_PARTY_DIR clone https://github.com/mavlink/mavros.git -b master
 
 # csv2kml convert
 git -C $THIRD_PARTY_DIR clone https://github.com/MapIV/kml_generator.git -b main
+
+
+# hector_metapackage (mapping, imu tools)
+git -C $THIRD_PARTY_DIR clone https://github.com/tu-darmstadt-ros-pkg/hector_slam.git -b noetic-devel
+
+# fork with swerve_steering_controller (4ws kinematic)
+git -C $THIRD_PARTY_DIR clone https://github.com/MarkNaeem/ros_controllers.git -b noetic-devel
+
+# 4ws_steering_controller deps
+git -C $THIRD_PARTY_DIR clone https://github.com/ros-drivers/four_wheel_steering_msgs.git -b master
+git -C $THIRD_PARTY_DIR clone https://github.com/ros-controls/urdf_geometry_parser.git -b kinetic-devel
+git -C $THIRD_PARTY_DIR clone https://github.com/ros/geometry2.git -b noetic-devel
