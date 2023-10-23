@@ -20,7 +20,7 @@ COPY bashrc /home/${USERNAME}/.bashrc
 RUN apt-get update && apt-get install -y \
     sudo \
     git \
-    kmod \
+    wget \
     xxd \
     && rm -rf /var/lib/apt/lists/*
 
@@ -28,6 +28,10 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get update && apt-get install -y \
     python3-catkin-tools \
     && rm -rf /var/lib/apt/lists/*
+
+# RUN wget https://github.com/IntelRealSense/librealsense/raw/master/scripts/libuvc_installation.sh
+# RUN chmod +x ./libuvc_installation.sh
+# RUN ./libuvc_installation.sh
 
 # необходимые библиотеки для ROS-пакетов
 COPY scripts/install_packages.sh /home/${USERNAME}/
