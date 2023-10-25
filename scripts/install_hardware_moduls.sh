@@ -35,4 +35,6 @@ else
     cmake ..
     make
     sudo make install
+    cd ../..
+    rm -rf YDLidar-SDK
 fi
