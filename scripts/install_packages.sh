@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt-get update && apt-get install -y \
+sudo apt-get update && sudo apt-get install -y \
     ros-$ROS_DISTRO-usb-cam \
     ros-$ROS_DISTRO-rosserial-server \
     ros-$ROS_DISTRO-rosserial-client \
