@@ -11,7 +11,7 @@ if modinfo uvcvideo | grep -q "version:"; then
         sudo tee /etc/apt/keyrings/librealsense.pgp > /dev/null
         echo "deb [signed-by=/etc/apt/keyrings/librealsense.pgp] https://librealsense.intel.com/Debian/apt-repo `lsb_release -cs` main" | \
         sudo tee /etc/apt/sources.list.d/librealsense.list
-        sudo apt-get update && apt-get install -y \
+        sudo apt-get update && sudo apt-get install -y \
             librealsense2-dkms \
             librealsense2-utils \
             librealsense2-dev \
