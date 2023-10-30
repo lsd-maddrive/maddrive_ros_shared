@@ -25,6 +25,18 @@ docker container run -it \
     lsd-maddrive-ros:noetic-desktop-full
 ```
 
+* запуск контейнера в хост-системе Windows
+```shell
+docker container run -it `
+    --name=TYPE_PROJECT_NAME `
+    --user=user1122 `
+    --network=host `
+    --ipc=host `
+    --volume=C:\Users\Nikita\Documents\catkin_ws\src:/home/user1122/catkin_ws/src `
+    -e DISPLAY=host.docker.internal:0.0 `
+    lsd-maddrive-ros:noetic-desktop-full
+```
+
 * с помощью флага `--device` передайте путь до файла подключаемого устройства (можно узнать с помощью команды `dmesg`)
 пример (передадим в контейнер файлы лидара и джойстика):
 

@@ -36,9 +36,10 @@ RUN apt-get update && apt-get install -y \
 # необходимые библиотеки для ROS-пакетов
 COPY scripts/install_packages.sh /home/${USERNAME}/
 RUN chmod +x /home/${USERNAME}/install_packages.sh
-RUN ./home/${USERNAME}/install_packages.sh
+RUN sh /home/${USERNAME}/install_packages.sh
 RUN rm -rf /var/lib/apt/lists/*
 
 COPY scripts/install_hardware_moduls.sh /home/${USERNAME}/
 RUN chmod +x /home/${USERNAME}/install_hardware_moduls.sh
-RUN ./home/${USERNAME}/install_hardware_moduls.sh
+RUN sh /home/${USERNAME}/install_hardware_moduls.sh
+RUN rm -rf /var/lib/apt/lists/*

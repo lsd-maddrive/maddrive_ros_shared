@@ -24,6 +24,7 @@ sudo apt-get update && sudo apt-get install -y \
     ros-$ROS_DISTRO-twist-mux \
     ros-$ROS_DISTRO-map-server \
     ros-$ROS_DISTRO-robot-upstart \
+    ros-$ROS_DISTRO-foxglove-bridge \
     libopenvdb-dev \
     libpcap-dev \
     libgeographic-dev \
