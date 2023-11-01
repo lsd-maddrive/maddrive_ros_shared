@@ -25,6 +25,7 @@ sudo apt-get update && sudo apt-get install -y \
     ros-$ROS_DISTRO-map-server \
     ros-$ROS_DISTRO-robot-upstart \
     ros-$ROS_DISTRO-foxglove-bridge \
+    ros-$ROS_DISTRO-imu-filter-madgwick \
     libopenvdb-dev \
     libpcap-dev \
     libgeographic-dev \
