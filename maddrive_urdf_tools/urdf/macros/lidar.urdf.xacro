@@ -2,8 +2,8 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <xacro:property name="lidar_mass" value="0.1" />
-    <xacro:property name="lidar_height" value="0.02" />
-    <xacro:property name="lidar_radius" value="0.04" />
+    <xacro:property name="lidar_height" value="0.016" />
+    <xacro:property name="lidar_radius" value="0.03" />
 
     <xacro:macro name="lidar" params="prefix parent origin_xyz origin_rpy">
 
