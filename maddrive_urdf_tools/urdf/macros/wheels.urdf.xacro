@@ -39,12 +39,24 @@
 	</xacro:macro>
 
 	<!-- SPEED WHEEL -->
-	<xacro:macro name="speed_wheel" params="prefix parent origin_xyz ">
+	<xacro:macro name="speed_wheel" params="prefix parent suspension_origin_xyz ">
+
+		<joint name="${prefix}_suspension_joint" type="fixed">
+			<parent link="${parent}" />
+			<child link="${prefix}_suspension_link" />
+			<origin xyz="${suspension_origin_xyz}" rpy="0 0 0" />
+		</joint>
+
+		<link name="${prefix}_suspension_link">
+			<xacro:null_visual/>
+			<xacro:null_collision/>
+			<xacro:null_inertia/>
+		</link>
 
 		<joint name="${prefix}_wheel_joint" type="continuous">
-			<parent link="${parent}" />
+			<parent link="${prefix}_suspension_link" />
 			<child link="${prefix}_wheel_link" />
-			<origin xyz="${origin_xyz}" rpy="0 0 0" />
+			<origin xyz="0 0 -${suspension_height}" rpy="0 0 0" />
 			<axis xyz="0 1 0" />
 			<limit effort="100000" velocity="${pi*10}" />
 		</joint>
@@ -65,12 +77,24 @@
 	</xacro:macro>
 
 	<!-- STEER WHEEL -->
-	<xacro:macro name="steer_wheel" params="prefix parent steer_origin_xyz steer_limit">
+	<xacro:macro name="steer_wheel" params="prefix parent suspension_origin_xyz suspension_height steer_limit">
+
+		<joint name="${prefix}_suspension_joint" type="fixed">
+			<parent link="${parent}" />
+			<child link="${prefix}_suspension_link" />
+			<origin xyz="${suspension_origin_xyz}" rpy="0 0 0" />
+		</joint>
+
+		<link name="${prefix}_suspension_link">
+			<xacro:null_visual/>
+			<xacro:null_collision/>
+			<xacro:null_inertia/>
+		</link>
 
 		<joint name="${prefix}_steer_joint" type="revolute">
-			<parent link="${parent}" />
+			<parent link="${prefix}_suspension_link" />
 			<child link="${prefix}_steer_link" />
-			<origin xyz="${steer_origin_xyz}" rpy="0 0 0" />
+			<origin xyz="0 0 -${suspension_height}" rpy="0 0 0" />
 			<axis xyz="0 0 1" />
 			<limit lower="${-steer_limit}" upper="${steer_limit}" effort="100000" velocity="${pi*2}" />
 		</joint>
