@@ -5,11 +5,11 @@ mkdir -p $THIRD_PARTY_DIR
 
 # ELP stereocamera driver
 #   NB - version not set as driver is under our development
-git -C $THIRD_PARTY_DIR clone https://github.com/lsd-maddrive/elp_stereo_camera || git -C $THIRD_PARTY_DIR pull
+# git -C $THIRD_PARTY_DIR clone https://github.com/lsd-maddrive/elp_stereo_camera
 
 # Libviso2
-git -C $THIRD_PARTY_DIR clone https://github.com/srv/viso2 -b melodic_develop_sift
-git -C $THIRD_PARTY_DIR/viso2 apply ../patches/viso2.patch
+# git -C $THIRD_PARTY_DIR clone https://github.com/srv/viso2 -b melodic_develop_sift
+# git -C $THIRD_PARTY_DIR/viso2 apply ../patches/viso2.patch
 
 # ORB-SLAM2
 git -C $THIRD_PARTY_DIR clone https://github.com/appliedAI-Initiative/orb_slam_2_ros -b v1.2
