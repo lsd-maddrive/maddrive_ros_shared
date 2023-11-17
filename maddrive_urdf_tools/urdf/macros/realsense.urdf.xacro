@@ -118,11 +118,11 @@
                     <alwaysOn>true</alwaysOn>
                     <updateRate>20.0</updateRate>
                     <cameraName>${prefix}_rs_${model}_camera</cameraName>
-                    <imageTopicName>/${prefix}_rs_${model}_camera/color/image_raw</imageTopicName>
-                    <cameraInfoTopicName>/${prefix}_rs_${model}_camera/color/camera_info</cameraInfoTopicName>
-                    <depthImageTopicName>/${prefix}_rs_${model}_camera/aligned_depth_to_color/image_raw</depthImageTopicName>
-                    <depthImageInfoTopicName>/${prefix}_rs_${model}_camera/depth/camera_info</depthImageInfoTopicName>
-                    <pointCloudTopicName>/${prefix}_rs_${model}_camera/depth/color/points</pointCloudTopicName>
+                    <imageTopicName>/${prefix}_rs_${model}_camera/color/image_raw</imageTopicName> <!-- sensor_msgs/Image -->
+                    <cameraInfoTopicName>/${prefix}_rs_${model}_camera/color/camera_info</cameraInfoTopicName> <!-- sensor_msgs/CameraInfo -->
+                    <depthImageTopicName>/${prefix}_rs_${model}_camera/aligned_depth_to_color/image_raw</depthImageTopicName> <!-- sensor_msgs/Image -->
+                    <depthImageInfoTopicName>/${prefix}_rs_${model}_camera/depth/camera_info</depthImageInfoTopicName> <!-- sensor_msgs/CameraInfo -->
+                    <pointCloudTopicName>/${prefix}_rs_${model}_camera/depth/color/points</pointCloudTopicName> <!-- sensor_msgs/PointCloud2 -->
                     <frameName>${prefix}_rs_${model}_camera_optical_frame</frameName>
                     <xacro:if value="${model == 'rs_d435i'}">
                         <pointCloudCutoff>${rs_d435i_camera_range_min}</pointCloudCutoff>
