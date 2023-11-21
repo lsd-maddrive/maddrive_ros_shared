@@ -1,6 +1,7 @@
 #!/bin/bash
 
 sudo apt-get update && sudo apt-get install -y \
+    python3-catkin-tools \
     ros-$ROS_DISTRO-usb-cam \
     ros-$ROS_DISTRO-rosserial-server \
     ros-$ROS_DISTRO-rosserial-client \
