@@ -5,6 +5,7 @@ sudo apt-get update && sudo apt-get install -y \
     ros-$ROS_DISTRO-usb-cam \
     ros-$ROS_DISTRO-rosserial-server \
     ros-$ROS_DISTRO-rosserial-client \
+    ros-$ROS_DISTRO-rosserial-python \
     ros-$ROS_DISTRO-robot-localization \
     ros-$ROS_DISTRO-move-base \
     ros-$ROS_DISTRO-global-planner \
