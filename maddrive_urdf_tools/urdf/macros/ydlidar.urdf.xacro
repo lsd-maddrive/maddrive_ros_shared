@@ -4,26 +4,13 @@
     <xacro:property name="ydlidar_mass" value="0.1" />
     <xacro:property name="ydlidar_height" value="0.016" />
     <xacro:property name="ydlidar_radius" value="0.03" />
-    <xacro:property name="ydlidar_base_2_scan_offset_z" value="0.043" />
 
     <xacro:macro name="ydlidar" params="prefix parent origin_xyz origin_rpy">
 
-        <joint name="${prefix}_ydlidar_base_joint" type="fixed">
-            <parent link="${parent}" />
-            <child link="${prefix}_ydlidar_base_link" />
-            <origin xyz="${origin_xyz}" rpy="${origin_rpy}" />
-        </joint>
-
-        <link name="${prefix}_ydlidar_base_link">
-            <xacro:null_visual/>
-            <xacro:null_collision/>
-            <xacro:null_inertia/>
-        </link>
-
         <joint name="${prefix}_ydlidar_scan_joint" type="fixed">
-            <parent link="${prefix}_ydlidar_base_link" />
+            <parent link="${parent}" />
             <child link="${prefix}_ydlidar_scan_link" />
-            <origin xyz="0 0 ${ydlidar_base_2_scan_offset_z}" rpy="0 0 0" />
+            <origin xyz="${origin_xyz}" rpy="${origin_rpy}" />
         </joint>
 
         <link name="${prefix}_ydlidar_scan_link">
@@ -50,7 +37,7 @@
         <gazebo reference="${prefix}_ydlidar_scan_link">
             <selfCollide>false</selfCollide>
             <material>Gazebo/Red</material>
-            <sensor name="${prefix}_ydlidar_scan_sensor" type="ray">
+            <sensor name="${prefix}_ydlidar_sensor" type="ray">
                 <pose>0 0 0 0 0 0</pose>
                 <visualize>true</visualize>
                 <update_rate>10</update_rate>
