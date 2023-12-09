@@ -5,7 +5,7 @@ if modinfo uvcvideo | grep -q "version:"; then
     if modinfo uvcvideo | grep -q "realsense"; then
         echo "The required RealSenseSDK modules are already installed"
     else
-        # https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md#installing-the-packages
+        # based on https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md#installing-the-packages
         sudo mkdir -p /etc/apt/keyrings
         curl -sSf https://librealsense.intel.com/Debian/librealsense.pgp | \
         sudo tee /etc/apt/keyrings/librealsense.pgp > /dev/null
@@ -29,6 +29,7 @@ SDK_config_file="/usr/local/lib/cmake/ydlidar_sdk/ydlidar_sdkConfig.cmake"
 if [ -f "$SDK_config_file" ]; then
     echo "Файл $SDK_config_file существует. SDK YDLidar уже установлен."
 else
+    # based on https://www.ydlidar.com/Public/upload/files/2022-06-21/YDLIDAR%20X2%20Lidar%20User%20Manual%20V1.3(211228).pdf
     git clone https://github.com/YDLIDAR/YDLidar-SDK.git
     mkdir -p YDLidar-SDK/build
     cd YDLidar-SDK/build

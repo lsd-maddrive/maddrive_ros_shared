@@ -1,5 +1,6 @@
 <launch>
     <!-- base on ydlidar_ros_driver/launch/X2.launch -->
+    <!-- mounted on the kitty robots -->
 
   <arg name="scan_output_topic" default="scan" />
   <arg name="point_cloud_output_topic" default="point_cloud" />

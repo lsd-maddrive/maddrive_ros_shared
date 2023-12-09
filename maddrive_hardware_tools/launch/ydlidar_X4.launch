@@ -1,5 +1,6 @@
 <launch>
   <!-- base on ydlidar_ros_driver/launch/X4.launch -->
+  <!-- mounted on the zaWRka robot -->
 
 <arg name="scan_output_topic" default="scan" />
 <arg name="point_cloud_output_topic" default="point_cloud" />
@@ -7,7 +8,7 @@
 
 <node pkg="ydlidar_ros_driver" type="ydlidar_ros_driver_node" name="ydlidar_publisher" output="screen" respawn="false" >
 
-   <!-- string property -->
+  <!-- string property -->
   <param name="port"         type="string" value="/dev/ydlidar"/>  
   <param name="frame_id"     type="string" value="$(arg frame_id)"/>
   <param name="ignore_array"     type="string" value=""/>
