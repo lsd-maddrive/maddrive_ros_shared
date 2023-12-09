@@ -13,14 +13,14 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-set(STEERING_FILTER_NAME steering_filter)
-set(STEERING_FILTER_SRC src/cmd_filter/main.cpp)
+set(CMD_VEL_FILTER_NAME cmd_vel_filter)
+set(CMD_VEL_FILTER_SRC src/cmd_filter/main.cpp)
 
 add_executable(
-  ${STEERING_FILTER_NAME} ${STEERING_FILTER_SRC}
+  ${CMD_VEL_FILTER_NAME} ${CMD_VEL_FILTER_SRC}
 )
 
 target_link_libraries(
-  ${STEERING_FILTER_NAME}
+  ${CMD_VEL_FILTER_NAME}
   ${catkin_LIBRARIES}
 )
