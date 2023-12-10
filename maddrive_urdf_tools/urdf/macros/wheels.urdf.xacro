@@ -39,7 +39,7 @@
 	</xacro:macro>
 
 	<!-- SPEED WHEEL -->
-	<xacro:macro name="speed_wheel" params="prefix parent suspension_origin_xyz ">
+	<xacro:macro name="speed_wheel" params="prefix parent suspension_origin_xyz suspension_height">
 
 		<joint name="${prefix}_suspension_joint" type="fixed">
 			<parent link="${parent}" />

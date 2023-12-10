@@ -3,37 +3,37 @@
 
     <xacro:include filename="$(find maddrive_urdf_tools)/urdf/macros/inertia.urdf.xacro" />
 
-    <xacro:property name="gps_sensor_length" value="0.05" />
-    <xacro:property name="gps_sensor_width" value="0.05" />
-    <xacro:property name="gps_sensor_height" value="0.05" />
-    <xacro:property name="gps_sensor_mass" value="0.1" />
+    <xacro:property name="ublox_gps_sensor_length" value="0.05" />
+    <xacro:property name="ublox_gps_sensor_width" value="0.05" />
+    <xacro:property name="ublox_gps_sensor_height" value="0.05" />
+    <xacro:property name="ublox_gps_sensor_mass" value="0.1" />
 
-    <xacro:macro name="gps_sensor" params="prefix parent origin_xyz origin_rpy">
+    <xacro:macro name="ublox_gps_sensor" params="prefix parent origin_xyz origin_rpy">
 
-        <joint name="${prefix}_gps_sensor_joint" type="fixed">
+        <joint name="${prefix}_ublox_gps_sensor_joint" type="fixed">
             <parent link="${parent}" />
-            <child link="${prefix}_gps_sensor_link" />
+            <child link="${prefix}_ublox_gps_sensor_link" />
             <origin xyz="${origin_xyz}" rpy="${origin_rpy}" />
         </joint>
 
-        <link name="${prefix}_gps_sensor_link">
+        <link name="${prefix}_ublox_gps_sensor_link">
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <box size="${gps_sensor_length} ${gps_sensor_width} ${gps_sensor_height}" />
+                    <box size="${ublox_gps_sensor_length} ${ublox_gps_sensor_width} ${ublox_gps_sensor_height}" />
                 </geometry>
             </collision>
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
-                    <box size="${gps_sensor_length} ${gps_sensor_width} ${gps_sensor_height}" />
+                    <box size="${ublox_gps_sensor_length} ${ublox_gps_sensor_width} ${ublox_gps_sensor_height}" />
                 </geometry>
             </visual>
             <xacro:box_inertia
-                length="${gps_sensor_length}"
-                width="${gps_sensor_width}"
-                height="${gps_sensor_height}"
-                mass="${gps_sensor_mass}">
+                length="${ublox_gps_sensor_length}"
+                width="${ublox_gps_sensor_width}"
+                height="${ublox_gps_sensor_height}"
+                mass="${ublox_gps_sensor_mass}">
                 <origin xyz="0 0 0" rpy="0 0 0" />
             </xacro:box_inertia>
         </link>
@@ -43,12 +43,12 @@
             <plugin name="gazebo_ros_gps_sensor" filename="libhector_gazebo_ros_gps.so">
                 <updateRate>1.0</updateRate>
                 <robotNamespace>/</robotNamespace>
-                <bodyName>${prefix}_gps_sensor_link</bodyName>
-                <frameId>${prefix}_gps_sensor</frameId>
-                <topicName>${prefix}_gps_sensor/fix</topicName>
-                <velocityTopicName>${prefix}_gps_sensor/vel</velocityTopicName>
-                <referenceLatitude>0.0</referenceLatitude> <!-- широта -->
-                <referenceLongitude>0.0</referenceLongitude> <!-- долгота -->
+                <bodyName>${prefix}_ublox_gps_sensor_link</bodyName>
+                <frameId>${prefix}_ublox_gps_sensor</frameId>
+                <topicName>${prefix}_ublox_gps_sensor/fix</topicName>
+                <velocityTopicName>${prefix}_ublox_gps_sensor/vel</velocityTopicName>
+                <referenceLatitude>59.972814</referenceLatitude> <!-- широта -->
+                <referenceLongitude>30.322828</referenceLongitude> <!-- долгота -->
                 <referenceAltitude>0.0</referenceAltitude> <!-- высота -->
                 <referenceHeading>90.0</referenceHeading> <!-- угол 0 (ТЕТА) (в градусах) --> <!-- http://docs.ros.org/en/noetic/api/robot_localization/html/_images/figure2.png -->
                 <!-- <status>10</status> -->
@@ -56,7 +56,7 @@
                 <offset>0.0 0.0 0.0</offset> <!-- в метрах -->
                 <drift>0.0 0.0 0.0</drift>
                 <driftFrequency>0.0 0.0 0.0</driftFrequency>
-                <gaussianNoise>0.5 0.5 0.0</gaussianNoise> <!-- в метрах -->
+                <gaussianNoise>0.05 0.05 0.0</gaussianNoise> <!-- в метрах -->
                 <velocityOffset>0.0 0.0 0.0</velocityOffset>
                 <velocityDrift>0.0 0.0 0.0</velocityDrift>
                 <velocityDriftFrequency>0.0 0.0 0.0</velocityDriftFrequency>
