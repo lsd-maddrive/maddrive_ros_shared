@@ -44,7 +44,7 @@
                 <updateRate>1.0</updateRate>
                 <robotNamespace>/</robotNamespace>
                 <bodyName>${prefix}_ublox_gps_sensor_link</bodyName>
-                <frameId>${prefix}_ublox_gps_sensor</frameId>
+                <frameId>${prefix}_ublox_gps_sensor_link</frameId>
                 <topicName>${prefix}_ublox_gps_sensor/fix</topicName>
                 <velocityTopicName>${prefix}_ublox_gps_sensor/vel</velocityTopicName>
                 <referenceLatitude>59.972814</referenceLatitude> <!-- широта -->
