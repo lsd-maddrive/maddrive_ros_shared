@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <xacro:include filename="$(find maddrive_urdf_tools)/urdf/macros/inertia.urdf.xacro" />
+
+    <xacro:property name="ublox_gps_sensor_length" value="0.05" />
+    <xacro:property name="ublox_gps_sensor_width" value="0.05" />
+    <xacro:property name="ublox_gps_sensor_height" value="0.05" />
+    <xacro:property name="ublox_gps_sensor_mass" value="0.1" />
+
+    <xacro:macro name="high_freq_zero_noise_ublox_gps_sensor" params="prefix parent origin_xyz origin_rpy">
+
+        <joint name="${prefix}_ublox_gps_sensor_joint" type="fixed">
+            <parent link="${parent}" />
+            <child link="${prefix}_ublox_gps_sensor_link" />
+            <origin xyz="${origin_xyz}" rpy="${origin_rpy}" />
+        </joint>
+
+        <link name="${prefix}_ublox_gps_sensor_link">
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <box size="${ublox_gps_sensor_length} ${ublox_gps_sensor_width} ${ublox_gps_sensor_height}" />
+                </geometry>
+            </collision>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <box size="${ublox_gps_sensor_length} ${ublox_gps_sensor_width} ${ublox_gps_sensor_height}" />
+                </geometry>
+            </visual>
+            <xacro:box_inertia
+                length="${ublox_gps_sensor_length}"
+                width="${ublox_gps_sensor_width}"
+                height="${ublox_gps_sensor_height}"
+                mass="${ublox_gps_sensor_mass}">
+                <origin xyz="0 0 0" rpy="0 0 0" />
+            </xacro:box_inertia>
+        </link>
+
+        <!-- http://wiki.ros.org/hector_gazebo_plugins -->
+        <gazebo>
+            <plugin name="gazebo_ros_gps_sensor" filename="libhector_gazebo_ros_gps.so">
+                <updateRate>30.0</updateRate>
+                <robotNamespace>/</robotNamespace>
+                <bodyName>${prefix}_ublox_gps_sensor_link</bodyName>
+                <frameId>${prefix}_ublox_gps_sensor_link</frameId>
+                <topicName>${prefix}_ublox_gps_sensor/fix</topicName>
+                <velocityTopicName>${prefix}_ublox_gps_sensor/vel</velocityTopicName>
+                <referenceLatitude>59.972814</referenceLatitude> <!-- широта -->
+                <referenceLongitude>30.322828</referenceLongitude> <!-- долгота -->
+                <referenceAltitude>0.0</referenceAltitude> <!-- высота -->
+                <referenceHeading>90.0</referenceHeading> <!-- угол 0 (ТЕТА) (в градусах) --> <!-- http://docs.ros.org/en/noetic/api/robot_localization/html/_images/figure2.png -->
+                <!-- <status>10</status> -->
+                <!-- <service>10</service> -->
+                <offset>0.0 0.0 0.0</offset> <!-- в метрах -->
+                <drift>0.0 0.0 0.0</drift>
+                <driftFrequency>0.0 0.0 0.0</driftFrequency>
+                <gaussianNoise>0.0 0.0 0.0</gaussianNoise> <!-- в метрах -->
+                <velocityOffset>0.0 0.0 0.0</velocityOffset>
+                <velocityDrift>0.0 0.0 0.0</velocityDrift>
+                <velocityDriftFrequency>0.0 0.0 0.0</velocityDriftFrequency>
+                <velocityGaussianNoise>0.0 0.0 0.0</velocityGaussianNoise>
+            </plugin>
+        </gazebo>
+
+    </xacro:macro>
+
+</robot>
