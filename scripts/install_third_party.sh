@@ -87,3 +87,6 @@ git -C $THIRD_PARTY_DIR clone https://github.com/MarkNaeem/ros_controllers.git -
 git -C $THIRD_PARTY_DIR clone https://github.com/ros-drivers/four_wheel_steering_msgs.git -b master
 git -C $THIRD_PARTY_DIR clone https://github.com/ros-controls/urdf_geometry_parser.git -b kinetic-devel
 git -C $THIRD_PARTY_DIR clone https://github.com/ros/geometry2.git -b noetic-devel
+
+# gps plugin for rviz
+git -C $THIRD_PARTY_DIR clone https://github.com/nobleo/rviz_satellite -b master
