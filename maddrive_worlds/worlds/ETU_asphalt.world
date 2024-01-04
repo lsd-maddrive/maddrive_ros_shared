@@ -123,10 +123,10 @@
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
     <state world_name='default'>
-      <sim_time>196 22000000</sim_time>
-      <real_time>196 489941750</real_time>
-      <wall_time>1702491176 75250016</wall_time>
-      <iterations>196022</iterations>
+      <sim_time>339 445000000</sim_time>
+      <real_time>144 336746936</real_time>
+      <wall_time>1704397971 82858595</wall_time>
+      <iterations>143423</iterations>
       <model name='all_build'>
         <pose>0 0 0 0 -0 0</pose>
         <scale>1 1 1</scale>
@@ -138,10 +138,10 @@
         </link>
       </model>
       <model name='asphalt_ground_plane'>
-        <pose>71.6053 1.72672 0 0 -0 0</pose>
+        <pose>77.4714 1.72672 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>71.6053 1.72672 0 0 -0 0</pose>
+          <pose>77.4714 1.72672 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -158,20 +158,20 @@
         </link>
       </model>
       <model name='asphalt_ground_plane_1'>
-        <pose>16.7047 72.1261 0 0 -0 0</pose>
+        <pose>22.5192 72.1295 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>16.7047 72.1261 0 0 -0 0</pose>
+          <pose>22.5192 72.1295 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='asphalt_ground_plane_2'>
-        <pose>71.6821 91.5872 0 0 -0 0</pose>
+        <pose>77.4623 91.7269 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>71.6821 91.5872 0 0 -0 0</pose>
+          <pose>77.4623 91.7269 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -188,10 +188,10 @@
         </link>
       </model>
       <model name='asphalt_ground_plane_4'>
-        <pose>-32.3825 -101.829 0 0 -0 0</pose>
+        <pose>-32.4746 -102.137 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>-32.3825 -101.829 0 0 -0 0</pose>
+          <pose>-32.4746 -102.137 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -552,7 +552,7 @@
     </model>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose>24.0008 -89.6604 946.184 3.6e-05 1.5698 1.72827</pose>
+        <pose>-150.157 -136.287 117.582 0 0.993797 0.000236</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
