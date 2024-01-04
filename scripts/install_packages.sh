@@ -15,7 +15,8 @@ sudo apt-get update && sudo apt-get install -y \
     ros-$ROS_DISTRO-rviz-imu-plugin \
     ros-$ROS_DISTRO-hector-gazebo-plugins \
     ros-$ROS_DISTRO-gazebo-plugins \
-    ros-$ROS_DISTRO-octomap \
+    ros-$ROS_DISTRO-octomap-msgs \
+    ros-$ROS_DISTRO-octomap-rviz-plugins \
     ros-$ROS_DISTRO-ddynamic-reconfigure \
     ros-$ROS_DISTRO-libpointmatcher \
     ros-$ROS_DISTRO-spatio-temporal-voxel-layer \
