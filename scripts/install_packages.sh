@@ -15,7 +15,7 @@ sudo apt-get update && sudo apt-get install -y \
     ros-$ROS_DISTRO-rviz-imu-plugin \
     ros-$ROS_DISTRO-hector-gazebo-plugins \
     ros-$ROS_DISTRO-gazebo-plugins \
-    ros-$ROS_DISTRO-octomap-msgs \
+    ros-$ROS_DISTRO-octomap \
     ros-$ROS_DISTRO-ddynamic-reconfigure \
     ros-$ROS_DISTRO-libpointmatcher \
     ros-$ROS_DISTRO-spatio-temporal-voxel-layer \
@@ -30,7 +30,6 @@ sudo apt-get update && sudo apt-get install -y \
     ros-$ROS_DISTRO-imu-filter-madgwick \
     ros-$ROS_DISTRO-laser-filters \
     ros-$ROS_DISTRO-jsk-visualization \
-    ros-$ROS_DISTRO-octomap-rviz-plugins \
     libopenvdb-dev \
     libpcap-dev \
     libgeographic-dev \
