@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <xacro:include filename="$(find maddrive_urdf_tools)/urdf/macros/inertia.urdf.xacro" />
+
+    <xacro:property name="c16_mass_kg" value="1.0" />
+    <xacro:property name="c16_height" value="0.0779" />
+    <xacro:property name="c16_radius" value="${0.102/2}" />
+    <xacro:property name="c16_hz" value="20" />
+    <xacro:property name="c16_number_of_channels" value="16" />
+    <xacro:property name="c16_horizontal_min_angle" value="-${pi}" />
+    <xacro:property name="c16_horizontal_max_angle" value="${pi}" />
+    <xacro:property name="c16_vertical_min_angle" value="-0.261799" />
+    <xacro:property name="c16_vertical_max_angle" value="0.261799" />
+    <xacro:property name="c16_range_min" value="2" />
+    <xacro:property name="c16_range_max" value="150" />
+
+    <xacro:property name="c64_mass_kg" value="1.0" />
+    <xacro:property name="c64_height" value="0.09" />
+    <xacro:property name="c64_radius" value="${0.1075/2}" />
+    <xacro:property name="c64_hz" value="20" />
+    <xacro:property name="c64_number_of_channels" value="64" />
+    <xacro:property name="c64_horizontal_min_angle" value="-${pi/2}" />
+    <xacro:property name="c64_horizontal_max_angle" value="${pi/2}" />
+    <xacro:property name="c64_vertical_min_angle" value="-0.436332" />
+    <xacro:property name="c64_vertical_max_angle" value="0.261799" />
+    <xacro:property name="c64_range_min" value="0.5" />
+    <xacro:property name="c64_range_max" value="100" />
+
+    <xacro:macro name="sector_lidar" params="prefix model parent origin_xyz origin_rpy">
+
+        <joint name="${prefix}_lslidar_${model}_lidar_joint" type="fixed">
+            <parent link="${parent}" />
+            <child link="${prefix}_lslidar_${model}_lidar_link" />
+            <origin xyz="${origin_xyz}" rpy="${origin_rpy}" />
+        </joint>
+
+        <link name="${prefix}_lslidar_${model}_lidar_link">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <xacro:if value="${model == 'c16'}">
+                        <cylinder
+                            length="${c16_height}"
+                            radius="${c16_radius}" />
+                    </xacro:if>
+                    <xacro:if value="${model == 'c64'}">
+                        <cylinder
+                            length="${c64_height}"
+                            radius="${c64_radius}" />
+                    </xacro:if>
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <xacro:if value="${model == 'c16'}">
+                        <cylinder
+                            length="${c16_height}"
+                            radius="${c16_radius}" />
+                    </xacro:if>
+                    <xacro:if value="${model == 'c64'}">
+                        <cylinder
+                            length="${c64_height}"
+                            radius="${c64_radius}" />
+                    </xacro:if>
+                </geometry>
+            </collision>
+            <xacro:if value="${model == 'c16'}">
+                <xacro:cylinder_inertia
+                    radius="${c16_radius}"
+                    length="${c16_height}"
+                    mass="${c16_mass_kg}">
+                    <origin xyz="0 0 0" rpy="0 0 0" />
+                </xacro:cylinder_inertia>
+            </xacro:if>
+            <xacro:if value="${model == 'c64'}">
+                <xacro:cylinder_inertia
+                    radius="${c64_radius}"
+                    length="${c64_height}"
+                    mass="${c64_mass_kg}">
+                    <origin xyz="0 0 0" rpy="0 0 0" />
+                </xacro:cylinder_inertia>
+            </xacro:if>
+        </link>
+
+        <gazebo reference="${prefix}_lslidar_${model}_lidar_link">
+            <material>Gazebo/Blue</material>
+            <sensor name="${prefix}_lslidar_${model}_lidar_sensor" type="ray">
+                <visualize>false</visualize>
+                <ray>
+                    <scan>
+                        <horizontal>
+                            <resolution>1</resolution>
+                            <xacro:if value="${model == 'c16'}">
+                                <samples>
+                                    ${(c16_horizontal_max_angle-c16_horizontal_min_angle)*(180/pi)/0.018/c16_hz}
+                                </samples>
+                                <min_angle>${c16_horizontal_min_angle}</min_angle>
+                                <max_angle>${c16_horizontal_max_angle}</max_angle>
+                            </xacro:if>
+                            <xacro:if value="${model == 'c64'}">
+                                <samples>
+                                    ${(c64_horizontal_max_angle-c64_horizontal_min_angle)*(180/pi)/0.018/c64_hz}
+                                </samples>
+                                <min_angle>${c64_horizontal_min_angle}</min_angle>
+                                <max_angle>${c64_horizontal_max_angle}</max_angle>
+                            </xacro:if>
+                        </horizontal>
+                        <vertical>
+                            <resolution>1</resolution>
+                            <xacro:if value="${model == 'c16'}">
+                                <samples>${c16_number_of_channels}</samples>
+                                <min_angle>${c16_vertical_min_angle}</min_angle>
+                                <max_angle>${c16_vertical_max_angle}</max_angle>
+                            </xacro:if>
+                            <xacro:if value="${model == 'c64'}">
+                                <samples>${c64_number_of_channels}</samples>
+                                <min_angle>${c64_vertical_min_angle}</min_angle>
+                                <max_angle>${c64_vertical_max_angle}</max_angle>
+                            </xacro:if>
+                        </vertical>
+                    </scan>
+                    <range>
+                        <xacro:if value="${model == 'c16'}">
+                            <min>${c16_range_min}</min>
+                            <max>${c16_range_max}</max>
+                        </xacro:if>
+                        <xacro:if value="${model == 'c64'}">
+                            <min>${c64_range_min}</min>
+                            <max>${c64_range_max}</max>
+                        </xacro:if>
+                    </range>
+                </ray>
+                <plugin name="gazebo_ros_block_laser" filename="libgazebo_ros_block_laser.so">
+                    <robotNamespace>/</robotNamespace>
+                    <frameName>${prefix}_lslidar_${model}_lidar_link</frameName>
+                    <topicName>${prefix}_lslidar_${model}_lidar_point_cloud_pcl1</topicName>
+                    <gaussianNoise>0.01</gaussianNoise>
+                    <hokuyoMinIntensity>101</hokuyoMinIntensity>
+                    <xacro:if value="${model == 'c16'}">
+                        <updateRate>${c16_hz}</updateRate>
+                    </xacro:if>
+                    <xacro:if value="${model == 'c64'}">
+                        <updateRate>${c64_hz}</updateRate>
+                    </xacro:if>
+                </plugin>
+            </sensor>
+        </gazebo>
+
+    </xacro:macro>
+
+</robot>

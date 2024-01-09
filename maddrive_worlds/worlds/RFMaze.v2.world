@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <world name="default">
+    <gui>
+      <camera name="user_camera">
+        <!-- <projection_type>orthographic</projection_type> -->
+        <pose>6 6 25 0 1.57079632679 1.57079632679</pose>
+      </camera>
+    </gui>
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://RFMaze.v2</uri>
+    </include>
+  </world>
+</sdf>

@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:property name="ydlidar_mass" value="0.1" />
+    <xacro:property name="ydlidar_height" value="0.016" />
+    <xacro:property name="ydlidar_radius" value="0.03" />
+
+    <xacro:macro name="ydlidar" params="prefix parent origin_xyz origin_rpy">
+
+        <joint name="${prefix}_ydlidar_scan_joint" type="fixed">
+            <parent link="${parent}" />
+            <child link="${prefix}_ydlidar_scan_link" />
+            <origin xyz="${origin_xyz}" rpy="${origin_rpy}" />
+        </joint>
+
+        <link name="${prefix}_ydlidar_scan_link">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <cylinder length="${ydlidar_height}" radius="${ydlidar_radius}" />
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <cylinder length="${ydlidar_height}" radius="${ydlidar_radius}" />
+                </geometry>
+            </collision>
+            <xacro:cylinder_inertia
+                radius="${ydlidar_radius}"
+                length="${ydlidar_height}"
+                mass="${ydlidar_mass}">
+                <origin xyz="0 0 0" rpy="0 0 0" />
+            </xacro:cylinder_inertia>
+        </link>
+
+        <gazebo reference="${prefix}_ydlidar_scan_link">
+            <selfCollide>false</selfCollide>
+            <material>Gazebo/Red</material>
+            <sensor name="${prefix}_ydlidar_sensor" type="ray">
+                <pose>0 0 0 0 0 0</pose>
+                <visualize>true</visualize>
+                <update_rate>10</update_rate>
+                <ray>
+                    <scan>
+                        <horizontal>
+                            <samples>360</samples>
+                            <resolution>1</resolution>
+                            <min_angle>${-pi}</min_angle>
+                            <max_angle>${pi}</max_angle>
+                        </horizontal>
+                    </scan>
+                    <range>
+                        <min>0.10</min>
+                        <max>30.0</max>
+                        <resolution>0.01</resolution>
+                    </range>
+                    <noise>
+                        <type>gaussian</type>
+                        <mean>0.0</mean>
+                        <stddev>0.03</stddev>
+                    </noise>
+                </ray>
+                <plugin name="gazebo_ros_laser" filename="libgazebo_ros_laser.so">
+                    <topicName>${prefix}_ydlidar_scan/raw</topicName>
+                    <frameName>${prefix}_ydlidar_scan_link</frameName>
+                </plugin>
+            </sensor>
+        </gazebo>
+
+    </xacro:macro>
+</robot>

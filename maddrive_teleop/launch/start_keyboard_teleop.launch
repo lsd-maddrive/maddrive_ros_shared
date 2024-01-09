@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="hz" default="10" />
+
+    <arg name="turbo/linear_steps" default="10"/>
+    <arg name="turbo/angular_steps" default="10"/>
+    <arg name="turbo/linear_forward_min" default="0.04" />
+    <arg name="turbo/linear_forward_max" default="0.4" />
+    <arg name="turbo/linear_backward_min" default="0.03" />
+    <arg name="turbo/linear_backward_max" default="0.3" />
+    <arg name="turbo/angular_min" default="0.05" />
+    <arg name="turbo/angular_max" default="0.5" />
+
+    <arg name="cmd_topic" default="cmd_vel" />
+
+    <node pkg="maddrive_teleop" type="key_teleop.py" name="key_ctrl" output="screen" >
+
+        <param name="hz" value="$(arg hz)" />
+
+        <param name="turbo/linear_steps" value="$(arg turbo/linear_steps)" />
+        <param name="turbo/angular_steps" value="$(arg turbo/angular_steps)" />
+        <!-- m/s -->
+        <param name="turbo/linear_forward_min" value="$(arg turbo/linear_forward_min)" />
+        <param name="turbo/linear_forward_max" value="$(arg turbo/linear_forward_max)" />
+        <!-- m/s -->
+        <param name="turbo/linear_backward_min" value="$(arg turbo/linear_backward_min)" />
+        <param name="turbo/linear_backward_max" value="$(arg turbo/linear_backward_max)" />
+        <!-- rad -->
+        <param name="turbo/angular_min" value="$(arg turbo/angular_min)" />
+        <param name="turbo/angular_max" value="$(arg turbo/angular_max)" />
+
+        <remap from="cmd_vel" to="$(arg cmd_topic)" />
+    </node>
+
+</launch>
