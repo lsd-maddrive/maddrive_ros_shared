@@ -49,6 +49,7 @@ rules_file="/etc/udev/rules.d/imu_usb.rules"
 if [ -f "$rules_file" ]; then
     echo "The YAHBOOM IMU device is already installed"
 else
+    # based on https://github.com/YahboomTechnology/10-axis_IMU_Module
     echo 'KERNEL=="ttyUSB*", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", MODE:="0777", SYMLINK+="imu_usb"' >/etc/udev/rules.d/imu_usb.rules
 
     service udev reload
