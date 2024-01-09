@@ -1,0 +1,20 @@
+<!-- open imu and rviz -->
+<launch>
+
+    <!-- rviz for testing -->
+    <arg name="rviz" default="false" />
+
+    <!-- imu python -->
+    <node pkg="maddrive_hardware_tools" type="wit_normal_ros.py" name="imu" output="screen">
+        <param name="port"               type = "str"    value="/dev/imu_usb"/>
+        <param name="baud"               type = "int"    value="9600"/>
+    </node>
+
+    <!-- load rviz -->
+    <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" args="-d $(find maddrive_hardware_tools)/rviz/wit_ros_imu.rviz" />
+
+    <include file="$(find foxglove_bridge)/launch/foxglove_bridge.launch">
+        <arg name="port" value="8765" />
+    </include>
+
+</launch>
