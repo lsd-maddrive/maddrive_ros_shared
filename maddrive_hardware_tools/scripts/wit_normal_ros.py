@@ -74,9 +74,6 @@ def handleSerialData(raw_data):
             imu_msg.header.stamp = stamp
             imu_msg.header.frame_id = "base_link"
 
-            mag_msg.header.stamp = stamp
-            mag_msg.header.frame_id = "base_link"
-
             angle_radian = [angle_degree[i] * math.pi / 180 for i in range(3)]
             qua = quaternion_from_euler(angle_radian[0], angle_radian[1], angle_radian[2])
 
@@ -85,13 +82,22 @@ def handleSerialData(raw_data):
             imu_msg.orientation.z = qua[2]
             imu_msg.orientation.w = qua[3]
 
+            imu_msg.orientation_covariance = [0.00007614, 0.0, 0.0, 0.0, 0.00007614, 0.0, 0.0, 0.0, 0.00007614]
+
             imu_msg.angular_velocity.x = angularVelocity[0]
             imu_msg.angular_velocity.y = angularVelocity[1]
             imu_msg.angular_velocity.z = angularVelocity[2]
 
+            imu_msg.angular_velocity_covariance = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
             imu_msg.linear_acceleration.x = acceleration[0]
             imu_msg.linear_acceleration.y = acceleration[1]
             imu_msg.linear_acceleration.z = acceleration[2]
+
+            imu_msg.linear_acceleration_covariance = [0.00001803, 0.0, 0.0, 0.0, 0.00001803, 0.0, 0.0, 0.0, 0.00001803]
+
+            mag_msg.header.stamp = stamp
+            mag_msg.header.frame_id = "base_link"
 
             mag_msg.magnetic_field.x = magnetometer[0]
             mag_msg.magnetic_field.y = magnetometer[1]
