@@ -46,8 +46,6 @@ git -C third_party clone https://github.com/IntelRealSense/realsense-ros.git -b 
 # Ydlidar driver
 git -C third_party clone https://github.com/YDLIDAR/ydlidar_ros_driver.git
 git -C third_party/ydlidar_ros_driver apply ../patches/ydlidar_ros_driver.patch
-chmod 0777 third_party/ydlidar_ros_driver/startup/*
-sudo sh third_party/ydlidar_ros_driver/startup/initenv.sh
 
 # LSLidar driver
 git -C third_party clone https://github.com/Lslidar/Lslidar_ROS1_driver.git
