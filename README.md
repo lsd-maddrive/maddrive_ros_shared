@@ -14,25 +14,22 @@ docker image build -t lsd-maddrive-ros:noetic-desktop-full .
 
 ```bash
 docker container run -it \
-    --name=TYPE_PROJECT_NAME \
-    --user=user1122 \
+    --name=<TYPE_PROJECT_NAME> \
     --network=host \
     --ipc=host \
-    --volume=$HOME/catkin_ws/src:/home/user1122/catkin_ws/src \
+    --volume=$HOME/catkin_ws/src:/root/catkin_ws/src \
     --volume=/tmp/.X11-unix:/tmp/.X11-unix:rw \
     --env=DISPLAY \
-    --device=/dev/input/js0 \
     lsd-maddrive-ros:noetic-desktop-full
 ```
 
 * запуск контейнера в хост-системе Windows
-```shell
+```bash
 docker container run -it `
-    --name=TYPE_PROJECT_NAME `
-    --user=user1122 `
+    --name=<TYPE_PROJECT_NAME> `
     --network=host `
     --ipc=host `
-    --volume=C:\Users\Nikita\Documents\catkin_ws\src:/home/user1122/catkin_ws/src `
+    --volume=C:\Users\Nikita\Documents\catkin_ws\src:/root/catkin_ws/src `
     -e DISPLAY=host.docker.internal:0.0 `
     lsd-maddrive-ros:noetic-desktop-full
 ```
@@ -48,7 +45,7 @@ docker container run -it `
 * расширяем конфигурацию catkin параметрами из `/opt/ros/noetic`
 
 ```bash
-sudo catkin config --extend /opt/ros/noetic
+catkin config --extend /opt/ros/noetic
 ```
 
 * если не появляется GUI, выполняем в хост-системе команду `xhost +`

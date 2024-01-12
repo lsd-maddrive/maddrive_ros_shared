@@ -37,8 +37,8 @@ else
     mkdir -p YDLidar-SDK/build
     cd YDLidar-SDK/build
     curl -o initenv.sh https://raw.githubusercontent.com/YDLIDAR/ydlidar_ros_driver/master/startup/initenv.sh && \
-    chmod +x initenv.sh && \
-    sh initenv.sh
+        chmod +x initenv.sh && \
+        sh initenv.sh
     cmake ..
     make
     sudo make install
