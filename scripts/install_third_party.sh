@@ -50,8 +50,8 @@ git -C ../third_party/ydlidar_ros_driver apply ../patches/ydlidar_ros_driver.pat
 # LSLidar driver
 git -C ../third_party clone https://github.com/Lslidar/Lslidar_ROS1_driver.git
 
-# pointCloud to PointCloud2 massage converter
-git -C ../third_party clone https://github.com/pal-robotics-forks/point_cloud_converter.git
+# lidar with PointCloud2 massage
+git -C ../third_party clone https://bitbucket.org/DataspeedInc/velodyne_simulator.git
 
 # GPS RTK
 
