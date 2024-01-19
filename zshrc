@@ -2,11 +2,14 @@
 
 export ZSH="$HOME/.oh-my-zsh"
 
+# zsh theme
+ZSH_THEME="agnoster"
+
 source $ZSH/oh-my-zsh.sh
 
 # ROS paths
 source /opt/ros/noetic/setup.zsh
-source ~/moveit_ws/devel/setup.zsh
+source ~/catkin_ws/devel/setup.zsh
 
 # usefull aliases
 alias rqt_tf_tree='rosrun rqt_tf_tree rqt_tf_tree'
