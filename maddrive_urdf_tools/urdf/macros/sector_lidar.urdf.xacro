@@ -86,8 +86,15 @@
 
         <gazebo reference="${prefix}_lslidar_${model}_lidar_link">
             <material>Gazebo/Blue</material>
-            <sensor name="${prefix}_lslidar_${model}_lidar_sensor" type="ray">
+            <sensor name="${prefix}_lslidar_${model}_lidar_sensor" type="gpu_ray">
+                <pose>0 0 0 0 0 0</pose>
                 <visualize>false</visualize>
+                <xacro:if value="${model == 'c16'}">
+                    <update_rate>${c16_hz}</update_rate>
+                </xacro:if>
+                <xacro:if value="${model == 'c64'}">
+                    <update_rate>${c64_hz}</update_rate>
+                </xacro:if>
                 <ray>
                     <scan>
                         <horizontal>
@@ -132,18 +139,22 @@
                         </xacro:if>
                     </range>
                 </ray>
-                <plugin name="gazebo_ros_block_laser" filename="libgazebo_ros_block_laser.so">
+                <plugin name="gazebo_ros_velodyne_gpu_laser" filename="libgazebo_ros_velodyne_gpu_laser.so">
                     <robotNamespace>/</robotNamespace>
                     <frameName>${prefix}_lslidar_${model}_lidar_link</frameName>
-                    <topicName>${prefix}_lslidar_${model}_lidar_point_cloud_pcl1</topicName>
+                    <topicName>${prefix}_lslidar_${model}_lidar_point_cloud</topicName>
                     <gaussianNoise>0.01</gaussianNoise>
-                    <hokuyoMinIntensity>101</hokuyoMinIntensity>
                     <xacro:if value="${model == 'c16'}">
                         <updateRate>${c16_hz}</updateRate>
+                        <min_range>${c16_range_min}</min_range>
+                        <max_range>${c16_range_max}</max_range>
                     </xacro:if>
                     <xacro:if value="${model == 'c64'}">
                         <updateRate>${c64_hz}</updateRate>
+                        <min_range>${c64_range_min}</min_range>
+                        <max_range>${c64_range_max}</max_range>
                     </xacro:if>
+                    <organize_cloud>false</organize_cloud>
                 </plugin>
             </sensor>
         </gazebo>

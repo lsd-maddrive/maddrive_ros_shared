@@ -1,6 +1,11 @@
 #!/bin/bash
 
-# RealSenseSDK
+if [ $(id -u) -ne 0 ]
+then
+    echo "This script must be run as root";
+    exit 1;
+fi
+
 if modinfo uvcvideo | grep -q "version:"; then
     if modinfo uvcvideo | grep -q "realsense"; then
         echo "The required RealSenseSDK modules are already installed"
@@ -22,20 +27,35 @@ else
 fi
 
 # YDLidarSDK
-# Путь к файлу ydlidar_sdkConfig.cmake
 SDK_config_file="/usr/local/lib/cmake/ydlidar_sdk/ydlidar_sdkConfig.cmake"
 
-# Проверяем, существует ли файл
 if [ -f "$SDK_config_file" ]; then
-    echo "Файл $SDK_config_file существует. SDK YDLidar уже установлен."
+    echo "The YDLidar SDK is already installed"
 else
     # based on https://www.ydlidar.com/Public/upload/files/2022-06-21/YDLIDAR%20X2%20Lidar%20User%20Manual%20V1.3(211228).pdf
     git clone https://github.com/YDLIDAR/YDLidar-SDK.git
     mkdir -p YDLidar-SDK/build
     cd YDLidar-SDK/build
+    curl -o initenv.sh https://raw.githubusercontent.com/YDLIDAR/ydlidar_ros_driver/master/startup/initenv.sh && \
+        chmod +x initenv.sh && \
+        sh initenv.sh
     cmake ..
     make
     sudo make install
     cd ../..
     rm -rf YDLidar-SDK
+fi
+
+# YAHBOOM IMU device
+rules_file="/etc/udev/rules.d/imu_usb.rules"
+
+if [ -f "$rules_file" ]; then
+    echo "The YAHBOOM IMU device is already installed"
+else
+    # based on https://github.com/YahboomTechnology/10-axis_IMU_Module
+    echo 'KERNEL=="ttyUSB*", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", MODE:="0777", SYMLINK+="imu_usb"' >/etc/udev/rules.d/imu_usb.rules
+
+    service udev reload
+    sleep 2
+    service udev restart
 fi
