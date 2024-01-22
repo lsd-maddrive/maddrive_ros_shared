@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
     git \
     sudo \
     dos2unix \
+    python3-pip \
     python3-catkin-tools
 
 RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
