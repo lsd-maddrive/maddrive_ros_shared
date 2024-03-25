@@ -1,0 +1,21 @@
+# Configuration Settings for simpleRTK2B device
+# https://github.com/KumarRobotics/ublox/blob/master/ublox_gps/config/zed_f9p.yaml
+# https://www.ardusimple.com/configuration-files/
+
+device: /dev/ttyACM0
+frame_id: gps
+uart1:
+    baudrate: 115200
+config_on_startup: false
+load:
+    # mask: 2 # https://github.com/KumarRobotics/ublox/blob/4f107f3b82135160a1aca3ef0689fd119199bbef/ublox_msgs/msg/CfgCFG.msg#L23
+    device: 4 # https://github.com/KumarRobotics/ublox/blob/4f107f3b82135160a1aca3ef0689fd119199bbef/ublox_msgs/msg/CfgCFG.msg#L34
+
+# Enable u-blox message topics
+publish:
+    rxm:
+        rtcm: true
+    mon:
+        hw: true
+    nav:
+        pvt: true
