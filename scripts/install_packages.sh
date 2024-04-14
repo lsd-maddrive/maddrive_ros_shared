@@ -32,6 +32,7 @@ sudo apt-get update && sudo apt-get install -y \
     ros-$ROS_DISTRO-imu-filter-madgwick \
     ros-$ROS_DISTRO-laser-filters \
     ros-$ROS_DISTRO-jsk-visualization \
+    ros-$ROS_DISTRO-swri-console \
     libopenvdb-dev \
     libpcap-dev \
     libgeographic-dev \
