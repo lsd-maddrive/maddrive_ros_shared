@@ -33,6 +33,10 @@ sudo apt-get update && sudo apt-get install -y \
     ros-$ROS_DISTRO-laser-filters \
     ros-$ROS_DISTRO-jsk-visualization \
     ros-$ROS_DISTRO-swri-console \
+    ros-$ROS_DISTRO-mapviz \
+    ros-$ROS_DISTRO-mapviz-plugins \
+    ros-$ROS_DISTRO-tile-map \
+    ros-$ROS_DISTRO-multires-image \
     libopenvdb-dev \
     libpcap-dev \
     libgeographic-dev \
