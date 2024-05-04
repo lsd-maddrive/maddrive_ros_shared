@@ -21,7 +21,7 @@ def hex_to_short(raw_data):
 
 
 # Parsing serial Port Data
-def handleSerialData(raw_data):
+def handleSerialData(raw_data, frame_id):
     global buff, key, angle_degree, magnetometer, acceleration, angularVelocity, pub_flag
     angle_flag=False
     if python_version == '2':
@@ -72,7 +72,7 @@ def handleSerialData(raw_data):
             stamp = rospy.get_rostime()
 
             imu_msg.header.stamp = stamp
-            imu_msg.header.frame_id = "base_link"
+            imu_msg.header.frame_id = frame_id
 
             angle_radian = [angle_degree[i] * math.pi / 180 for i in range(3)]
             qua = quaternion_from_euler(angle_radian[0], angle_radian[1], angle_radian[2])
@@ -97,7 +97,7 @@ def handleSerialData(raw_data):
             imu_msg.linear_acceleration_covariance = [0.00001803, 0.0, 0.0, 0.0, 0.00001803, 0.0, 0.0, 0.0, 0.00001803]
 
             mag_msg.header.stamp = stamp
-            mag_msg.header.frame_id = "base_link"
+            mag_msg.header.frame_id = frame_id
 
             mag_msg.magnetic_field.x = magnetometer[0]
             mag_msg.magnetic_field.y = magnetometer[1]
@@ -122,7 +122,8 @@ if __name__ == "__main__":
     rospy.init_node("imu")
     port = rospy.get_param("~port", "/dev/ttyUSB0")
     baudrate = rospy.get_param("~baud", 9600)
-    print("IMU Type: Normal Port:%s baud:%d" %(port,baudrate))
+    frame_id = rospy.get_param("~frameId", "yahboom_imu_link")  # Добавляем параметр frameId
+    print("IMU Type: Normal Port:%s baud:%d Frame ID:%s" %(port, baudrate, frame_id))
     imu_msg = Imu()
     mag_msg = MagneticField()
     try:
