@@ -152,4 +152,4 @@ if __name__ == "__main__":
                 if buff_count > 0:
                     buff_data = wt_imu.read(buff_count)
                     for i in range(0, buff_count):
-                        handleSerialData(buff_data[i])
+                        handleSerialData(buff_data[i], frame_id)

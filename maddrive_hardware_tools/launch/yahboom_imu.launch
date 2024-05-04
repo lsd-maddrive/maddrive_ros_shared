@@ -9,9 +9,9 @@
 
     <!-- imu python -->
     <node pkg="maddrive_hardware_tools" type="wit_normal_ros.py" name="imu" output="screen">
-        <param name="port" type = "str" value="/dev/tty_Yahboom"/>
-        <param name="baud" type = "int" value="115200"/>
-        <param name="frameId" type = "str" value="imu_link"/>
+        <param name="port" type="str" value="/dev/tty_Yahboom"/>
+        <param name="baud" type="int" value="115200"/>
+        <param name="frameId" type="str" value="imu_link"/>
         <remap from="wit/imu" to="$(arg imu_output_topic)"/>
         <remap from="wit/mag" to="$(arg mag_output_topic)"/>
     </node>
