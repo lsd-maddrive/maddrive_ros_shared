@@ -1,6 +1,9 @@
 <!-- open imu and rviz -->
 <launch>
 
+    <arg name="port" default="/dev/tty_Yahboom" />
+    <arg name="baud" default="115200" />
+    <arg name="frameId" default="imu_link" />
     <!-- output -->
     <arg name="imu_output_topic" default="wit/imu" />
     <arg name="mag_output_topic" default="wit/mag" />
@@ -9,9 +12,9 @@
 
     <!-- imu python -->
     <node pkg="maddrive_hardware_tools" type="wit_normal_ros.py" name="imu" output="screen">
-        <param name="port" type="str" value="/dev/tty_Yahboom"/>
-        <param name="baud" type="int" value="115200"/>
-        <param name="frameId" type="str" value="imu_link"/>
+        <param name="port" type="str" value="$(arg port)"/>
+        <param name="baud" type="int" value="$(arg baud)"/>
+        <param name="frameId" type="str" value="$(arg frameId)"/>
         <remap from="wit/imu" to="$(arg imu_output_topic)"/>
         <remap from="wit/mag" to="$(arg mag_output_topic)"/>
     </node>
