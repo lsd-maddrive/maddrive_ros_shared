@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="imu/data_raw" default="imu" />
+    <arg name="imu/data_filtered" default="imu_filtered" />
+
+    <!-- http://wiki.ros.org/imu_filter_madgwick -->
+    <node pkg="imu_filter_madgwick" type="imu_filter_node" name="imu_filter_node" output="screen">
+        <param name="world_frame" value="enu"/>
+        <param name="use_mag" value="false"/>
+        <param name="publish_tf" value="false"/>
+        <remap from="imu/data_raw" to="$(arg imu/data_raw)"/>
+        <remap from="imu/data" to="$(arg imu/data_filtered)"/>
+    </node>
+
+</launch>

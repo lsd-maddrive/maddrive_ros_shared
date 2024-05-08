@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="rgb_topic" default="color/image_raw" />
+    <arg name="depth_topic" default="aligned_depth_to_color/image_raw" />
+    <arg name="camera_info_topic" default="color/camera_info" />
+    <arg name="serial_no_camera1" default="135122251612" /> <!-- front RS D455 serial number -->
+    <arg name="serial_no_camera2" default="135122079630" /> <!--rear RS D435i serial number -->
+    <arg name="name_camera1" default="front_rs_d455_camera" /> <!-- Note: Replace with camera name -->
+    <arg name="name_camera2" default="rear_rs_d435i_camera" /> <!-- Note: Replace with camera name -->
+    <arg name="tf_prefix_camera1" default="$(arg name_camera1)" />
+    <arg name="tf_prefix_camera2" default="$(arg name_camera2)" />
+    <arg name="initial_reset" default="false" />
+    <arg name="reconnect_timeout" default="7.0" />
+
+    <!-- camera args -->
+    <arg name="align_depth" default="true" />
+    <!-- imu calib https://www.programmersought.com/article/29581858144/ -->
+    <arg name="linear_accel_cov" default="2.8946e-2" />
+    <arg name="angular_velocity_cov" default="3.02472e-3" />
+    <arg name="unite_imu_method" default="linear_interpolation" />
+    <arg name="depth_fps" default="30" />
+    <arg name="color_fps" default="30" />
+    <arg name="enable_gyro" default="true" />
+    <arg name="enable_accel" default="true" />
+    <arg name="enable_infra1" default="true" />
+    <arg name="enable_infra2" default="true" />
+    <arg name='enable_sync' default='true'/>
+
+    
+  
+    <group ns="$(arg name_camera1)">
+        <include file="$(find maddrive_hardware_tools)/launch/drivers/driver_realsense.launch">
+        <!-- <include file="$(find realsense2_camera)/launch/rs_camera.launch"> -->
+            <arg name="serial_no" value="$(arg serial_no_camera1)" />
+            <arg name="tf_prefix" value="$(arg tf_prefix_camera1)" />
+            <arg name="initial_reset" value="$(arg initial_reset)" />
+            <arg name="reconnect_timeout" value="$(arg reconnect_timeout)" />
+
+            <arg name="align_depth" value="$(arg align_depth)" />
+            <!-- <arg name="linear_accel_cov" value="$(arg linear_accel_cov)" /> -->
+            <!-- <arg name="angular_velocity_cov" value="$(arg angular_velocity_cov)" /> -->
+
+            <arg name="unite_imu_method" value="$(arg unite_imu_method)" />
+            <!-- <arg name="depth_fps" value="$(arg depth_fps)" /> -->
+            <!-- <arg name="color_fps" value="$(arg color_fps)" /> -->
+            <arg name="enable_gyro" value="$(arg enable_gyro)" />
+            <arg name="enable_accel" value="$(arg enable_accel)" />
+
+            <arg name="enable_infra1" value="$(arg enable_infra1)" />
+            <arg name="enable_infra2" value="$(arg enable_infra2)" />
+            <arg name="enable_sync" value="$(arg enable_sync)" />
+            <!-- pointcloud -->
+             <arg name="filters" value=""/> 
+        </include>
+
+    </group>
+
+
+    <include file="$(find maddrive_hardware_tools)/launch/imu_filter.launch">
+        <arg name="imu/data_raw" default="$(arg name_camera1)/imu" />
+        <arg name="imu/data_filtered" default="$(arg name_camera1)/imu/filtered" />
+    </include>
+</launch>
