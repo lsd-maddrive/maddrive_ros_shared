@@ -27,7 +27,7 @@
     <arg name="enable_confidence"   default="true"/>
     <arg name="confidence_fps"      default="30"/>
 
-    <arg name="infra_width"         default="848"/>
+    <arg name="infra_width"         default="640"/>
     <arg name="infra_height"        default="480"/>
     <arg name="enable_infra"        default="false"/>
     <arg name="enable_infra1"       default="false"/>
@@ -101,7 +101,7 @@
     <arg name="stereo_module/exposure/2" default="1"/>
     <arg name="stereo_module/gain/2"     default="16"/>
 
-    <arg name="filters"                  default="pointcloud"/>
+    <arg name="filters"                  default=""/>
     <arg name="clip_distance"            default="-1"/>
     <arg name="linear_accel_cov"         default="0.01"/>
     <arg name="initial_reset"            default="false"/>
