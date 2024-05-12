@@ -37,6 +37,8 @@ sudo apt-get update && sudo apt-get install -y \
     ros-$ROS_DISTRO-mapviz-plugins \
     ros-$ROS_DISTRO-tile-map \
     ros-$ROS_DISTRO-multires-image \
+    ros-$ROS_DISTRO-image-transport \
+    ros-$ROS_DISTRO-point-cloud-transport \
     libopenvdb-dev \
     libpcap-dev \
     libgeographic-dev \
