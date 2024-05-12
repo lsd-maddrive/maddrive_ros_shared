@@ -39,6 +39,7 @@ sudo apt-get update && sudo apt-get install -y \
     ros-$ROS_DISTRO-multires-image \
     ros-$ROS_DISTRO-image-transport \
     ros-$ROS_DISTRO-point-cloud-transport \
+    ros-$ROS_DISTRO-point-cloud-transport-plugins \
     libopenvdb-dev \
     libpcap-dev \
     libgeographic-dev \
