@@ -9,13 +9,18 @@
   <arg name='rviz' default="true"/>
   <arg name='rtabmap_viz' default='true'/>
   <arg name="database_path" default="$(find maddrive_worlds)/3d_maps/$(arg map_name)"/>
+  <arg name="record" default="true"/>
+
 
   <group if="$(arg hardware)">
     <include file="$(find maddrive_hardware_tools)/launch/start_lslidar_c16.launch">
       <arg name="min_range" value="1.0" />  
       <arg name="topic_name" value="front_lslidar_c16_lidar_point_cloud" />  
     </include>
-    <include file="$(find maddrive_hardware_tools)/launch/start_rs_camera_ir.launch"/>
+    <include file="$(find maddrive_hardware_tools)/launch/start_zed2_camera.launch">
+      <arg name="cam_pos_z" value="1.15" />
+    </include>
+
     <!-- yahboom_imu -->
       <include file="$(find maddrive_hardware_tools)/launch/yahboom_imu.launch">
           <arg name="port" value="/dev/tty_Yahboom0" />
@@ -41,13 +46,13 @@
       </node>
 
       <!-- ntrip client -->
-      <include file="$(find ntrip_client)/launch/ntrip_client.launch">
+      <!-- <include file="$(find ntrip_client)/launch/ntrip_client.launch">
           <arg name="host" value="rtcm.smartnetrtk.ru"/>
           <arg name="port" value="8007" />
           <arg name="mountpoint" value="VRS.MSM5" />
           <arg name="authenticate" value="true" />
-          <arg name="username" value="lapopka" />
-          <arg name="password" value="Gzfdis90WM" />
+          <arg name="username" value="anastasiikanata" />
+          <arg name="password" value="EPFa?bxnNo" />
           <arg name="ntrip_version" value="" />
           <arg name="ssl" value="false" />
           <arg name="cert" value="false" />
@@ -55,20 +60,23 @@
           <arg name="ca_cert" value="false" />
           <arg name="debug" value="true" />
           <arg name="rtcm_message_package" value="rtcm_msgs" />
-      </include>
+      </include> -->
+
   </group>
 
 <!-- SLAM START-->
 <include file="$(find tigra_vision)/launch/rtabmap_slam.launch">
     <arg name="lidar_name" default="front_lslidar_c16_lidar" />
+    <arg name="camera_name" default="zed2" />
+
     <arg name="localization" value="$(arg localization)" />
     <arg name="database_path" value="$(arg database_path)" />
     <arg name="rtabmap_viz" value="$(arg rtabmap_viz)"/>
 </include>
-<include file="$(find tigra_vision)/launch/rgbd_odom.launch">
+<!-- <include file="$(find tigra_vision)/launch/rgbd_odom.launch">
     <arg name="publish_tf" value="true" />
     <arg name="camera_name" value="front_rs_d455_camera" />
-</include>
+</include> -->
 <!-- SLAM END -->
 
   <!-- TF pepelac high is 0.8-->
@@ -105,8 +113,9 @@
 
 <node name="rviz" pkg="rviz" type="rviz" args="-d $(find maddrive_launch)/launch/full_slam_pepelac_view.rviz" output="screen"/>
 
-<node pkg="rosbag" type="record" name="rosbag_record" output="screen"
+<node if="$(arg record)" pkg="rosbag" type="record" name="rosbag_record" output="screen"
             args="
+                /tf
                 /tf_static
                 /yahboom/imu/raw
                 /yahboom/mag/raw
@@ -147,7 +156,20 @@
                 /front_rs_d455_camera/color/camera_info
                 /front_rs_d455_camera/imu/filtered
                 /front_lslidar_c16_lidar_point_cloud
-                --output-name $(arg record_path)/ETU_test_2.bag
+                /zed2/zed_node/rgb/image_rect_color/compressed
+                /zed2/zed_node/depth/depth_registered/compressedDepth
+                /zed2/zed_node/rgb/camera_info
+                /zed2/zed_node/odom
+                /zed2/zed_node/right/image_rect_gray/compressed
+                /zed2/zed_node/left/image_rect_gray/compressed
+                /zed2/zed_node/right/camera_info
+                /zed2/zed_node/left/camera_info
+
+
+
+
+
+                --output-name $(arg record_path)/ETU_test_3.bag
                 --split
                 --size=10000
                 "/>
@@ -155,5 +177,4 @@
 <!-- ZED_Explorer -o ./record.svo -r HD720 -compression_mode 4 -->
 
 </launch>
-
 

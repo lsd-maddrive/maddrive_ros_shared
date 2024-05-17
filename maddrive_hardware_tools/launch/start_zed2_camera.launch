@@ -1,8 +1,10 @@
 <launch>
+    <arg name="cam_pos_z"             default="0.0" />
+
     <group ns="zed2">
 
     <!-- Camera Model and Name -->
-    <arg name="rviz"                  default="true" /> <!-- The name you want -->
+    <arg name="rviz"                  default="false" /> <!-- The name you want -->
     <arg name="camera_name"           default="zed2" /> <!-- The name you want -->
     <arg name="camera_model"          default="zed2" /> <!-- 'zed' or 'zedm' or 'zed2' -->
     <arg name="node_name"             default="zed_node" />
@@ -11,7 +13,7 @@
     <!-- Remote stream -->
     <arg name="stream"                default="" /> <!-- <arg name="stream" default="<ip_address>:<port>"> -->
     <!-- Base frame -->
-    <arg name="base_frame"            default="base_link" />
+    <arg name="base_frame"            default="base_footprint" />
     <!-- Publish ZED urdf -->
     <arg name="publish_urdf"          default="true" />
     <arg name="camera_id"             default="0" />
@@ -19,7 +21,6 @@
     <!-- Position respect to base frame (i.e. "base_link) -->
     <arg name="cam_pos_x"             default="0.0" />
     <arg name="cam_pos_y"             default="0.0" />
-    <arg name="cam_pos_z"             default="0.0" />
     <!-- Orientation respect to base frame (i.e. "base_link) -->
     <arg name="cam_roll"              default="0.0" />
     <arg name="cam_pitch"             default="0.0" />
@@ -60,10 +61,19 @@
         <!-- GPU ID -->
         <param name="general/gpu_id"                    value="$(arg gpu_id)" />
         <!--  Disable TF publishing  -->
-        <!-- <param name="pos_tracking/publish_tf" value="false"/>
-        <param name="pos_tracking/publish_map_tf" value="false"/> -->
+        <param name="general/base_frame" value="base_footprint"/>
+
+        <param name="pos_tracking/publish_tf" value="true"/>
+        <param name="pos_tracking/publish_map_tf" value="false"/>
+        <param name="pos_tracking/two_d_mode" value="false"/> 
+
+
         <param name="mapping/mapping_enabled" value="false"/>
-        <param name="object_detection/od_enabled" value="true"/>
+        <param name="object_detection/od_enabled" value="false"/>
+
+        <!-- <param name="depth_confidence" value="99"/>
+        <param name="depth_texture_conf" value="90"/>
+        <param name="depth_confidence" value="100"/> -->
 
     </node>
 
