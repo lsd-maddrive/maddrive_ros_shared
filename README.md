@@ -58,3 +58,17 @@ rosdep install -y -r \
 ```
 
 * если не появляется GUI, выполняем в хост-системе команду `xhost +`
+
+## работа с контейнером 'MapProxy', предоставляющим подложки карт (maptiles)
+
+* выполняем команду
+
+```bash
+docker run -p 8080:8080 -d -t -v ~/mapproxy:/mapproxy danielsnider/mapproxy
+```
+
+* добавляем подложку в `rviz` при помощи плагина `rviz_satellite`
+
+    * в поле `Object URI` указываем `http://localhost:8080/wmts/gm_layer/gm_grid/0/0/0.png`
+
+* или в `mapviz` при помощи плагина `map_tile`
