@@ -1,0 +1,6 @@
+<launch>
+    <node name="odometry_republisher" pkg="odometry_republisher" type="node" output="screen">
+        <remap from="odom" to="/zed2/zed_node/odom"/>
+        <param name="base_frame"               value="base_footprint" />
+    </node>
+</launch>
