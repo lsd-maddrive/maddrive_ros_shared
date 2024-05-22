@@ -1,10 +1,9 @@
 <launch>
-    <arg name="cam_pos_z"             default="0.0" />
 
     <group ns="zed2">
 
     <!-- Camera Model and Name -->
-    <arg name="rviz"                  default="false" /> <!-- The name you want -->
+    <arg name="rviz"                  default="true" /> <!-- The name you want -->
     <arg name="camera_name"           default="zed2" /> <!-- The name you want -->
     <arg name="camera_model"          default="zed2" /> <!-- 'zed' or 'zedm' or 'zed2' -->
     <arg name="node_name"             default="zed_node" />
@@ -21,6 +20,7 @@
     <!-- Position respect to base frame (i.e. "base_link) -->
     <arg name="cam_pos_x"             default="0.0" />
     <arg name="cam_pos_y"             default="0.0" />
+    <arg name="cam_pos_z"             default="0.0" />
     <!-- Orientation respect to base frame (i.e. "base_link) -->
     <arg name="cam_roll"              default="0.0" />
     <arg name="cam_pitch"             default="0.0" />
@@ -50,6 +50,7 @@
         <rosparam file="$(find zed_wrapper)/params/common.yaml" command="load" />
         <rosparam file="$(find zed_wrapper)/params/$(arg camera_model).yaml" command="load" />
 
+        <!-- cat $(rospack find zed_wrapper)/params/common.yaml -->
         <param name="general/camera_name"               value="$(arg camera_name)" />
         <param name="general/base_frame"                value="$(arg base_frame)" />
         <!-- SVO file path -->
@@ -62,10 +63,11 @@
         <param name="general/gpu_id"                    value="$(arg gpu_id)" />
         <!--  Disable TF publishing  -->
         <param name="general/base_frame" value="base_footprint"/>
-
-        <param name="pos_tracking/publish_tf" value="true"/>
+        <!-- <param name="pos_tracking/pos_tracking_mode" value="GEN_2"/> -->
+        <param name="pos_tracking/publish_tf" value="false"/>
         <param name="pos_tracking/publish_map_tf" value="false"/>
-        <param name="pos_tracking/two_d_mode" value="false"/> 
+        <param name="pos_tracking/two_d_mode" value="true"/> 
+        <param name="pos_tracking/imu_fusion" value="true"/> 
 
 
         <param name="mapping/mapping_enabled" value="false"/>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+    <node pkg="ublox_gps" type="ublox_gps" name="simpleRTK2B_rover"
+        output="screen" clear_params="true" respawn="true">
+        <rosparam command="load" file="$(find maddrive_hardware_tools)/config/gps/simpleRTK2B_rover.yaml" />
+        <remap from="rtcm" to="rtcm"/>
+    </node>
+
+</launch>
