@@ -32,5 +32,10 @@
     <include file="$(find maddrive_hardware_tools)/launch/imu_filter.launch">
         <arg name="imu/data_raw" default="$(arg name_camera)/imu" />
         <arg name="imu/data_filtered" default="$(arg name_camera)/imu/filtered" />
+        <arg name="node_name" default="imu_filter_realsense_node" />
+
     </include>
+
+
+    
 </launch>

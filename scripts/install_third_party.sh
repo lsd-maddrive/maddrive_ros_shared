@@ -21,8 +21,8 @@ git -C ../third_party clone https://github.com/appliedAI-Initiative/orb_slam_2_r
 git -C ../third_party clone https://github.com/ros-drivers/rosserial.git -b noetic-devel
 
 # Rtabmap
-git -C ../third_party clone https://github.com/introlab/rtabmap.git -b 0.21.0
-git -C ../third_party clone https://github.com/introlab/rtabmap_ros.git -b 0.21.1-noetic
+git -C ../third_party clone https://github.com/introlab/rtabmap.git -b 0.21.4
+git -C ../third_party clone https://github.com/introlab/rtabmap_ros.git -b 0.21.4-noetic
 
 git -C ../third_party clone https://github.com/ros-perception/image_pipeline.git -b noetic
 git -C ../third_party clone https://github.com/ros-perception/vision_opencv.git -b noetic

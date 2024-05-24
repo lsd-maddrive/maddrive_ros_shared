@@ -23,5 +23,5 @@
       <param name="packet_loss" value="true"/>   <!--是否开启丢包检测-->
       <param name="use_time_service" value="$(arg use_time_service)"/>
   </node>
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find lslidar_driver)/rviz/lslidar_ls.rviz" output="screen"/>    <!--不启动rviz将此行注释-->
+  <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find lslidar_driver)/rviz/lslidar_ls.rviz" output="screen"/>    不启动rviz将此行注释 -->
 </launch>

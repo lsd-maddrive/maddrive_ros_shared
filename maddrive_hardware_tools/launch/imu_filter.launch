@@ -3,9 +3,11 @@
 
     <arg name="imu/data_raw" default="imu" />
     <arg name="imu/data_filtered" default="imu_filtered" />
+    <arg name="node_name" default="imu_filter_node" />
+
 
     <!-- http://wiki.ros.org/imu_filter_madgwick -->
-    <node pkg="imu_filter_madgwick" type="imu_filter_node" name="imu_filter_node" output="screen">
+    <node pkg="imu_filter_madgwick" type="imu_filter_node" name="$(arg node_name)" output="screen">
         <param name="world_frame" value="enu"/>
         <param name="use_mag" value="false"/>
         <param name="publish_tf" value="false"/>

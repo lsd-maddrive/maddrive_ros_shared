@@ -1,9 +1,16 @@
 <launch>
+    <arg name="cam_pos_x"             default="0.0" />
+    <arg name="cam_pos_y"             default="0.0" />
+    <arg name="cam_pos_z"             default="0.0" />
+
+    <arg name="cam_roll"              default="0.0" />
+    <arg name="cam_pitch"             default="0.0" />
+    <arg name="cam_yaw"               default="0.0" />
 
     <group ns="zed2">
 
     <!-- Camera Model and Name -->
-    <arg name="rviz"                  default="true" /> <!-- The name you want -->
+    <arg name="rviz"                  default="false" /> <!-- The name you want -->
     <arg name="camera_name"           default="zed2" /> <!-- The name you want -->
     <arg name="camera_model"          default="zed2" /> <!-- 'zed' or 'zedm' or 'zed2' -->
     <arg name="node_name"             default="zed_node" />
@@ -18,13 +25,9 @@
     <arg name="camera_id"             default="0" />
     <arg name="gpu_id"                default="-1" />
     <!-- Position respect to base frame (i.e. "base_link) -->
-    <arg name="cam_pos_x"             default="0.0" />
-    <arg name="cam_pos_y"             default="0.0" />
-    <arg name="cam_pos_z"             default="0.0" />
+   
     <!-- Orientation respect to base frame (i.e. "base_link) -->
-    <arg name="cam_roll"              default="0.0" />
-    <arg name="cam_pitch"             default="0.0" />
-    <arg name="cam_yaw"               default="0.0" />
+
 
     <!-- ROS URDF description of the ZED -->
     <group if="$(arg publish_urdf)">
