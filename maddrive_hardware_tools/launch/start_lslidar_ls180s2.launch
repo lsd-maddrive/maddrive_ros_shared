@@ -6,7 +6,7 @@
   <arg name="use_time_service" default="true"/>  <!--是否使用授时,false:使用系统时间-->
   <arg name="packet_rate" default="15000.0"/>     <!--pcap每秒包数，离线解析pcap包时使用-->
 
-  <node pkg="lslidar_driver" type="lslidar_driver_node" name="$(arg prefix)lslidar_ls180s2_driver_node" output="screen">
+  <node pkg="lslidar_ls180s2_driver" type="lslidar_ls180s2_driver_node" name="$(arg prefix)lslidar_ls180s2_driver_node" output="screen">
       <!--param name="pcap" value="$(find lslidar_driver)/pcap/ls400s3.pcap"/-->  <!--离线解析pcap包时取消此行注释-->
       <param name="packet_rate" value="$(arg packet_rate)"/>
       <param name="lidar_ip" value="$(arg device_ip)"/>

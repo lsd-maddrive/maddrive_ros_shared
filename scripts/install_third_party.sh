@@ -47,8 +47,11 @@ git -C ../third_party clone https://github.com/IntelRealSense/realsense-ros.git 
 git -C ../third_party clone https://github.com/YDLIDAR/ydlidar_ros_driver.git
 git -C ../third_party/ydlidar_ros_driver apply ../patches/ydlidar_ros_driver.patch
 
-# LSLidar driver
-git -C ../third_party clone https://github.com/Lslidar/Lslidar_ROS1_driver.git
+# LSLidar C16 driver
+git -C ../third_party clone https://github.com/lsd-maddrive/lslidar_c16_driver.git -b C16_V4.0
+
+# LSLidar LS180S2 driver
+git -C ../third_party clone https://github.com/lsd-maddrive/lslidar_ls180s2_driver.git -b LS128/180/320/400S2_V1.0
 
 # lidar with PointCloud2 massage
 git -C ../third_party clone https://bitbucket.org/DataspeedInc/velodyne_simulator.git
