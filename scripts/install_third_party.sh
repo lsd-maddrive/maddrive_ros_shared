@@ -53,7 +53,10 @@ git -C ../third_party clone https://github.com/lsd-maddrive/lslidar_ros_driver.g
 # LSLidar LS180S2 driver
 git -C ../third_party clone https://github.com/lsd-maddrive/lslidar_ros_driver.git -b LS128/180/320/400S2_V1.0 lslidar_ls180s2_driver
 
-# lidar with PointCloud2 massage
+# GKV-3 driver
+git -C ../third_party clone https://github.com/lsd-maddrive/gkv_ros_driver.git
+
+# gazebo lidar plugin with PointCloud2 massage
 git -C ../third_party clone https://bitbucket.org/DataspeedInc/velodyne_simulator.git
 
 # GPS RTK
