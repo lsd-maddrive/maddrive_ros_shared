@@ -1,17 +1,17 @@
 <!-- open imu and rviz -->
 <launch>
 
-    <arg name="port" default="/dev/tty_Yahboom" />
+    <arg name="port" default="/dev/tty_Yahboom0" />
     <arg name="baud" default="115200" />
-    <arg name="frameId" default="imu_link" />
+    <arg name="frameId" default="yahboom_imu_link" />
     <!-- output -->
-    <arg name="imu_output_topic" default="wit/imu" />
-    <arg name="mag_output_topic" default="wit/mag" />
+    <arg name="imu_output_topic" default="yahboom_imu/imu" />
+    <arg name="mag_output_topic" default="yahboom_imu/mag" />
     <!-- rviz for testing -->
     <arg name="rviz" default="false" />
 
     <!-- imu python -->
-    <node pkg="maddrive_hardware_tools" type="wit_normal_ros.py" name="imu" output="screen">
+    <node pkg="maddrive_hardware_tools" type="wit_normal_ros.py" name="yahboom_imu" output="screen">
         <param name="port" type="str" value="$(arg port)"/>
         <param name="baud" type="int" value="$(arg baud)"/>
         <param name="frameId" type="str" value="$(arg frameId)"/>

@@ -52,7 +52,7 @@ Visualization Manager:
       Enabled: true
       Name: Imu
       Queue Size: 10
-      Topic: /wit/imu
+      Topic: /yahboom_imu/imu
       Unreliable: false
       Value: true
       fixed_frame_orientation: true
@@ -60,7 +60,7 @@ Visualization Manager:
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: imu_link
+    Fixed Frame: yahboom_imu_link
     Frame Rate: 30
   Name: root
   Tools:
