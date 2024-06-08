@@ -97,3 +97,6 @@ git -C ../third_party clone https://github.com/ros/geometry2.git -b noetic-devel
 
 # gps plugin for rviz
 git -C ../third_party clone https://github.com/nobleo/rviz_satellite -b master
+
+# make tf from /odom topic
+git -C ../third_party clone https://github.com/VorpalBlade/odometry_republisher.git -b master
