@@ -5,7 +5,7 @@
             <arg name="camera" value="$(arg name_camera)"/>
             <arg name="reconnect_timeout" value="6.0"/>
             <arg name="initial_reset" value="false" />
-            <arg name="serial_no" value="135122251612" />
+            <!-- <arg name="serial_no" value="135122251612" /> -->
             <arg name="enable_gyro" value="true"/>
             <arg name="enable_accel" value="true"/>
             <arg name="enable_infra1" value="true"/>
@@ -18,6 +18,11 @@
             <arg name="filters" value="pointcloud" />
 
     </include>
+
+    <rosparam> /front_rs_d455_camera/stereo_module/emitter_enabled: 0</rosparam>
+    <!-- <rosparam> /front_rs_d455_camera/aligned_depth_to_color/image_raw/compressed/format: </rosparam> -->
+
+
 
     <!-- camera args -->
     <!-- imu calib https://www.programmersought.com/article/29581858144/ -->

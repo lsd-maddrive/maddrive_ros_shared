@@ -6,11 +6,13 @@
     <arg name="cam_roll"              default="0.0" />
     <arg name="cam_pitch"             default="0.0" />
     <arg name="cam_yaw"               default="0.0" />
+    <arg name="base_frame"            default="base_footprint" />
+    <arg name="rviz"                  default="false" /> <!-- The name you want -->
+
 
     <group ns="zed2">
 
     <!-- Camera Model and Name -->
-    <arg name="rviz"                  default="false" /> <!-- The name you want -->
     <arg name="camera_name"           default="zed2" /> <!-- The name you want -->
     <arg name="camera_model"          default="zed2" /> <!-- 'zed' or 'zedm' or 'zed2' -->
     <arg name="node_name"             default="zed_node" />
@@ -19,7 +21,6 @@
     <!-- Remote stream -->
     <arg name="stream"                default="" /> <!-- <arg name="stream" default="<ip_address>:<port>"> -->
     <!-- Base frame -->
-    <arg name="base_frame"            default="base_footprint" />
     <!-- Publish ZED urdf -->
     <arg name="publish_urdf"          default="true" />
     <arg name="camera_id"             default="0" />
