@@ -4,7 +4,7 @@ import rospy
 import os
 
 def main():
-    rospy.init_node('ntrip_transport', anonymous=False)
+    rospy.init_node('ntrip_2_device', anonymous=False)
 
     # Получение параметров
     login = rospy.get_param('~login', 'msc9862')
