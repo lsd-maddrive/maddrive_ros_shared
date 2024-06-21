@@ -43,7 +43,9 @@ sudo apt-get update && sudo apt-get install -y \
     libopenvdb-dev \
     libpcap-dev \
     libgeographic-dev \
-    libspnav-dev
+    libspnav-dev \
+    rtklib \
+    rtklib-qt
 
 #requirements for RS-ros
 sudo apt-get purge -y \
