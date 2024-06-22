@@ -47,14 +47,13 @@ git -C ../third_party clone https://github.com/IntelRealSense/realsense-ros.git 
 git -C ../third_party clone https://github.com/YDLIDAR/ydlidar_ros_driver.git
 git -C ../third_party/ydlidar_ros_driver apply ../patches/ydlidar_ros_driver.patch
 
-# LSLidar C16 driver
+# LSLidar drivers
 git -C ../third_party clone https://github.com/lsd-maddrive/lslidar_ros_driver.git -b C16_V4.0 lslidar_c16_driver
-
-# LSLidar LS180S2 driver
 git -C ../third_party clone https://github.com/lsd-maddrive/lslidar_ros_driver.git -b LS128/180/320/400S2_V1.0 lslidar_ls180s2_driver
-
-# LSLidar CH64W driver
 git -C ../third_party clone https://github.com/lsd-maddrive/lslidar_ros_driver.git -b CH64W_V1.0 lslidar_ch64w_driver
+
+# pointcloud_concatenate
+git -C ../third_party clone https://github.com/aseligmann/pointcloud_concatenate.git
 
 # GKV-3 driver
 git -C ../third_party clone https://github.com/lsd-maddrive/gkv_ros_driver.git
