@@ -101,21 +101,7 @@ rules_file="/etc/udev/rules.d/GKV-3.rules"
 if [ -f "$rules_file" ]; then
     echo "The GKV-3 device is already installed"
 else
-    echo 'KERNEL=="ttyUSB[0-9]*", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6015", MODE:="0777", SYMLINK+="tty_GKV-3-%n", GROUP="dialout"' > /etc/udev/rules.d/GKV-3.rules
-
-    service udev reload
-    sleep 2
-    service udev restart
-    sudo udevadm trigger
-fi
-
-# GKV device
-rules_file="/etc/udev/rules.d/GKV-3.rules"
-
-if [ -f "$rules_file" ]; then
-    echo "The GKV-3 device is already installed"
-else
-    echo 'KERNEL=="ttyUSB[0-9]*", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6015", MODE:="0777", SYMLINK+="tty_GKV-3-%n", GROUP="dialout"' > /etc/udev/rules.d/GKV-3.rules
+    echo 'KERNEL=="ttyUSB[0-9]*", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6015", MODE:="0777", GROUP="dialout", SYMLINK+="tty_GKV-3-%n"' > /etc/udev/rules.d/GKV-3.rules
 
     service udev reload
     sleep 2
