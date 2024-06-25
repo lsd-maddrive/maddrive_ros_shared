@@ -3,7 +3,7 @@
   <arg name="prefix" default=""/>
   <arg name="msop_port" default="2310"/>          <!--雷达目的数据端口-->
   <arg name="difop_port" default="2311"/>         <!--雷达目的设备端口-->
-  <arg name="use_time_service" default="true"/>  <!--是否使用授时,false:使用系统时间-->
+  <arg name="use_time_service" default="false"/>  <!--是否使用授时,false:使用系统时间-->
   <arg name="packet_rate" default="15000.0"/>     <!--pcap每秒包数，离线解析pcap包时使用-->
   <arg name="rviz" default="false" />
 

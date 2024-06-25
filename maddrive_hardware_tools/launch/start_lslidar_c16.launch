@@ -7,6 +7,10 @@
   <arg name="pcl_type" default="false" />            <!-- 点云类型   true: xyzi -->
   <arg name="packet_rate" default="1695.0"/>
   <arg name="rviz" default="false" />
+  <arg name="angle_disable_min" default="0"/>     <!-- 雷达扫描最小裁剪角度 单位: 0.01°-->
+  <arg name="angle_disable_max" default="0"/>     <!-- 雷达扫描最大裁剪角度 单位: 0.01°-->
+  <arg name="distance_min" default="0.15"/>       <!-- 雷达扫描最小距离 小于该值的点将被过滤-->
+
 
   <node pkg="lslidar_c16_driver" type="lslidar_c16_driver_node" name="$(arg prefix)lslidar_c16_driver_node" output="screen">
     <!--param name="pcap" value="$(find lslidar_c16_driver)/pcap/xxx.pcap" /-->
@@ -20,10 +24,10 @@
     <param name="group_ip" value="224.1.1.2"/>      <!-- 组播ip -->
     <param name="frame_id" value="$(arg prefix)lslidar_c16_pcl_link"/>     <!-- 点云帧id -->
     <param name="pointcloud_topic" value="$(arg prefix)lslidar_c16_point_cloud"/>  <!-- 点云话题名 -->
-    <param name="distance_min" value="0.15"/>       <!-- 雷达扫描最小距离 小于该值的点将被过滤-->
+    <param name="distance_min" value="$(arg distance_min)"/>       <!-- 雷达扫描最小距离 小于该值的点将被过滤-->
     <param name="distance_max" value="200.0"/>      <!-- 雷达扫描最大距离 大于该值的点将被过滤-->
-    <param name="angle_disable_min" value="0"/>     <!-- 雷达扫描最小裁剪角度 单位: 0.01°-->
-    <param name="angle_disable_max" value="0"/>     <!-- 雷达扫描最大裁剪角度 单位: 0.01°-->
+    <param name="angle_disable_min" value="$(arg angle_disable_min)"/>     <!-- 雷达扫描最小裁剪角度 单位: 0.01°-->
+    <param name="angle_disable_max" value="$(arg angle_disable_max)"/>     <!-- 雷达扫描最大裁剪角度 单位: 0.01°-->
     <param name="distance_unit" value="0.40"/>
     <param name="horizontal_angle_resolution" value="0.18"/>  <!--10Hz:0.18  20Hz:0.36 5Hz:0.09-->
     <param name="publish_scan" value="false"/>      <!-- 是否发布laserscan -->

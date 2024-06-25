@@ -44,6 +44,7 @@ sudo apt-get update && sudo apt-get install -y \
     libpcap-dev \
     libgeographic-dev \
     libspnav-dev \
+    libmodbus-dev \
     rtklib \
     rtklib-qt
 
