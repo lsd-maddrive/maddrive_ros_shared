@@ -67,6 +67,13 @@
         <param name="general/gpu_id"                    value="$(arg gpu_id)" />
         <!--  Disable TF publishing  -->
         <param name="general/base_frame" value="base_footprint"/>
+        <param name="general/pub_frame_rate" value="30"/>
+        <param name="general/pub_resolution" value="NATIVE"/>
+
+        <param name="general/camera_flip" value="ON"/>
+        
+
+
         <!-- <param name="pos_tracking/pos_tracking_mode" value="GEN_2"/> -->
         <param name="pos_tracking/publish_tf" value="false"/>
         <param name="pos_tracking/publish_map_tf" value="false"/>
