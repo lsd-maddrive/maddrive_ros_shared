@@ -106,7 +106,6 @@ git -C ../third_party clone https://github.com/VorpalBlade/odometry_republisher.
 # ZED wrapper
 
 git -C ../third_party clone --recursive https://github.com/stereolabs/zed-ros-wrapper.git
-git -C ../third_party clone https://github.com/stereolabs/zed-ros-interfaces.git
 
 # zed_examples and object detect rviz plugin
 git -C ../third_party clone https://github.com/stereolabs/zed-ros-examples.git
