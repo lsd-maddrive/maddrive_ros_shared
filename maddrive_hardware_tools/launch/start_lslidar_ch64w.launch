@@ -7,6 +7,8 @@
     <arg name="pcl_type" default="false"/>
     <arg name="use_time_service" default="false" />
     <arg name="rviz" default="false" />
+    <arg name="min_range" default="0.15"/>
+    <arg name="max_range" default="500.0"/>
 
   <node pkg="lslidar_ch64w_driver" type="lslidar_ch_driver_node" name="lslidar_ch64w_driver_node" output="screen">
     <!--param name="pcap" value="$(find lslidar_ch64w_driver)/pcap/123.pcap"/-->
@@ -18,8 +20,8 @@
     <param name="add_multicast" value="false"/>
     <param name="group_ip" value="224.1.1.2"/>
     <param name="frame_id" value="$(arg prefix)lslidar_ch64w_pcl_link"/>
-    <param name="min_range" value="0.15"/>
-    <param name="max_range" value="500.0"/>
+    <param name="min_range" value="$(arg min_range)"/>
+    <param name="max_range" value="$(arg max_range)"/>
     <param name="packet_rate" value="11228.0"/>
     <param name="read_once" value="false"/>
     <param name="angle_disable_min" value="0"/>
