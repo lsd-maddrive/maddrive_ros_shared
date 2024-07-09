@@ -51,6 +51,7 @@ else
     service udev reload
     sleep 2
     service udev restart
+    sudo udevadm trigger
 fi
 
 # YAHBOOM IMU device
@@ -65,6 +66,7 @@ else
     service udev reload
     sleep 2
     service udev restart
+    sudo udevadm trigger
 fi
 
 # simpleRTK2B device
