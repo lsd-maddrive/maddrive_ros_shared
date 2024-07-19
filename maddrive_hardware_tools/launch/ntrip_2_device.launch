@@ -3,8 +3,8 @@
   <arg name="login" default="msc9862" />
   <arg name="password" default="16ihqidp"/>
   <arg name="ntrip_server" default="ntrip.eftgroup.ru" />
-  <arg name="port" default="7016" />
-  <arg name="mountpoint" default="NCHE3_2"/>
+  <arg name="port" default="7052" />
+  <arg name="mountpoint" default="NNOV3_2"/>
   <arg name="device" default="ttyUSB2"/>
   <arg name="baudrate" default="115200" />
 

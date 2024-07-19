@@ -82,7 +82,7 @@
 
 
         <param name="mapping/mapping_enabled" value="false"/>
-        <param name="object_detection/od_enabled" value="true"/>
+        <param name="object_detection/od_enabled" value="false"/>
 
         <!-- <param name="depth_confidence" value="99"/>
         <param name="depth_texture_conf" value="90"/>
