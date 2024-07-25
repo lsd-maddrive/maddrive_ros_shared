@@ -13,8 +13,8 @@
         <arg name="login" value="msc9862" />
         <arg name="password" value="16ihqidp" />
         <arg name="ntrip_server" value="ntrip.eftgroup.ru" />
-        <arg name="port" value="7052" />
-        <arg name="mountpoint" value="NNV23_2" />
+        <arg name="port" value="7047" />
+        <arg name="mountpoint" value="SPBE3_2" />
         <arg name="device" value="ttyGKV-3-extra" />
         <arg name="baudrate" value="115200" />
     </include>

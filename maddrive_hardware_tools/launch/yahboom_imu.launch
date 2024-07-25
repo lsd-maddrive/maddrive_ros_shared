@@ -1,7 +1,7 @@
 <!-- open imu and rviz -->
 <launch>
 
-    <arg name="port" default="/dev/tty_Yahboom0" />
+    <arg name="port" default="/dev/ttyYahboom0" />
     <arg name="baud" default="115200" />
     <arg name="frameId" default="yahboom_imu_link" />
     <!-- output -->
