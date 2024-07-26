@@ -69,13 +69,13 @@ else
     sudo udevadm trigger
 fi
 
-# simpleRTK2B device
-rules_file="/etc/udev/rules.d/simpleRTK2B.rules"
+# ardusimple device
+rules_file="/etc/udev/rules.d/ardusimple.rules"
 
 if [ -f "$rules_file" ]; then
-    echo "The simpleRTK2B device is already installed"
+    echo "The ardusimple device is already installed"
 else
-    echo 'KERNEL=="ttyACM[0-9]*", ATTRS{idVendor}=="1546", ATTRS{idProduct}=="01a9", MODE:="0777", GROUP="dialout", SYMLINK+="ttyArdusimple-%n"' > /etc/udev/rules.d/simpleRTK2B.rules
+    echo 'KERNEL=="ttyACM[0-9]*", ATTRS{idVendor}=="1546", ATTRS{idProduct}=="01a9", MODE:="0777", GROUP="dialout", SYMLINK+="ttyArdusimple-%n"' > /etc/udev/rules.d/ardusimple.rules
 
     service udev reload
     sleep 2
@@ -97,7 +97,7 @@ else
     sudo udevadm trigger
 fi
 
-# GKV device
+# GKV-3 device
 rules_file="/etc/udev/rules.d/GKV-3.rules"
 
 if [ -f "$rules_file" ]; then
