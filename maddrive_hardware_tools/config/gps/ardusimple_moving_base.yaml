@@ -2,8 +2,7 @@
 # https://github.com/KumarRobotics/ublox/blob/master/ublox_gps/config/zed_f9p.yaml
 # https://www.ardusimple.com/configuration-files/
 
-device: /dev/tty_Ardusimple0
-frame_id: gps_moving_base
+frame_id: ardusimple_moving_base_link
 uart1:
     baudrate: 115200
 config_on_startup: false
