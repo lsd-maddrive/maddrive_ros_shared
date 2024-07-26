@@ -44,9 +44,9 @@ else
     rm -rf YDLidar-SDK
 
     # based on https://raw.githubusercontent.com/YDLIDAR/ydlidar_ros_driver/master/startup/initenv.sh
-    echo 'KERNEL=="ttyUSB*", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", MODE:="0666", GROUP:="dialout", SYMLINK+="ttyYdlidar-%n"' > /etc/udev/rules.d/ydlidar.rules
-    echo 'KERNEL=="ttyACM*", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", MODE:="0666", GROUP:="dialout", SYMLINK+="ttyYdlidar-%n"' > /etc/udev/rules.d/ydlidar-V2.rules
-    echo 'KERNEL=="ttyUSB*", ATTRS{idVendor}=="067b", ATTRS{idProduct}=="2303", MODE:="0666", GROUP:="dialout", SYMLINK+="ttyYdlidar-%n"' > /etc/udev/rules.d/ydlidar-2303.rules
+    echo 'KERNEL=="ttyUSB*", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", MODE:="0666", GROUP:="dialout", SYMLINK+="ttyYdlidar%n"' > /etc/udev/rules.d/ydlidar.rules
+    echo 'KERNEL=="ttyACM*", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", MODE:="0666", GROUP:="dialout", SYMLINK+="ttyYdlidar%n"' > /etc/udev/rules.d/ydlidar-V2.rules
+    echo 'KERNEL=="ttyUSB*", ATTRS{idVendor}=="067b", ATTRS{idProduct}=="2303", MODE:="0666", GROUP:="dialout", SYMLINK+="ttyYdlidar%n"' > /etc/udev/rules.d/ydlidar-2303.rules
 
     service udev reload
     sleep 2
@@ -61,7 +61,7 @@ if [ -f "$rules_file" ]; then
     echo "The YAHBOOM IMU device is already installed"
 else
     # based on https://github.com/YahboomTechnology/10-axis_IMU_Module
-    echo 'KERNEL=="ttyUSB*", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", MODE:="0777", GROUP="dialout", SYMLINK+="ttyYahboom-%n"' > /etc/udev/rules.d/yahboom_imu.rules
+    echo 'KERNEL=="ttyUSB*", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", MODE:="0777", GROUP="dialout", SYMLINK+="ttyYahboom%n"' > /etc/udev/rules.d/yahboom_imu.rules
 
     service udev reload
     sleep 2
@@ -75,7 +75,7 @@ rules_file="/etc/udev/rules.d/ardusimple.rules"
 if [ -f "$rules_file" ]; then
     echo "The ardusimple device is already installed"
 else
-    echo 'KERNEL=="ttyACM[0-9]*", ATTRS{idVendor}=="1546", ATTRS{idProduct}=="01a9", MODE:="0777", GROUP="dialout", SYMLINK+="ttyArdusimple-%n"' > /etc/udev/rules.d/ardusimple.rules
+    echo 'KERNEL=="ttyACM[0-9]*", ATTRS{idVendor}=="1546", ATTRS{idProduct}=="01a9", MODE:="0777", GROUP="dialout", SYMLINK+="ttyArdusimple%n"' > /etc/udev/rules.d/ardusimple.rules
 
     service udev reload
     sleep 2
