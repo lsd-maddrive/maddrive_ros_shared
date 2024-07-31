@@ -11,13 +11,24 @@
     <!-- rviz -->
     <group if="$(arg rviz)">
         <node name="rviz" pkg="rviz" type="rviz" args="-d $(find maddrive_hardware_tools)/rviz/gkv.rviz" />
-        <!-- tf -->
+        <!-- map 2 odom -->
+        <node pkg="tf2_ros" type="static_transform_publisher"
+            name="map_2_odom"
+            args="
+                0.0 0.0 0.0
+                0.0 0.0 0.0
+                /map /odom" />
+        <!-- odom 2 base_footprint -->
+        <node name="odometry_republisher" pkg="odometry_republisher" type="node" output="screen">
+            <remap from="odom" to="/gkv/odom"/>
+            <param name="base_frame" value="base_footprint" />
+        </node>
         <node pkg="tf2_ros" type="static_transform_publisher"
             name="map_2_gkv_imu_link"
             args="
                 0.0 0.0 1.0
                 0.0 0.0 0.0
-                /map /gkv_imu_link" />
+                /base_footprint /gkv_imu_link" />
     </group>
 
 </launch>
