@@ -10,25 +10,44 @@
 
     <!-- rviz -->
     <group if="$(arg rviz)">
+
         <node name="rviz" pkg="rviz" type="rviz" args="-d $(find maddrive_hardware_tools)/rviz/gkv.rviz" />
-        <!-- map 2 odom -->
+
+        <!-- tf_static map_2_odom -->
         <node pkg="tf2_ros" type="static_transform_publisher"
             name="map_2_odom"
             args="
                 0.0 0.0 0.0
                 0.0 0.0 0.0
                 /map /odom" />
-        <!-- odom 2 base_footprint -->
+        <!-- odom_2_base_footprint -->
         <node name="odometry_republisher" pkg="odometry_republisher" type="node" output="screen">
             <remap from="odom" to="/gkv/odom"/>
             <param name="base_frame" value="base_footprint" />
         </node>
+        <!-- tf_static base_footprint_2_base_link -->
         <node pkg="tf2_ros" type="static_transform_publisher"
-            name="map_2_gkv_imu_link"
+            name="base_footprint_2_base_link"
             args="
-                0.0 0.0 1.0
+                0.0 0.0 0.33
                 0.0 0.0 0.0
-                /base_footprint /gkv_imu_link" />
+                /base_footprint /base_link" />
+
+        <!-- tf_static base_link_2_gkv_imu_link -->
+        <node pkg="tf2_ros" type="static_transform_publisher"
+            name="base_link_2_gkv_imu_link"
+            args="
+                3.55 -0.43 0.93
+                0.0 0.0 0.0
+                /base_link /gkv_imu_link" />
+        <!-- tf_static base_link_2_gkv_gnss_master_link -->
+        <node pkg="tf2_ros" type="static_transform_publisher"
+            name="base_link_2_gkv_gnss_master_link"
+            args="
+                1.65 -0.69 1.82
+                0.0 0.0 0.0
+                /base_link /gkv_gnss_master_link" />
+
     </group>
 
 </launch>
