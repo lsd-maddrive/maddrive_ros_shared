@@ -44,7 +44,7 @@
         <node pkg="tf2_ros" type="static_transform_publisher"
             name="base_link_2_gkv_gnss_master_link"
             args="
-                1.65 -0.69 1.82
+                0.0 0.0 0.0
                 0.0 0.0 0.0
                 /base_link /gkv_gnss_master_link" />
 
