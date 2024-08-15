@@ -110,3 +110,6 @@ git -C ../third_party clone --recursive https://github.com/stereolabs/zed-ros-wr
 # zed_examples and object detect rviz plugin
 git -C ../third_party clone https://github.com/stereolabs/zed-ros-examples.git
 
+# rosbag tools
+git -C ../third_party clone https://github.com/srv/srv_tools.git -b melodic
+git -C ../third_party clone https://github.com/neufieldrobotics/rosbag_toolkit.git
