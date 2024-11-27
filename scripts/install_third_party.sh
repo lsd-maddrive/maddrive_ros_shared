@@ -38,9 +38,7 @@ git -C ../third_party clone https://github.com/PonomarevDA/world_creator.git
 # Madproto - protocol for serial communication
 git -C ../third_party clone https://github.com/KaiL4eK/madproto.git
 
-# hardware package reqs
-
-# Realsense-ros (rosdep required)
+# Realsense-ros
 git -C ../third_party clone https://github.com/IntelRealSense/realsense-ros.git -b 2.3.2
 
 # Ydlidar driver
@@ -60,8 +58,6 @@ git -C ../third_party clone https://github.com/lsd-maddrive/gkv_ros_driver.git
 
 # gazebo lidar plugin with PointCloud2 massage
 git -C ../third_party clone https://bitbucket.org/DataspeedInc/velodyne_simulator.git
-
-# GPS RTK
 
 # include GPS plugin (for simulations)
 git -C ../third_party clone https://github.com/tu-darmstadt-ros-pkg/hector_gazebo.git
@@ -85,7 +81,6 @@ git -C ../third_party clone https://github.com/mavlink/mavros.git -b master
 # csv2kml convert
 git -C ../third_party clone https://github.com/MapIV/kml_generator.git -b main
 
-
 # hector_metapackage (mapping, imu tools)
 git -C ../third_party clone https://github.com/tu-darmstadt-ros-pkg/hector_slam.git -b noetic-devel
 
@@ -104,7 +99,6 @@ git -C ../third_party clone https://github.com/nobleo/rviz_satellite -b master
 git -C ../third_party clone https://github.com/VorpalBlade/odometry_republisher.git -b master
 
 # ZED wrapper
-
 git -C ../third_party clone --recursive https://github.com/stereolabs/zed-ros-wrapper.git
 
 # zed_examples and object detect rviz plugin
@@ -113,3 +107,7 @@ git -C ../third_party clone https://github.com/stereolabs/zed-ros-examples.git
 # rosbag tools
 git -C ../third_party clone https://github.com/srv/srv_tools.git -b melodic
 git -C ../third_party clone https://github.com/neufieldrobotics/rosbag_toolkit.git
+
+# cool rqt applications for debugging and visualizing
+git -C ../third_party clone https://github.com/OTL/rqt_ez_publisher.git -b noetic-devel
+git -C ../third_party clone https://github.com/shadow-robot/sr-visualization.git -b noetic-devel
