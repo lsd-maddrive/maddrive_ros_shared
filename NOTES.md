@@ -166,3 +166,4 @@ https://www.cyberciti.biz/howto/how-to-install-and-edit-desktop-files-on-linux-d
 
 ## Iris Xe problems on ubuntu 20.04
 https://askubuntu.com/questions/1299067/ubuntu-20-04-no-driver-loaded-for-intel-iris-xe-graphics
+https://askubuntu.com/questions/1521777/graphics-drivers-with-ubuntu-20-04
