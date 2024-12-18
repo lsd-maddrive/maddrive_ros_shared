@@ -1,4 +1,4 @@
-#Общие заметки по всем проектам
+# Общие заметки по всем проектам
 
 ## Запуск докера из под прокси
 ```bash
@@ -163,3 +163,6 @@ https://stackoverflow.com/questions/21857935/pyqt-segmentation-fault-sometimes
 
 ## Create desktop 
 https://www.cyberciti.biz/howto/how-to-install-and-edit-desktop-files-on-linux-desktop-entries/
+
+## Iris Xe problems on ubuntu 20.04
+https://askubuntu.com/questions/1299067/ubuntu-20-04-no-driver-loaded-for-intel-iris-xe-graphics
