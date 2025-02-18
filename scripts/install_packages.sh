@@ -48,6 +48,9 @@ sudo apt-get update && sudo apt-get install -y \
     rtklib \
     rtklib-qt
 
+sudo apt-get update && sudo apt-get install -y \
+    ros-$ROS_DISTRO-moveit
+
 #requirements for RS-ros
 sudo apt-get purge -y \
     ros-$ROS_DISTRO-realsense2-camera \
