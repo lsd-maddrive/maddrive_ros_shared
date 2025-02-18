@@ -48,12 +48,21 @@ sudo apt-get update && sudo apt-get install -y \
     rtklib \
     rtklib-qt
 
+# moveit
 sudo apt-get update && sudo apt-get install -y \
     ros-$ROS_DISTRO-moveit
 
-#requirements for RS-ros
+# widowx
+sudo apt-get update && sudo apt-get install -y \
+    ros-$ROS_DISTRO-moveit \
+    ros-$ROS_DISTRO-dynamixel-sdk \
+    ros-$ROS_DISTRO-dynamixel-workbench \
+    ros-$ROS_DISTRO-roboticsgroup-upatras-gazebo-plugins
+
+# requirements for RS-ros
 sudo apt-get purge -y \
     ros-$ROS_DISTRO-realsense2-camera \
     ros-$ROS_DISTRO-realsense2-description
 
+# python reqs
 pip3 install pyserial
