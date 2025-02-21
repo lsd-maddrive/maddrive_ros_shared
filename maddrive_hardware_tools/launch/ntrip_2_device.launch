@@ -1,0 +1,21 @@
+<launch>
+
+  <arg name="login" default="msc9862" />
+  <arg name="password" default="16ihqidp"/>
+  <arg name="ntrip_server" default="ntrip.eftgroup.ru" />
+  <arg name="port" default="7047" />
+  <arg name="mountpoint" default="SPBE3_2"/>
+  <arg name="device" default="ttyGKV-3-extra"/>
+  <arg name="baudrate" default="115200" />
+
+  <node pkg="maddrive_hardware_tools" type="ntrip_2_device.py" name="ntrip_2_device" output="screen">
+    <param name="login" value="$(arg login)"/>
+    <param name="password" value="$(arg password)"/>
+    <param name="ntrip_server" value="$(arg ntrip_server)"/>
+    <param name="port" value="$(arg port)"/>
+    <param name="mountpoint" value="$(arg mountpoint)"/>
+    <param name="device" value="$(arg device)"/>
+    <param name="baudrate" value="$(arg baudrate)"/>
+  </node>
+
+</launch>

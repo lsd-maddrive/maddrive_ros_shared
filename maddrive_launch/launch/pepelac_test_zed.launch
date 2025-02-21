@@ -1,0 +1,180 @@
+         <!-- 5) 3DoF mapping with 3D LiDAR and RGB-D camera
+            $ roslaunch rtabmap_ros demo_husky.launch lidar3d:=true slam2d:=true camera:=true -->
+<launch>
+  <arg name="hardware" default="true"/>
+  <arg name="record_path" default="/home/blackwidow/Bags"/>
+  <arg name="map_name" default="pepelac_test.db"/>
+  <arg name="localization" default="false" doc="[false - slam]"/>
+  <arg name="debug" default="false" doc="[true - rqt_plot]"/>
+  <arg name='rviz' default="true"/>
+  <arg name='rtabmap_viz' default='true'/>
+  <arg name="database_path" default="$(find maddrive_worlds)/3d_maps/$(arg map_name)"/>
+  <arg name="record" default="true"/>
+
+
+  <group if="$(arg hardware)">
+    <include file="$(find maddrive_hardware_tools)/launch/start_lslidar_c16.launch">
+      <arg name="min_range" value="1.0" />  
+      <arg name="topic_name" value="front_lslidar_c16_lidar_point_cloud" />  
+    </include>
+    <include file="$(find maddrive_hardware_tools)/launch/start_zed2_camera.launch">
+      <arg name="cam_pos_z" value="1.15" />
+    </include>
+
+    <!-- yahboom_imu -->
+      <include file="$(find maddrive_hardware_tools)/launch/yahboom_imu.launch">
+          <arg name="port" value="/dev/tty_Yahboom0" />
+          <arg name="baud" value="115200" />
+          <arg name="frameId" value="imu_raw_link" />
+          <arg name="imu_output_topic" value="/yahboom/imu/raw" />
+          <arg name="mag_output_topic" value="/yahboom/mag/raw" />
+          <arg name="rviz" value="false" />
+      </include>
+
+      <!-- rover -->
+      <node pkg="ublox_gps" type="ublox_gps" name="simpleRTK2B_rover"
+          output="screen" clear_params="true" respawn="true">
+          <rosparam command="load" file="$(find maddrive_hardware_tools)/config/gps/simpleRTK2B_rover.yaml" />
+          <remap from="rtcm" to="simpleRTK2B_rover/rtcm"/>
+      </node>
+
+      <!-- moving base -->
+      <node pkg="ublox_gps" type="ublox_gps" name="simpleRTK2B_moving_base"
+          output="screen" clear_params="true" respawn="true">
+          <rosparam command="load" file="$(find maddrive_hardware_tools)/config/gps/simpleRTK2B_moving_base.yaml" />
+          <remap from="rtcm" to="rtcm"/>
+      </node>
+
+      <!-- ntrip client -->
+      <!-- <include file="$(find ntrip_client)/launch/ntrip_client.launch">
+          <arg name="host" value="rtcm.smartnetrtk.ru"/>
+          <arg name="port" value="8007" />
+          <arg name="mountpoint" value="VRS.MSM5" />
+          <arg name="authenticate" value="true" />
+          <arg name="username" value="anastasiikanata" />
+          <arg name="password" value="EPFa?bxnNo" />
+          <arg name="ntrip_version" value="" />
+          <arg name="ssl" value="false" />
+          <arg name="cert" value="false" />
+          <arg name="key" value="false" />
+          <arg name="ca_cert" value="false" />
+          <arg name="debug" value="true" />
+          <arg name="rtcm_message_package" value="rtcm_msgs" />
+      </include> -->
+
+  </group>
+
+<!-- SLAM START-->
+<include file="$(find tigra_vision)/launch/rtabmap_slam.launch">
+    <arg name="lidar_name" default="front_lslidar_c16_lidar" />
+    <arg name="camera_name" default="zed2" />
+
+    <arg name="localization" value="$(arg localization)" />
+    <arg name="database_path" value="$(arg database_path)" />
+    <arg name="rtabmap_viz" value="$(arg rtabmap_viz)"/>
+</include>
+<!-- <include file="$(find tigra_vision)/launch/rgbd_odom.launch">
+    <arg name="publish_tf" value="true" />
+    <arg name="camera_name" value="front_rs_d455_camera" />
+</include> -->
+<!-- SLAM END -->
+
+  <!-- TF pepelac high is 0.8-->
+  <node pkg="tf2_ros" type="static_transform_publisher"
+    name="tf_bl_2_lidar"
+    args="
+      0.0 0.0 1.02
+      1.57 0.0 0.0
+      /base_footprint /laser_link" />
+  <node pkg="tf2_ros" type="static_transform_publisher"
+    name="tf_bl_2_cam"
+    args="
+      0.0 0.0 1.15
+      0.0 0.0 0.0
+      /base_footprint /front_rs_d455_camera_link" />
+  <node pkg="tf2_ros" type="static_transform_publisher"
+      name="base_footprint_2_imu_raw_link"
+      args="
+          0.09 0.09 0.81
+          0.0 0.0 0.0
+          /base_footprint /imu_raw_link" />
+  <node pkg="tf2_ros" type="static_transform_publisher"
+      name="base_link_2_gps_rover"
+      args="
+          0.45 0.25 0.81
+          0.0 0.0 0.0
+          /base_footprint /gps_rover" />
+  <node pkg="tf2_ros" type="static_transform_publisher"
+      name="base_link_2_gps_moving_base"
+      args="
+          0.77 0.25 0.81
+          0.0 0.0 0.0
+          /base_footprint /gps_moving_base" />
+
+<node name="rviz" pkg="rviz" type="rviz" args="-d $(find maddrive_launch)/launch/full_slam_pepelac_view.rviz" output="screen"/>
+
+<node if="$(arg record)" pkg="rosbag" type="record" name="rosbag_record" output="screen"
+            args="
+                /tf
+                /tf_static
+                /yahboom/imu/raw
+                /yahboom/mag/raw
+                /simpleRTK2B_moving_base/fix
+                /simpleRTK2B_moving_base/fix_velocity
+                /simpleRTK2B_moving_base/hp_fix
+                /simpleRTK2B_moving_base/monhw
+                /simpleRTK2B_moving_base/navclock
+                /simpleRTK2B_moving_base/navheading
+                /simpleRTK2B_moving_base/navhpposecef
+                /simpleRTK2B_moving_base/navhpposllh
+                /simpleRTK2B_moving_base/navposecef
+                /simpleRTK2B_moving_base/navpvt
+                /simpleRTK2B_moving_base/navrelposned
+                /simpleRTK2B_moving_base/navsat
+                /simpleRTK2B_moving_base/navstatus
+                /simpleRTK2B_rover/fix
+                /simpleRTK2B_rover/fix_velocity
+                /simpleRTK2B_rover/hp_fix
+                /simpleRTK2B_rover/monhw
+                /simpleRTK2B_rover/navclock
+                /simpleRTK2B_rover/navheading
+                /simpleRTK2B_rover/navhpposecef
+                /simpleRTK2B_rover/navhpposllh
+                /simpleRTK2B_rover/navposecef
+                /simpleRTK2B_rover/navpvt
+                /simpleRTK2B_rover/navrelposned
+                /simpleRTK2B_rover/navsat
+                /simpleRTK2B_rover/navstatus
+                /simpleRTK2B_rover/rtcm
+                /simpleRTK2B_rover/rxmrtcm
+                /front_rs_d455_camera/infra1/image_rect_raw/compressed
+                /front_rs_d455_camera/infra2/image_rect_raw/compressed
+                /front_rs_d455_camera/infra1/camera_info 
+                /front_rs_d455_camera/infra2/camera_info 
+                /front_rs_d455_camera/color/image_raw/compressed
+                /front_rs_d455_camera/aligned_depth_to_color/image_raw/compressed
+                /front_rs_d455_camera/color/camera_info
+                /front_rs_d455_camera/imu/filtered
+                /front_lslidar_c16_lidar_point_cloud
+                /zed2/zed_node/rgb/image_rect_color/compressed
+                /zed2/zed_node/depth/depth_registered/compressedDepth
+                /zed2/zed_node/rgb/camera_info
+                /zed2/zed_node/odom
+                /zed2/zed_node/right/image_rect_gray/compressed
+                /zed2/zed_node/left/image_rect_gray/compressed
+                /zed2/zed_node/right/camera_info
+                /zed2/zed_node/left/camera_info
+
+
+
+
+
+                --output-name $(arg record_path)/ETU_test_3.bag
+                --split
+                --size=10000
+                "/>
+
+<!-- ZED_Explorer -o ./record.svo -r HD720 -compression_mode 4 -->
+
+</launch>
+

@@ -1,0 +1,30 @@
+<launch>
+  <arg name="device_ip" default="192.168.1.161"/> <!--雷达ip-->
+  <arg name="prefix" default=""/>
+  <arg name="msop_port" default="2310"/>          <!--雷达目的数据端口-->
+  <arg name="difop_port" default="2311"/>         <!--雷达目的设备端口-->
+  <arg name="use_time_service" default="false"/>  <!--是否使用授时,false:使用系统时间-->
+  <arg name="packet_rate" default="15000.0"/>     <!--pcap每秒包数，离线解析pcap包时使用-->
+  <arg name="rviz" default="false" />
+  <arg name="min_range" default="0.15"/>      <!--雷达最小探测距离裁剪-->
+
+
+  <node pkg="lslidar_ls180s2_driver" type="lslidar_ls180s2_driver_node" name="$(arg prefix)lslidar_ls180s2_driver_node" output="screen">
+      <!--param name="pcap" value="$(find lslidar_driver)/pcap/ls400s3.pcap"/-->  <!--离线解析pcap包时取消此行注释-->
+      <param name="packet_rate" value="$(arg packet_rate)"/>
+      <param name="lidar_ip" value="$(arg device_ip)"/>
+      <param name="msop_port" value="$(arg msop_port)"/>
+      <param name="difop_port" value="$(arg difop_port)"/>
+      <param name="add_multicast" value="false"/> <!--是否开启组播-->
+      <param name="group_ip" value="224.1.1.2"/>  <!--组播ip-->
+      <param name="min_range" value="$(arg min_range)"/>      <!--雷达最小探测距离裁剪-->
+      <param name="max_range" value="1500"/>      <!--雷达最大探测距离裁剪-->
+      <param name="scan_start_angle" value="-60"/>    <!--雷达最小探测角度裁剪-->
+      <param name="scan_end_angle" value="60"/>       <!--雷达最小探测角度裁剪-->
+      <param name="frame_id" value="$(arg prefix)lslidar_ls180s2_pcl_link"/> <!--点云帧id-->
+      <param name="pointcloud_topic" value="$(arg prefix)lslidar_ls180s_point_cloud"/>    <!--点云话题名称-->
+      <param name="packet_loss" value="true"/>   <!--是否开启丢包检测-->
+      <param name="use_time_service" value="$(arg use_time_service)"/>
+  </node>
+  <node if="$(arg rviz)" pkg="rviz" type="rviz" name="rviz" args="-d $(find maddrive_hardware_tools)/rviz/lslidar_ls180s2.rviz"/>
+</launch>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="rviz" default="false" />
+
+    <node pkg="gkv_ros_driver" type="gkv_controller" name="gkv_controller" output="screen">
+    </node>
+    <node pkg="gkv_ros_driver" type="gkv_custom_data_parser.py" name="gkv_custom_data_parser" output="screen">
+    </node>
+
+    <!-- rviz -->
+    <group if="$(arg rviz)">
+        <node name="rviz" pkg="rviz" type="rviz" args="-d $(find maddrive_hardware_tools)/rviz/gkv.rviz" />
+        <!-- tf -->
+        <node pkg="tf2_ros" type="static_transform_publisher"
+            name="map_2_gkv_imu_link"
+            args="
+                0.0 0.0 1.0
+                0.0 0.0 0.0
+                /map /gkv_imu_link" />
+    </group>
+
+</launch>

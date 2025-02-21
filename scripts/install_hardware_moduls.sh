@@ -36,26 +36,80 @@ else
     git clone https://github.com/YDLIDAR/YDLidar-SDK.git
     mkdir -p YDLidar-SDK/build
     cd YDLidar-SDK/build
-    curl -o initenv.sh https://raw.githubusercontent.com/YDLIDAR/ydlidar_ros_driver/master/startup/initenv.sh && \
-        chmod +x initenv.sh && \
-        sh initenv.sh
+
     cmake ..
     make
     sudo make install
     cd ../..
     rm -rf YDLidar-SDK
+
+    # based on https://raw.githubusercontent.com/YDLIDAR/ydlidar_ros_driver/master/startup/initenv.sh
+    echo 'KERNEL=="ttyUSB*", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", MODE:="0666", GROUP:="dialout", SYMLINK+="ttyYdlidar%n"' > /etc/udev/rules.d/ydlidar.rules
+    echo 'KERNEL=="ttyACM*", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", MODE:="0666", GROUP:="dialout", SYMLINK+="ttyYdlidar%n"' > /etc/udev/rules.d/ydlidar-V2.rules
+    echo 'KERNEL=="ttyUSB*", ATTRS{idVendor}=="067b", ATTRS{idProduct}=="2303", MODE:="0666", GROUP:="dialout", SYMLINK+="ttyYdlidar%n"' > /etc/udev/rules.d/ydlidar-2303.rules
+
+    service udev reload
+    sleep 2
+    service udev restart
+    sudo udevadm trigger
 fi
 
 # YAHBOOM IMU device
-rules_file="/etc/udev/rules.d/imu_usb.rules"
+rules_file="/etc/udev/rules.d/yahboom_imu.rules"
 
 if [ -f "$rules_file" ]; then
     echo "The YAHBOOM IMU device is already installed"
 else
     # based on https://github.com/YahboomTechnology/10-axis_IMU_Module
-    echo 'KERNEL=="ttyUSB*", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", MODE:="0777", SYMLINK+="imu_usb"' >/etc/udev/rules.d/imu_usb.rules
+    echo 'KERNEL=="ttyUSB*", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", MODE:="0777", GROUP="dialout", SYMLINK+="ttyYahboom%n"' > /etc/udev/rules.d/yahboom_imu.rules
 
     service udev reload
     sleep 2
     service udev restart
+    sudo udevadm trigger
+fi
+
+# ardusimple device
+rules_file="/etc/udev/rules.d/ardusimple.rules"
+
+if [ -f "$rules_file" ]; then
+    echo "The ardusimple device is already installed"
+else
+    echo 'KERNEL=="ttyACM[0-9]*", ATTRS{idVendor}=="1546", ATTRS{idProduct}=="01a9", MODE:="0777", GROUP="dialout", SYMLINK+="ttyArdusimple%n"' > /etc/udev/rules.d/ardusimple.rules
+
+    service udev reload
+    sleep 2
+    service udev restart
+    sudo udevadm trigger
+fi
+
+# U-blox c94-m8p device
+rules_file="/etc/udev/rules.d/ublox_c94-m8p.rules"
+
+if [ -f "$rules_file" ]; then
+    echo "The U-blox C94-M8P device is already installed"
+else
+    echo 'KERNEL=="ttyACM[0-9]*", ATTRS{idVendor}=="1546", ATTRS{idProduct}=="01a8", MODE:="0777", GROUP="dialout" SYMLINK+="ttyUblox-C94-M8P-%n"' > /etc/udev/rules.d/ublox_c94-m8p.rules
+
+    service udev reload
+    sleep 2
+    service udev restart
+    sudo udevadm trigger
+fi
+
+# GKV-3 device
+rules_file="/etc/udev/rules.d/GKV-3.rules"
+
+if [ -f "$rules_file" ]; then
+    echo "The GKV-3 device is already installed"
+else
+    # main port
+    echo 'KERNEL=="ttyUSB[0-9]*", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6015", MODE:="0777", GROUP="dialout", SYMLINK+="ttyGKV-3-main"' > /etc/udev/rules.d/GKV-3.rules
+    # extra port
+    echo 'KERNEL=="ttyUSB[0-9]*", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", MODE:="0777", GROUP="dialout", SYMLINK+="ttyGKV-3-extra"' > /etc/udev/rules.d/GKV-3.rules
+
+    service udev reload
+    sleep 2
+    service udev restart
+    sudo udevadm trigger
 fi

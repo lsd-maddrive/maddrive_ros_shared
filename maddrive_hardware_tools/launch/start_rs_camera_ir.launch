@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="name_camera" default="front_rs_d455_camera"/>
+     <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+            <arg name="camera" value="$(arg name_camera)"/>
+            <arg name="reconnect_timeout" value="6.0"/>
+            <arg name="initial_reset" value="false" />
+            <!-- <arg name="serial_no" value="135122251612" /> -->
+            <arg name="enable_gyro" value="true"/>
+            <arg name="enable_accel" value="true"/>
+            <arg name="enable_infra1" value="true"/>
+            <arg name="enable_infra2" value="true"/>
+            <arg name="unite_imu_method" value="linear_interpolation"/>
+            <arg name="infra_width" value="848"/>
+            <arg name="infra_height" value="480"/>
+            <arg name="infra_fps" value="30"/>
+            <arg name="align_depth" value="true" />
+            <arg name="filters" value="pointcloud" />
+
+    </include>
+
+    <rosparam> /front_rs_d455_camera/stereo_module/emitter_enabled: 0</rosparam>
+    <!-- <rosparam> /front_rs_d455_camera/aligned_depth_to_color/image_raw/compressed/format: </rosparam> -->
+
+
+
+    <!-- camera args -->
+    <!-- imu calib https://www.programmersought.com/article/29581858144/ -->
+    <!-- <arg name="linear_accel_cov" default="2.8946e-2" />
+    <arg name="angular_velocity_cov" default="3.02472e-3" />
+    <arg name="depth_fps" default="30" />
+    <arg name="color_fps" default="30" />
+    <arg name='enable_sync' default='true'/> -->
+
+      
+
+    <include file="$(find maddrive_hardware_tools)/launch/imu_filter.launch">
+        <arg name="imu/data_raw" default="$(arg name_camera)/imu" />
+        <arg name="imu/data_filtered" default="$(arg name_camera)/imu/filtered" />
+        <arg name="node_name" default="imu_filter_realsense_node" />
+
+    </include>
+
+
+    
+</launch>

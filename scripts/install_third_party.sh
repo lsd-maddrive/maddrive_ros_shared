@@ -21,8 +21,8 @@ git -C ../third_party clone https://github.com/appliedAI-Initiative/orb_slam_2_r
 git -C ../third_party clone https://github.com/ros-drivers/rosserial.git -b noetic-devel
 
 # Rtabmap
-git -C ../third_party clone https://github.com/introlab/rtabmap.git -b 0.21.0
-git -C ../third_party clone https://github.com/introlab/rtabmap_ros.git -b 0.21.1-noetic
+git -C ../third_party clone https://github.com/introlab/rtabmap.git -b 0.21.4
+git -C ../third_party clone https://github.com/introlab/rtabmap_ros.git -b 0.21.4-noetic
 
 git -C ../third_party clone https://github.com/ros-perception/image_pipeline.git -b noetic
 git -C ../third_party clone https://github.com/ros-perception/vision_opencv.git -b noetic
@@ -47,10 +47,18 @@ git -C ../third_party clone https://github.com/IntelRealSense/realsense-ros.git 
 git -C ../third_party clone https://github.com/YDLIDAR/ydlidar_ros_driver.git
 git -C ../third_party/ydlidar_ros_driver apply ../patches/ydlidar_ros_driver.patch
 
-# LSLidar driver
-git -C ../third_party clone https://github.com/Lslidar/Lslidar_ROS1_driver.git
+# LSLidar drivers
+git -C ../third_party clone https://github.com/lsd-maddrive/lslidar_ros_driver.git -b C16_V4.0 lslidar_c16_driver
+git -C ../third_party clone https://github.com/lsd-maddrive/lslidar_ros_driver.git -b LS128/180/320/400S2_V1.0 lslidar_ls180s2_driver
+git -C ../third_party clone https://github.com/lsd-maddrive/lslidar_ros_driver.git -b CH64W_V1.0 lslidar_ch64w_driver
 
-# lidar with PointCloud2 massage
+# pointcloud_concatenate
+git -C ../third_party clone https://github.com/aseligmann/pointcloud_concatenate.git
+
+# GKV-3 driver
+git -C ../third_party clone https://github.com/lsd-maddrive/gkv_ros_driver.git
+
+# gazebo lidar plugin with PointCloud2 massage
 git -C ../third_party clone https://bitbucket.org/DataspeedInc/velodyne_simulator.git
 
 # GPS RTK
@@ -91,3 +99,14 @@ git -C ../third_party clone https://github.com/ros/geometry2.git -b noetic-devel
 
 # gps plugin for rviz
 git -C ../third_party clone https://github.com/nobleo/rviz_satellite -b master
+
+# make tf from /odom topic
+git -C ../third_party clone https://github.com/VorpalBlade/odometry_republisher.git -b master
+
+# ZED wrapper
+
+git -C ../third_party clone --recursive https://github.com/stereolabs/zed-ros-wrapper.git
+
+# zed_examples and object detect rviz plugin
+git -C ../third_party clone https://github.com/stereolabs/zed-ros-examples.git
+
